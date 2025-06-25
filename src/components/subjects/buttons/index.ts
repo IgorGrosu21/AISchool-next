@@ -1,0 +1,1 @@
+export { TheoryButtons } from "./theory";
