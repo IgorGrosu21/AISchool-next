@@ -2,7 +2,8 @@ export { sendAuthUser, sendLogoutRequest, sendVerificationEmail } from "./auth";
 export { fetchCountryNames, fetchRegionNames, fetchCityNames, fetchCity } from "./country";
 export {
   fetchSchoolWithTimetable, sendSchoolWithTimetable,
-  fetchSpecificLessonNames, fetchSpecificLesson, sendSpecificLesson, sendSpecificLessonPhoto, deleteSpecificLessonPhoto,
+  fetchSpecificLessonNames, fetchSpecificLesson,
+  sendSpecificLesson, deleteSpecificLesson, sendSpecificLessonPhoto, deleteSpecificLessonPhoto,
   sendHomework, deleteHomework, sendHomeworkPhoto, deleteHomeworkPhoto
 } from "./lesson";
 export { fetchStudent, sendStudent, fetchTeacher, sendTeacher } from "./person";

@@ -39,6 +39,17 @@ export async function sendSpecificLesson(specificLesson: IDetailedSpecificLesson
   }, 'replace')
 }
 
+export async function deleteSpecificLesson(specificLesson: IDetailedSpecificLesson) {
+  const { schoolId, klassId, lessonId, date } = extractDataFromSpecificLesson(specificLesson)
+  const update: CacheUpdater<CachedResponse, IHomework> = { }
+  update[`api/specific-lesson/${schoolId}/${klassId}/${lessonId}/${date}/`] = () => 'delete'
+  return requestWithRefresh<IDetailedSpecificLesson>({
+    url: `api/specific-lesson/${schoolId}/${klassId}/${lessonId}/${date}/`,
+    method: 'DELETE',
+    cache: { update: update }
+  })
+}
+
 export async function sendSpecificLessonPhoto(specificLesson: IDetailedSpecificLesson, data: FormData) {
   const { schoolId, klassId, lessonId, date } = extractDataFromSpecificLesson(specificLesson)
 
@@ -122,7 +133,6 @@ export async function deleteHomework(specificLesson: IDetailedSpecificLesson) {
     return requestWithRefresh<IHomework>({
       url: `api/homework/${schoolId}/${klassId}/${lessonId}/${date}/`,
       method: 'DELETE',
-      data: homework,
       cache: { update: update }
     })
   }

@@ -73,7 +73,7 @@ export async function SideBar() {
     </Stack>
     {user ? <Stack sx={{height: '100%', width: '100%', justifyContent: 'center'}}>
       <Stack gap={2} direction='row' sx={{p: 2, bgcolor: 'primary.main', alignItems: 'center'}}>
-        <Link href={user.profileLink!} style={{display: 'flex', alignItems: 'center', pointerEvents: user.profileLink ? 'unset' : 'none'}} as='image'>
+        <Link href={user.profileLink ?? '/'} style={{display: 'flex', alignItems: 'center', pointerEvents: user.profileLink ? 'unset' : 'none'}} as='image'>
           <Image
             src={user.avatar ? `${user.avatar}` : '/images/default-avatar.png'}
             width={100}

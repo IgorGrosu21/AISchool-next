@@ -17,7 +17,7 @@ const abscences = ['ma', 'ua', 'da']
 const notes = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10']
 
 export function TeacherView({specificLesson, setSpecificLesson}: TeacherViewProps) {
-  const students: IStudent[] = useMemo(() =>  specificLesson.lesson.klass.students, [specificLesson])
+  const students: IStudent[] = useMemo(() =>  specificLesson.students, [specificLesson])
 
   const [activeStudent, setActiveStudent] = useState<IStudent>(students[0])
   const newNote: INote = useMemo(() => ({
@@ -91,7 +91,7 @@ export function TeacherView({specificLesson, setSpecificLesson}: TeacherViewProp
       {activeHomework?.files && activeHomework.files.length > 0 && <Stack gap={2}>
         <Typography variant='h5'>{t('files.plural')}:</Typography>
         <Stack>
-          {specificLesson.files.map((file, i) => <Stack key={i} direction='row' sx={{alignItems: 'center'}} gap={2}>
+          {activeHomework.files.map((file, i) => <Stack key={i} direction='row' sx={{alignItems: 'center'}} gap={2}>
             <Button variant='outlined' sx={{borderRadius: '10%'}}>
               <Typography>{file.file.split('/').at(-1)}</Typography>
               <Link href={file.file} target='_blank'>

@@ -1,4 +1,4 @@
-import type { IStudent, IKlass, IModuleProgress, ITeacher, IPosition } from '../listed'
+import type { IStudent, IKlass, ITeacher, IPosition } from '../listed'
 import type { ISubjectName } from '../name'
 import type { IDetailedUser } from './user'
 
@@ -9,7 +9,6 @@ type IDetailedPerson = {
 
 export type IDetailedStudent = IStudent & IDetailedPerson & {
   klass?: IKlass
-  modulesProgress: IModuleProgress[]
 }
 
 export type IDetailedTeacher = ITeacher & IDetailedPerson & {

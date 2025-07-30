@@ -1,9 +1,9 @@
 export type { IAuthUser, ITokens, IAuthError } from './auth';
 
 export type { IDetailedCity } from './detailed'
-export type { IDetailedLesson, IDetailedSpecificLesson } from './detailed';
+export type { IDetailedSpecificLesson } from './detailed';
 export type { IDetailedStudent, IDetailedTeacher } from './detailed'
-export type { IDetailedKlass, IKlassWithDiary, IKlassWithStudents, IDetailedSchool, ISchoolWithKlasses, ISchoolWithTimetable } from './detailed'
+export type { IDetailedKlass, IKlassWithDiary, IDetailedSchool, ISchoolWithKlasses, ISchoolWithTimetable } from './detailed'
 export type { IDetailedModule, IDetailedSubject, IDetailedTopic } from './detailed'
 export type { IDetailedUser, IUserRoutes } from './detailed'
 export type { ICanEdit } from './detailed'

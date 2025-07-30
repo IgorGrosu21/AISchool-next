@@ -13,10 +13,6 @@ export type IKlassWithDiary = IKlass & ICanEdit & {
   timetable: ILesson[]
 }
 
-export type IKlassWithStudents = IKlass & {
-  students: IStudent[]
-}
-
 export type IDetailedSchool = ISchool & ICanEdit & {
   staff: IPosition[],
   desc: string
