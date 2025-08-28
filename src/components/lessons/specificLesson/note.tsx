@@ -2,12 +2,12 @@
 
 import { Stack, Button, Typography } from "@mui/material";
 
-interface SpecificLessonNoteProps {
+interface NoteProps {
   value?: string
   onClick?: () => void
 }
 
-export function SpecificLessonNote({value, onClick}: SpecificLessonNoteProps) {
+export function Note({value, onClick}: NoteProps) {
   return  <Stack sx={{justifyContent: 'center'}} onClick={onClick}>
     <Button variant='outlined' sx={{
       p: 1,

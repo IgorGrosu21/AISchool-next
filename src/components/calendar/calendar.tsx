@@ -1,17 +1,12 @@
 'use client'
 
-import { IKlassWithDiary } from '@/utils/interfaces'
 import { Divider, Grid2, Stack } from '@mui/material'
 import { Month } from './month'
 import { AnimatePresence, motion } from 'framer-motion'
 import { MonthButton } from './monthButton'
 import { useCalendarContext } from '@/providers'
 
-interface CalendarProps {
-  klass: IKlassWithDiary
-}
-
-export function Calendar({klass}: CalendarProps) {
+export function Calendar() {
   const { monthGroups, activeMonth, setActiveMonth, setActiveDay } = useCalendarContext()
 
   return <AnimatePresence mode='wait'>
@@ -24,7 +19,7 @@ export function Calendar({klass}: CalendarProps) {
       exit={{ opacity: 0 }}
       transition={{ duration: 0.35, ease: 'easeInOut' }}
     >
-      <Month klass={klass} month={activeMonth} />
+      <Month month={activeMonth} />
       <Divider sx={{my: 8}} />
       <Stack direction='row' sx={{justifyContent: 'space-between'}}>
         {monthGroups.map(group => group.map(month => <MonthButton

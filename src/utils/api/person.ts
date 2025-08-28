@@ -1,12 +1,20 @@
-import type { IDetailedStudent, IDetailedTeacher } from "../interfaces"
-import { request, requestWithRefresh } from "./client"
+import type { IDetailedParent, IDetailedStudent, IDetailedTeacher } from "../interfaces"
+import { request, send } from "./client"
+
+export async function fetchParent(id: string) {
+  return request<IDetailedParent>({url: `api/parents/${id}/`})
+}
+
+export async function sendParent(parent: IDetailedParent) {
+  return send<IDetailedParent>({url: `api/parents/${parent.id}/`, method: 'PUT', data: parent}, 'replace')
+}
 
 export async function fetchStudent(id: string) {
   return request<IDetailedStudent>({url: `api/students/${id}/`})
 }
 
 export async function sendStudent(student: IDetailedStudent) {
-  return requestWithRefresh<IDetailedStudent>({url: `api/students/${student.id}/`, method: 'PUT', data: student}, 'replace')
+  return send<IDetailedStudent>({url: `api/students/${student.id}/`, method: 'PUT', data: student}, 'replace')
 }
 
 export async function fetchTeacher(id: string) {
@@ -14,5 +22,5 @@ export async function fetchTeacher(id: string) {
 }
 
 export async function sendTeacher(teacher: IDetailedTeacher) {
-  return requestWithRefresh<IDetailedTeacher>({url: `api/teachers/${teacher.id}/`, method: 'PUT', data: teacher}, 'replace')
+  return send<IDetailedTeacher>({url: `api/teachers/${teacher.id}/`, method: 'PUT', data: teacher}, 'replace')
 }

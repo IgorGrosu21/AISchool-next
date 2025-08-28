@@ -1,29 +1,32 @@
 'use client'
 
 import { KlassesRange } from "@/components";
-import { ICountry } from "@/utils/interfaces";
+import { IDetailedCountry } from "@/utils/interfaces";
 import { Grid2, Stack, Typography, Checkbox } from "@mui/material";
 import { useTranslations } from "next-intl";
 import { Dispatch, SetStateAction, useCallback, useMemo } from "react";
 
 interface FiltersProps {
-  country: ICountry,
-  params: ICountry,
-  setParams: Dispatch<SetStateAction<ICountry>>
+  country: IDetailedCountry,
+  params: IDetailedCountry,
+  setParams: Dispatch<SetStateAction<IDetailedCountry>>
 }
 
 export function Filters({country, params, setParams}: FiltersProps) {
   const t = useTranslations('schools.filters');
   
   const toggleValue = useCallback((arr: string[], value: string) => {
+    if (arr.length === 1 && arr[0] === '') {
+      return [value]
+    }
     return arr.includes(value) ? arr.filter(v => v != value) : [...arr, value]
   }, [])
 
   const handleChange = useCallback((group: string, value: string) => {
     switch (group) {
       case 'langs': return setParams(p => ({...p, langs: toggleValue(p.langs.split(','), value).join(',')}));
-      case 'schoolTypes': return setParams(p => ({...p, schoolTypes: toggleValue(p.schoolTypes.split(','), value).join(',')}));
-      case 'schoolProfiles': return setParams(p => ({...p, schoolProfiles: toggleValue(p.schoolProfiles.split(','), value).join(',')}));
+      case 'types': return setParams(p => ({...p, schoolTypes: toggleValue(p.schoolTypes.split(','), value).join(',')}));
+      case 'profiles': return setParams(p => ({...p, schoolProfiles: toggleValue(p.schoolProfiles.split(','), value).join(',')}));
     }
   }, [setParams, toggleValue])
 

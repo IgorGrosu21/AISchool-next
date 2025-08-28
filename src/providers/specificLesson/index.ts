@@ -1,2 +1,2 @@
-export { SpecificLessonFilesProvider, useSpecificLessonFilesContext } from "./files";
-export { SpecificLessonLinksProvider, useSpecificLessonLinksContext } from "./links";
+export { AttachedFilesProvider, useAttachedFilesContext } from "./files";
+export { AttachedLinksProvider, useAttachedLinksContext } from "./links";

@@ -1,11 +1,10 @@
 import type { IAuthUser, ITokens } from "../interfaces"
-import { deleteAllCache, request, requestWithRefresh } from "./client"
+import { deleteAllCache, request, send } from "./client"
 import { getToken } from "@/app/actions/token";
 
 export async function sendAuthUser(type: string, data: IAuthUser) {
-  return request<ITokens>({url: `auth/${type}/`, method: 'POST', data: data, cache: { update: {
-    'get_api/user-routes/': 'delete'
-  }}})
+  deleteAllCache()
+  return request<ITokens>({url: `auth/${type}/`, method: 'POST', data: data})
 }
 
 export async function sendLogoutRequest(all = false) {
@@ -16,7 +15,7 @@ export async function sendLogoutRequest(all = false) {
 }
 
 export async function sendVerificationEmail() {
-  return requestWithRefresh({url: `auth/send-verification/`, method: 'POST', cache: { update: {
+  return send({url: `auth/send-verification/`, method: 'POST', cache: { update: {
     'get_api/user-routes/': 'delete'
   }}})
 }

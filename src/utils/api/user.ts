@@ -1,5 +1,5 @@
-import type { IMedia, IDetailedUser, IUserRoutes } from "../interfaces"
-import { request, requestWithRefresh } from "./client"
+import type { IDetailedUser, IUserRoutes } from "../interfaces"
+import { request, send, sendFile } from "./client"
 
 export function fetchUserRoutes() {
   return request<IUserRoutes>({url: 'api/user-routes/'})
@@ -8,7 +8,7 @@ export function fetchUserRoutes() {
 export async function createUser(formData: FormData) {
   const user = {
     id: '',
-    isTeacher: formData.get('isTeacher') === 'on',
+    userType: formData.get('userType'),
     name: formData.get('name'),
     surname: formData.get('surname'),
     socials: [],
@@ -17,13 +17,13 @@ export async function createUser(formData: FormData) {
     },
     lang: formData.get('lang')
   }
-  return requestWithRefresh<IDetailedUser>({url: 'api/user/', method: 'POST', data: user})
+  return send<IDetailedUser>({url: 'api/user/', method: 'POST', data: user})
 }
 
 export async function sendAvatar(data: FormData) {
-  return requestWithRefresh<IMedia>({url: 'api/user/', method: 'PATCH', data: data})
+  return sendFile({url: 'api/user/', method: 'PATCH', data: data})
 }
 
 export async function deleteAvatar() {
-  return requestWithRefresh<undefined>({url: 'api/user/', method: 'DELETE'})
+  return send<undefined>({url: 'api/user/', method: 'DELETE'})
 }

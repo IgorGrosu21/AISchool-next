@@ -5,6 +5,8 @@ type IPerson = {
   user: IUserName
 }
 
+export type IParentName = IPerson
+
 export type IStudentName = IPerson
 
 export type ITeacherName = IPerson

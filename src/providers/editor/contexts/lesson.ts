@@ -1,6 +1,6 @@
 'use client'
 
-import { IDetailedSpecificLesson } from "@/utils/interfaces"
+import { IDetailedHomework, IDetailedSpecificLesson } from "@/utils/interfaces"
 import { createContext, useContext } from "react"
 import { EditorContextType } from "./base"
 
@@ -9,3 +9,9 @@ export type SpecificLessonEditorContextType = EditorContextType<IDetailedSpecifi
 export const SpecificLessonEditorContext = createContext<SpecificLessonEditorContextType | null>(null)
 
 export const useSpecificLessonEditorContext = () => useContext(SpecificLessonEditorContext)!
+
+export type HomeworkEditorContextType = EditorContextType<IDetailedHomework>
+
+export const HomeworkEditorContext = createContext<HomeworkEditorContextType | null>(null)
+
+export const useHomeworkEditorContext = () => useContext(HomeworkEditorContext)!

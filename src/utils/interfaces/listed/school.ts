@@ -1,7 +1,7 @@
 import type { IKlassName, IPositionName, ISchoolName } from '../name'
 import type { ITeacher } from './person'
 
-export type IPosition = IPositionName & {
+export type IPosition = Omit<IPositionName, 'teacher'> & {
   id: string
   teacher: ITeacher
   school: ISchoolName
@@ -11,7 +11,6 @@ export type IPosition = IPositionName & {
 
 export type ISchool = ISchoolName & {
   address: string
-  phones: string
   website: string
   lang: string
   type: string

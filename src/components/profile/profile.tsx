@@ -19,7 +19,7 @@ export async function Profile({user, headerChildren, children}: ProfileProps) {
   
   return <NavigationContainer segments={[]} last={`${user.name} ${user.surname}`}>
     <Stack direction='row' sx={{ justifyContent: 'space-between', alignItems: 'center' }}>
-      <Typography variant='h4'>{t('title')} {t(user.profileLink!.split('/')[0])}</Typography>
+      <Typography variant='h4'>{t('title')} {t(user.profileLink!.split('/')[1])}</Typography>
       <EditButton link={`/core/${user.profileLink}`} editable={user} />
     </Stack>
     <Stack gap={4} direction='row' sx={{ justifyContent: 'space-between' }}>

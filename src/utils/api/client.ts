@@ -2,11 +2,12 @@ import { getToken } from '@/app/actions/token';
 import axios, { AxiosError } from 'axios';
 import { setupCache } from 'axios-cache-interceptor'
 import type { CacheRequestConfig, CacheUpdater, CachedResponse } from 'axios-cache-interceptor'
+import { IMedia } from '../interfaces';
 
 type updateCacheBehavior = 'replace' | 'ignore'
 
 const api = setupCache(axios.create({
-  baseURL: process.env.NEXT_PUBLIC_DJANGO_HOST,
+  baseURL: process.env.NEXT_PUBLIC_DJANGO_HOST_PROD,
   withCredentials: true,
   headers: {
     'Content-Type': 'application/json'
@@ -54,7 +55,7 @@ async function refreshToken() {
   }
 }
 
-export async function requestWithRefresh<T>(config: CacheRequestConfig, updateCacheType?: updateCacheBehavior) {
+export async function send<T>(config: CacheRequestConfig, updateCacheType?: updateCacheBehavior) {
   try {
     return await request<T>(config, updateCacheType)
   } catch (error: unknown) {
@@ -70,6 +71,13 @@ export async function requestWithRefresh<T>(config: CacheRequestConfig, updateCa
     }
   }
   return undefined
+}
+
+export async function sendFile(config: CacheRequestConfig, updateCacheType?: updateCacheBehavior) {
+  const response = await send<{file: IMedia}>(config, updateCacheType)
+  if (response) {
+    return response.file
+  }
 }
 
 export async function getCachedData(key: string) {

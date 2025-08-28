@@ -14,8 +14,8 @@ export function SchoolLink({school, ...props}: SchoolLinkProps) {
   
   return <Stack {...props} direction={props.direction ?? 'row'} gap={props.gap ?? 1}>
     <Typography variant='h6'>{t('singular')}:</Typography>
-    <Link href={`/core/schools/${school.id}`}>
-      <Typography variant='h6' sx={{color: 'primary.main'}}>{school.name}</Typography>
+    <Link href={`/core/schools/${school.slug}`}>
+      <Typography variant='h6' color='primary'>{school.name}</Typography>
     </Link>
   </Stack>
 }

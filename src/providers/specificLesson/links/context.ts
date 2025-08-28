@@ -14,4 +14,4 @@ export const LinksContext = createContext<LinkContextType>({
   deleteLink: () => {},
 });
 
-export const useSpecificLessonLinksContext = () => useContext(LinksContext)
+export const useAttachedLinksContext = () => useContext(LinksContext)

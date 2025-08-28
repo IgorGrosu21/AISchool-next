@@ -1,15 +1,16 @@
 import type { IDetailedMedia } from '../media'
-import type { ILessonTimeName, ILessonName } from '../name'
-import { ITeacher } from './person'
-import { IKlass } from './school'
+import type { ILessonTimeName, ILessonName, ISpecificLessonName, IStudentName, INoteName } from '../name'
+import type { ITeacher } from './person'
+import type { IKlass } from './school'
 
 export type ILessonTime = ILessonTimeName & {
   lessons: ILessonName[]
+  school: string
 }
 
-export type ILesson = Omit<ILessonName, 'klass' | 'teacher'> & {
+export type ILesson = Omit<ILessonName, 'klass' | 'teacher' | 'lessonTime'> & {
   klass: IKlass
-  teacher: ITeacher
+  teacher?: ITeacher
   lessonTime: ILessonTimeName
 }
 
@@ -21,14 +22,15 @@ export type IHomework = {
   links: string
   lastModified: string
   files: IDetailedMedia[]
-  filesData?: File[]
 }
 
-export type INote = {
-  id: string
-  value: string
-  specificLesson: string
-  student: string
-  comment: string
-  lastModified: string
+export type INote = Omit<INoteName, 'specificLesson' | 'student'> & {
+  specificLesson: ISpecificLesson
+  student: IStudentName
+}
+
+export type ISpecificLesson = Omit<ISpecificLessonName, 'lesson'> & {
+  lesson: ILesson
+  files: IDetailedMedia[]
+  links: string
 }

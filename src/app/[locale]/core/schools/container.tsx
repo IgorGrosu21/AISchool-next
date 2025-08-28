@@ -4,18 +4,19 @@ import { Stack } from "@mui/material"
 import { useMemo, useState } from "react";
 import { SchoolsTable } from "./table";
 import { Filters } from "./filters";
-import { ISchool, ICountry } from "@/utils/interfaces";
+import { ISchool, IDetailedCountry } from "@/utils/interfaces";
 
 interface ContainerProps {
   schools: ISchool[],
-  country: ICountry
+  country: IDetailedCountry
 }
 
 export function Container({schools, country}: ContainerProps) {
-  const [params, setParams] = useState<ICountry>({
+  const [params, setParams] = useState<IDetailedCountry>({
     id: country.id,
     name: country.name,
     flag: country.flag,
+    slug: country.slug,
     langs: '',
     startGrade: 1,
     finalGrade: 12,

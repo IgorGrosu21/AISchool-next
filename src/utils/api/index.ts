@@ -1,16 +1,17 @@
 export { sendAuthUser, sendLogoutRequest, sendVerificationEmail } from "./auth";
 export { fetchCountryNames, fetchRegionNames, fetchCityNames, fetchCity } from "./country";
 export {
-  fetchSchoolWithTimetable, sendSchoolWithTimetable,
-  fetchSpecificLessonNames, fetchSpecificLesson,
-  sendSpecificLesson, deleteSpecificLesson, sendSpecificLessonPhoto, deleteSpecificLessonPhoto,
-  sendHomework, deleteHomework, sendHomeworkPhoto, deleteHomeworkPhoto
+  fetchLessonNames, fetchLesson,
+  fetchSpecificLessonNames, fetchSpecificLesson, sendSpecificLesson, deleteSpecificLesson, sendSpecificLessonPhoto, deleteSpecificLessonPhoto,
+  fetchHomework, sendHomework, deleteHomework, sendHomeworkPhoto, deleteHomeworkPhoto,
+  fetchStudentNotes, fetchTeacherNotes, sendNote
 } from "./lesson";
-export { fetchStudent, sendStudent, fetchTeacher, sendTeacher } from "./person";
+export { fetchManuals, fetchManual, fetchModule, fetchTopic, sendTask } from "./manual";
+export { fetchParent, sendParent, fetchStudent, sendStudent, fetchTeacher, sendTeacher } from "./person";
 export {
-  fetchSchoolNames, fetchSchools, fetchSchool, sendSchool,
-  sendSchoolPreview, deleteSchoolPreview, sendSchoolPhoto, deleteSchoolPhoto,
-  fetchSchoolWithKlasses, sendSchoolWithKlasses, fetchKlass, sendKlass, fetchKlassDiary
+  fetchSchoolNames, fetchSchools, fetchSchool, sendSchool, fetchSchoolWithKlasses, sendSchoolWithKlasses, fetchSchoolWithTimetable, sendSchoolWithTimetable,
+  sendSchoolPreview, deleteSchoolPreview, sendSchoolPhoto, deleteSchoolPhoto, fetchSchoolLessonTimeNames,
+  fetchKlass, sendKlass, fetchTeacherKlasses
 } from "./school";
-export { fetchSubjectsNames, fetchSubjects, fetchSubject, fetchModule, fetchTopic, sendTheory } from "./subject";
+export { fetchSubjectsNames, fetchTeachedSubjects, fetchStudiedSubjects } from "./subject";
 export { fetchUserRoutes, createUser, sendAvatar, deleteAvatar } from "./user";

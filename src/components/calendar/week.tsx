@@ -2,20 +2,20 @@
 
 import { getSpecificLessons } from '@/app/actions/lesson';
 import { SpecificLessons } from '@/components';
-import { useCalendarContext } from '@/providers';
-import { IKlassWithDiary, ISpecificLessonName } from '@/utils/interfaces';
+import { useCalendarContext, useDiaryContext } from '@/providers';
+import { ISpecificLessonName } from '@/utils/interfaces';
 import { ChevronLeft, ChevronRight } from '@mui/icons-material';
 import { Box, Button, CircularProgress, Stack, Typography } from '@mui/material';
 import { addDays, compareAsc, compareDesc, format, isSameWeek, subDays } from 'date-fns';
 import { useEffect, useMemo, useState, useTransition } from 'react';
 
 interface WeekProps {
-  klass: IKlassWithDiary
   dates: Date[]
 }
 
-export function Week({klass, dates}: WeekProps) {
+export function Week({dates}: WeekProps) {
   const { year, setActiveDay, currentDay } = useCalendarContext()
+  const { accountType, personId, schoolSlug } = useDiaryContext()
   
   const [specificLessons, setSpecificLessons] = useState<ISpecificLessonName[]>([])
   const [isPending, startTransition] = useTransition()
@@ -48,9 +48,9 @@ export function Week({klass, dates}: WeekProps) {
   useEffect(() => {
     startTransition(async () => {
       //though this is client component, we still want to fetch on the server to cache the data
-      getSpecificLessons(klass, format(debouncedStart, 'y.M.d'), format(debouncedEnd, 'y.M.d')).then(setSpecificLessons)
+      getSpecificLessons(accountType, personId, format(debouncedStart, 'y.M.d'), format(debouncedEnd, 'y.M.d'), schoolSlug).then(setSpecificLessons)
     })
-  }, [klass, debouncedStart, debouncedEnd])
+  }, [debouncedStart, debouncedEnd, accountType, personId, schoolSlug])
 
   return <Stack gap={2} sx={{alignItems: 'center'}}>
     <Stack direction='row' sx={{alignItems: 'center'}}>
@@ -72,7 +72,7 @@ export function Week({klass, dates}: WeekProps) {
     </Stack>
     <Box sx={{position: 'relative'}}>
       <Box sx={{opacity: isPending ? 0.2 : 1, transition: '0.35s'}}>
-        <SpecificLessons klass={klass} specificLessons={specificLessons} dates={dates} />
+        <SpecificLessons specificLessons={specificLessons} dates={dates} />
       </Box>
       <Stack direction='row' sx={{
         position: 'absolute',

@@ -19,4 +19,4 @@ export const FilesContext = createContext<FileContextType>({
   deleteFile: () => {}
 });
 
-export const useSpecificLessonFilesContext = () => useContext(FilesContext)
+export const useAttachedFilesContext = () => useContext(FilesContext)

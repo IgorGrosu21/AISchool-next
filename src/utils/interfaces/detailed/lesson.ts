@@ -1,21 +1,20 @@
-import type { ILesson, IHomework, INote, IStudent } from "../listed"
-import type { IDetailedMedia } from "../media"
-import type { ISpecificLessonName } from "../name"
+import type { IHomework, IStudent, ISpecificLesson, ILesson } from "../listed"
+import type { INoteName, ISpecificLessonName } from "../name"
 
-export type IDetailedSpecificLesson = Omit<ISpecificLessonName, 'lesson' | 'note'> & {
-  desc: string
-  links: string,
-  files: IDetailedMedia[]
+export type IDetailedLesson = ILesson & {
+  specificLessons: ISpecificLessonName[]
+}
+
+export type IDetailedSpecificLesson = ISpecificLesson & {
   filesData?: File[]
-  lesson: ILesson
-} & ({
-  canEdit: false
-  student: IStudent
-  note?: INote
-  homework?: IHomework
-} | {
-  canEdit: true
   students: IStudent[]
-  notes: INote[]
+  notes: INoteName[]
   homeworks: IHomework[]
-})
+}
+
+export type IDetailedHomework = Omit<IHomework, 'student'> & {
+  filesData?: File[]
+  specificLesson: ISpecificLesson
+  note?: INoteName
+  student: IStudent
+}

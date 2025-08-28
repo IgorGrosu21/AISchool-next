@@ -27,10 +27,11 @@ export function TeacherPositionsEditor({teacher, setTeacher, schoolNames}: Teach
         id: '',
         name: ''
       },
-      preview: ''
+      preview: '',
+      slug: ''
     },
-    subjectNames: [...teacher.subjectNames],
-    type: 'T',
+    subjects: [...teacher.subjects],
+    type: 'T' as const,
     isManager: false
   }), [teacher])
   const [positions, setPositions] = useState<IPosition[]>(teacher.workPlaces.length === 0 ? [dummyPosition] : teacher.workPlaces)
@@ -60,10 +61,14 @@ export function TeacherPositionsEditor({teacher, setTeacher, schoolNames}: Teach
             <Typography variant='h6'>{t('singular')}:</Typography>
             <TypePicker type={position.type} setType={type => setPositions(ps => ps.map((p, j) => i === j ? {...p, type: type} : p))} />
           </Stack>
+            <Stack>
+              <Typography variant='h5'>{t('pick')}</Typography>
+              <Typography>{t('helper')}</Typography>
+            </Stack>
           <SubjectsEditor<IPosition>
             instance={position}
             setInstance={instance => setPositions(ps => ps.map((p, j) => j === i ? instance : p))}
-            subjectNames={teacher.subjectNames}
+            subjects={teacher.subjects}
             small
           />
           <Stack direction='row' sx={{justifyContent: 'flex-end'}}>

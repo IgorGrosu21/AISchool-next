@@ -9,7 +9,7 @@ interface ValueType<T> {
   setInstance: Dispatch<SetStateAction<T>>
 }
 
-export function SpecificLessonLinksProvider<T extends {links: string}>({children, value: {setInstance}}: ProviderProps<ValueType<T>>) {
+export function AttachedLinksProvider<T extends {links: string}>({children, value: {setInstance}}: ProviderProps<ValueType<T>>) {
   const [newLink, setNewLink] = useState('')
   const [linksOpened, openLinks] = useState(false)
   const t = useTranslations('timetable.specific_lessons.links')

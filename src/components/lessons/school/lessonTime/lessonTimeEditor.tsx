@@ -1,6 +1,6 @@
 'use client'
 
-import { ILessonTime } from "@/utils/interfaces";
+import { ILessonTime, ISchoolWithTimetable } from "@/utils/interfaces";
 import { Stack, Typography, TextField } from "@mui/material";
 import { useTranslations } from "next-intl";
 import { useCallback, useEffect, useState } from "react";
@@ -8,19 +8,19 @@ import { weekdays } from "../../utils";
 import { LessonTimeContainer } from "./lessonTimeContainer";
 
 interface LessonTimeEditorProps {
-  timetable: ILessonTime[]
+  school: ISchoolWithTimetable
   setTimetable: (val: ILessonTime[]) => void
 }
 
-export function LessonTimeEditor({timetable, setTimetable}: LessonTimeEditorProps) {
+export function LessonTimeEditor({school, setTimetable}: LessonTimeEditorProps) {
   const [duration, setDuration] = useState(45)
   const t = useTranslations('timetable')
 
   useEffect(() => {
-    if (timetable.length < 48) {
+    if (school.timetable.length < 48) {
       const newTimetable: ILessonTime[] = []
       for (const weekday of weekdays) {
-        const lessonTimeList = timetable.filter(l => l.weekday === weekday)
+        const lessonTimeList = school.timetable.filter(l => l.weekday === weekday)
         const fullLessonTimeList: ILessonTime[] = []
         if (lessonTimeList.length < 8) {
           for (let i = 0; i < 8; i++) {
@@ -31,6 +31,7 @@ export function LessonTimeEditor({timetable, setTimetable}: LessonTimeEditorProp
               weekday: weekday,
               order: i,
               lessons: [],
+              school: school.id
             })
           }
         }
@@ -38,21 +39,21 @@ export function LessonTimeEditor({timetable, setTimetable}: LessonTimeEditorProp
       }
       setTimetable(newTimetable)
     }
-  }, [setTimetable, timetable])
+  }, [setTimetable, school.timetable, school.id])
 
   const updateTime = useCallback((weekday: ILessonTime['weekday'], order: number, type: 'starting' | 'ending', value: string) => {
     if (value === '') {
       return setTimetable(
-        timetable.map(l => l.weekday === weekday && l.order === order ? {...l, starting: '', ending: ''} : l)
+        school.timetable.map(l => l.weekday === weekday && l.order === order ? {...l, starting: '', ending: ''} : l)
       )
     }
     if (type === 'ending') {
       return setTimetable(
-        timetable.map(l => l.weekday === weekday && l.order === order ? {...l, ending: value} : l)
+        school.timetable.map(l => l.weekday === weekday && l.order === order ? {...l, ending: value} : l)
       )
     }
     if (value.length === 5 && value.includes(':')) {
-      const copy = [...timetable]
+      const copy = [...school.timetable]
       copy.forEach((l, i) => {
         if (l.order === order) {
           let [hours, minutes] = value.split(':').map(Number)
@@ -67,10 +68,10 @@ export function LessonTimeEditor({timetable, setTimetable}: LessonTimeEditorProp
       return setTimetable(copy)
     }
     setTimetable(
-      timetable.map(l => l.weekday === weekday && l.order === order ? {...l, starting: value} : l)
+      school.timetable.map(l => l.weekday === weekday && l.order === order ? {...l, starting: value} : l)
     )
     
-  }, [duration, setTimetable, timetable])
+  }, [duration, setTimetable, school.timetable])
 
   return <Stack gap={8}>
     <Stack gap={2} direction='row' sx={{justifyContent: 'space-between', alignItems: 'center'}}>
@@ -80,7 +81,7 @@ export function LessonTimeEditor({timetable, setTimetable}: LessonTimeEditorProp
       </Stack>
       <TextField value={duration} onChange={e => setDuration(Number(e.target.value))} label={t('lesson_time.duration')} />
     </Stack>
-    <LessonTimeContainer timetable={timetable} render={lessonTime => <Stack key={lessonTime.order} direction='row' gap={2} sx={{alignItems: 'center'}}>
+    <LessonTimeContainer timetable={school.timetable} render={lessonTime => <Stack key={lessonTime.order} direction='row' gap={2} sx={{alignItems: 'center'}}>
       <Typography variant='h6'>{lessonTime.order + 1}.</Typography>
       <TextField value={lessonTime.starting} label={t('lesson_time.starting')} onChange={e => updateTime(
         lessonTime.weekday, lessonTime.order, 'starting', e.target.value

@@ -12,17 +12,19 @@ interface KlassLessonsEditorProps {
 }
 
 export function KlassLessonsEditor({timetable, klass, staff, setKlass}: KlassLessonsEditorProps) {
-  const getLesson = useCallback((lessonTime: ILessonTimeName) => klass.timetable.find(l => l.lessonTime.id === lessonTime.id), [klass])
+  const getLesson = useCallback((lessonTime: ILessonTimeName) => klass.lessons.find(l => l.lessonTime === lessonTime.id), [klass])
   
   return <LessonsEditor
+    subjects={klass.school.subjects}
+    groups={klass.groups}
     staff={staff}
     timetable={timetable}
     getLesson={getLesson}
-    createLesson={(teacherSubjectNames, lessonTime, teacher) => setKlass(
-      k => ({...k, timetable: [...k.timetable, {
+    createLesson={(lessonTime, subject) => setKlass(
+      k => ({...k, timetable: [...k.lessons, {
         id: '',
-        subjectName: teacherSubjectNames[0],
-        teacher: teacher,
+        subject: subject,
+        teacher: undefined,
         klass: {
           id: klass.id,
           grade: klass.grade,
@@ -33,16 +35,16 @@ export function KlassLessonsEditor({timetable, klass, staff, setKlass}: KlassLes
         subjectSlug: ''
       }]})
     )}
-    updateLesson={(lesson, teacherSubjectNames, lessonTime, teacher) => setKlass(
-      k => ({...k, timetable: k.timetable.map(
-        l => l.klass.id === lesson.klass.id ? {...l, teacher: teacher, subjectName: teacherSubjectNames[0]} : l
+    updateLesson={(lesson, lessonTime, subject) => setKlass(
+      k => ({...k, timetable: k.lessons.map(
+        l => l.klass === lesson.klass ? {...l, teacher: lessonTime, subject: subject} : l
       )})
     )}
     deleteLesson={lessonTime => setKlass(
-      k => ({...k, timetable: k.timetable.filter(l => l.lessonTime.id !== lessonTime.id)})
+      k => ({...k, timetable: k.lessons.filter(l => l.lessonTime !== lessonTime.id)})
     )}
-    updateSubjectName={(lessonTime, subjectName) => setKlass(
-      k => ({...k, timetable: k.timetable.map(l => l.lessonTime.id === lessonTime.id ? {...l, subjectName: subjectName} : l)})
+    updateTeacher={(lessonTime, teacher) => setKlass(
+      k => ({...k, timetable: k.lessons.map(l => l.lessonTime === lessonTime.id ? {...l, teacher: teacher} : l)})
     )}
   />
 }

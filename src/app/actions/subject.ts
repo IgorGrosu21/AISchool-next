@@ -1,10 +1,10 @@
 'use server'
 
-import { sendTheory } from "@/utils/api"
-import { IDetailedTopic, ITheory } from "@/utils/interfaces"
+import { sendTask } from "@/utils/api"
+import { IDetailedTopic, ITask } from "@/utils/interfaces"
 
-export async function completeTheory(topic: IDetailedTopic, theory: ITheory) {
-  if (!topic.completedTheories.includes(theory.slug)) {
-    await sendTheory(topic, theory)
+export async function completeTask(topic: IDetailedTopic, theory: ITask) {
+  if (!topic.completedTasks.includes(theory.slug)) {
+    await sendTask(topic, theory)
   }
 }

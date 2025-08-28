@@ -1,30 +1,31 @@
 import type { IDetailedMedia } from '../media'
-import type { IKlassName, ISchoolName, ISchoolNameWithTimetable } from '../name'
-import type { IKlass, IStudent, ILesson, ISchool, IPosition, ITeacher, ILessonTime } from '../listed'
+import type { IGroupName, IKlassName, IKlassNameWithGroups, ILessonName, ISchoolName, ISchoolNameWithTimetable, ISubjectName } from '../name'
+import type { IKlass, IStudent, ISchool, IPosition, ITeacher, ILessonTime } from '../listed'
 import type { ICanEdit } from './canEdit'
 
-export type IDetailedKlass = IKlassWithDiary & {
+export type IDetailedKlass = Omit<IKlass, 'school'> & ICanEdit & {
   students: IStudent[]
   teacher?: ITeacher
-}
-
-export type IKlassWithDiary = IKlass & ICanEdit & {
+  lessons: ILessonName[]
   school: ISchoolNameWithTimetable
-  timetable: ILesson[]
+  groups: IGroupName[]
 }
 
 export type IDetailedSchool = ISchool & ICanEdit & {
-  staff: IPosition[],
   desc: string
-  workHours: string
-  photos: IDetailedMedia[]
+  phones: string
   emails: string
+  workHours: string
+  staff: IPosition[]
+  files: IDetailedMedia[]
 }
 
 export type ISchoolWithKlasses = Omit<ISchoolName, 'city' | 'preview'> & ICanEdit & {
   klasses: IKlassName[]
 }
 
-export type ISchoolWithTimetable = ISchoolWithKlasses & Omit<ISchoolNameWithTimetable, 'timetable'> & {
+export type ISchoolWithTimetable = Omit<ISchoolWithKlasses, 'klasses'> & Omit<ISchoolNameWithTimetable, 'timetable'> & {
   timetable: ILessonTime[]
+  subjects: ISubjectName[]
+  klasses: IKlassNameWithGroups[]
 }

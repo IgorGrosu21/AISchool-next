@@ -5,7 +5,7 @@ import { redirect } from "next/navigation"
 import { sendAuthUser, createUser, sendLogoutRequest, sendVerificationEmail } from "@/utils/api";
 import { AxiosError } from "axios";
 import { deleteTokens, setTokens } from "./token";
-import { IAuthError } from "@/utils/interfaces";
+import { IError } from "@/utils/interfaces";
 
 export type FormState = {
   email: {
@@ -43,11 +43,13 @@ export async function auth(state: FormState, formData: FormData): Promise<FormSt
     }
   } catch (error: unknown) {
     if (error instanceof AxiosError) {
-      const response = (error as AxiosError<IAuthError>).response
+      const response = (error as AxiosError<IError>).response
       if (response) {
+        const emailErrors = response.data.errors.filter(e => e.attr === 'email')
+        const passwordErrors = response.data.errors.filter(e => e.attr === 'password')
         return {
-          email: {...newState.email, error: response.data.email ? response.data.email[0] : ''},
-          password: {...newState.password, error: response.data.password ? response.data.password[0] : ''}
+          email: {...newState.email, error: emailErrors.at(0)?.detail ?? ''},
+          password: {...newState.password, error: passwordErrors.at(0)?.detail ?? ''}
         }
       }
     }

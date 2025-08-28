@@ -1,4 +1,3 @@
-export { SpecificLessonFiles } from "./files";
-export { SpecificLessonLinks } from "./links";
+export { SpecificLessonHeader } from "./header";
 export { SpecificLessons } from "./list";
-export { SpecificLessonNote } from "./note";
+export { Note } from "./note";

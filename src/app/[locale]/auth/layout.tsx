@@ -11,7 +11,7 @@ export default async function AuthLayout({ children }: { children: React.ReactNo
     redirect('/core')
   }
 
-  return <Stack gap={2} sx={{alignItems: 'center', justifyContent: 'center', height: '100%', width: '100%', p: 2}}>
+  return <Stack gap={2} sx={{alignItems: 'center', height: '100%', width: '100%', px: 2, pt: 16}}>
     <Image src='/images/logo-blue.png' width={100} height={94} alt='light-logo' priority />
     {children}
   </Stack>

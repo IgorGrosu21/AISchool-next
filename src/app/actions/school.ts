@@ -9,7 +9,7 @@ export async function editKlass(instance: IDetailedKlass) {
   instance.school.timetable = []
   const data = await sendKlass(instance)
   if (data) {
-    redirect(`/core/schools/${data.school.id}/klasses/${data.id}`)
+    redirect(`/core/schools/${data.school.slug}/klasses/${data.slug}`)
   }
   return data ?? instance
 }
@@ -17,7 +17,7 @@ export async function editKlass(instance: IDetailedKlass) {
 export async function editSchool(instance: IDetailedSchool) {
   const data = await sendSchool(instance)
   if (data) {
-    redirect(`/core/schools/${data.id}`)
+    redirect(`/core/schools/${data.slug}`)
   }
   return data ?? instance
 }
@@ -26,13 +26,12 @@ export async function editSchoolWithKlasses(instance: ISchoolWithKlasses) {
   instance.klasses = instance.klasses.map(k => ({...k, school: instance.id}))
   const data = await sendSchoolWithKlasses(instance)
   if (data) {
-    redirect(`/core/schools/${data.id}/klasses`)
+    redirect(`/core/schools/${data.slug}/klasses`)
   }
   return data ?? instance
 }
 
 export async function editSchoolWithTimetable(instance: ISchoolWithTimetable) {
-  instance.klasses = []
   instance.staff = []
   instance.timetable = instance.timetable.filter(lt => lt.starting != '').map(lt => ({
     ...lt,
@@ -41,7 +40,7 @@ export async function editSchoolWithTimetable(instance: ISchoolWithTimetable) {
   }))
   const data = await sendSchoolWithTimetable(instance)
   if (data) {
-    redirect(`/core/schools/${data.id}/timetable`)
+    redirect(`/core/schools/${data.slug}/timetable`)
   }
   return data ?? instance
 }

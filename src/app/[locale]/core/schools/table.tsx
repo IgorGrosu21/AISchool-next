@@ -45,7 +45,7 @@ export function SchoolsTable({filteredSchools}: SchoolsTableProps) {
       <TableBody>
         {paginatedSchools.map((school, i) => <TableRow key={i} sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>
           <TableCell component="th" scope="row">
-            <Link href={`/core/schools/${school.id}/`}>
+            <Link href={`/core/schools/${school.slug}/`}>
               <Image
                 width={1792}
                 height={1024}
@@ -56,9 +56,13 @@ export function SchoolsTable({filteredSchools}: SchoolsTableProps) {
               />
             </Link>
           </TableCell>
-          <TableCell><Link href={`/core/schools/${school.id}/`}>{school.name}</Link></TableCell>
+          <TableCell>
+            <Link href={`/core/schools/${school.slug}/`}>{school.name}</Link>
+          </TableCell>
           <TableCell>{school.address}</TableCell>
-          <TableCell align="right">{school.website}</TableCell>
+          <TableCell align="right" sx={{color: 'primary.main'}}>
+            <Link target='_blank' href={school.website}>{school.website}</Link>
+          </TableCell>
         </TableRow>)}
         <Paginator page={page} setPage={setPage} pages={pages} filteredSchoolsLength={filteredSchools.length} />
       </TableBody>

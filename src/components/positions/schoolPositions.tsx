@@ -27,7 +27,7 @@ export async function SchoolPositions({school}: SchoolPositionsProps) {
             <Typography variant='h6'>{t(position.type)}</Typography>
           </TableCell>
           <TableCell>
-            <Subjects subjectNames={position.subjectNames} small showText={false} />
+            <Subjects subjects={position.subjects} small showText={false} />
           </TableCell>
         </TableRow>)}
       </TableBody>

@@ -4,17 +4,15 @@ import { Divider, Stack } from '@mui/material';
 import { getDay, getDaysInMonth, setDate } from 'date-fns';
 import { useMemo } from 'react';
 import { motion } from 'framer-motion'
-import { IKlassWithDiary } from '@/utils/interfaces';
 import { Weeks } from './weeks';
 import { MonthButton } from './monthButton';
 import { useCalendarContext } from '@/providers';
 
 interface MonthProps {
-  klass?: IKlassWithDiary //no need to pass klass to unactive months
   month: Date
 }
 
-export function Month({klass, month}: MonthProps) {
+export function Month({month}: MonthProps) {
   const { activeMonth, setActiveMonth, currentMonth, setActiveDay } = useCalendarContext()
 
   const isActive = useMemo(() => activeMonth?.getMonth() === month.getMonth(), [activeMonth, month])
@@ -51,7 +49,7 @@ export function Month({klass, month}: MonthProps) {
     <Stack gap={2}>
       <MonthButton month={month} activeMonth={currentMonth} onClick={() => setActiveDay(undefined)} />
       <Divider />
-      <Weeks klass={klass} calendarDays={calendarDays} />
+      <Weeks calendarDays={calendarDays} />
     </Stack>
   </motion.div>
 }

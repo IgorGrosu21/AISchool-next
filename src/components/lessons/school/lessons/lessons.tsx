@@ -9,7 +9,8 @@ interface SchoolLessonsProps {
 }
 
 export function SchoolLessons({school}: SchoolLessonsProps) {
-  return <WithKlass school={school} render={(_, getLessonName) => <Lessons
+  return <WithKlass school={school} render={(klass, getLessonName) => <Lessons
+    groups={klass.groups}
     timetable={school.timetable}
     getLessonName={getLessonName}
   />} />

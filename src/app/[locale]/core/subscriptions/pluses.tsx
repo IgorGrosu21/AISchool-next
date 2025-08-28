@@ -6,8 +6,8 @@ export async function Pluses() {
   
   const soloPluses = t('solo').split(';')
   const groupPluses = t('group').split(';')
-  
-  return <Stack gap={8} direction='row'>
+
+  return <Stack gap={4} direction='row'>
     <Stack gap={4} sx={{p: 4, flex: 1}}>
       <Typography variant='h5' color='primary'>{t('about')}</Typography>
       <Divider />

@@ -1,4 +1,3 @@
-import type { IKlassName } from './school'
 import type { ISubjectName } from './subject'
 import type { ITeacherName } from './person'
 
@@ -12,16 +11,29 @@ export type ILessonTimeName = {
 
 export type ILessonName = {
   id: string
-  subjectName: ISubjectName
-  teacher: ITeacherName
-  klass: IKlassName
-  subjectSlug: string
+  subject: ISubjectName
+  teacher?: ITeacherName
+  klass: string
+  lessonTime: string
+  klassSlug: string
+  manualSlug: string
+}
+
+export type INoteName = {
+  id: string
+  value: string
+  specificLesson: string
+  student: string
+  comment: string
+  lastModified: string
 }
 
 export type ISpecificLessonName = {
   id: string
   lesson: string
-  date: Date
+  date: string
   title: string
+  desc: string
   note?: string
+  homework?: string
 }

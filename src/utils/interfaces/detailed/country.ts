@@ -1,11 +1,11 @@
 import type { ICity, IRegion } from '../listed'
 import type { ICountryName } from '../name'
 
-export type IDetailedCity = ICity & {
+export type IDetailedCity = Omit<ICity, 'region'> & {
   region: IDetailedRegion
 }
 
-export type IDetailedRegion = IRegion & {
+export type IDetailedRegion = Omit<IRegion, 'country'> & {
   country: IDetailedCountry
 }
 

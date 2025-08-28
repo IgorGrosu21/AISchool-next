@@ -1,7 +1,7 @@
 'use client'
 
 import { ISubjectName } from "@/utils/interfaces";
-import { Stack, Typography, Autocomplete, TextField, Checkbox, Box } from "@mui/material";
+import { Stack, Autocomplete, TextField, Checkbox, Box } from "@mui/material";
 import { CheckBox, CheckBoxOutlineBlank } from "@mui/icons-material";
 import { useMemo } from "react";
 import { useTranslations } from "next-intl";
@@ -10,24 +10,20 @@ import { Subjects } from "@/components";
 interface SubjectsEditorProps<T> {
   instance: T,
   setInstance: (instance: T) => void
-  subjectNames: ISubjectName[],
+  subjects: ISubjectName[],
   small?: boolean
 }
 
-export function SubjectsEditor<T extends {subjectNames: ISubjectName[]}>({instance, setInstance, subjectNames, small = false}: SubjectsEditorProps<T>) {
-  const pickedSubjectsEditor = useMemo(() => instance.subjectNames, [instance.subjectNames])
+export function SubjectsEditor<T extends {subjects: ISubjectName[]}>({instance, setInstance, subjects, small = false}: SubjectsEditorProps<T>) {
+  const pickedSubjects = useMemo(() => instance.subjects, [instance.subjects])
   const t = useTranslations('subjects')
   
   return <Stack gap={4}>
-    <Stack>
-      <Typography variant='h5'>{t('pick')}</Typography>
-      <Typography>{t('helper')}</Typography>
-    </Stack>
     <Autocomplete
       multiple
-      options={subjectNames}
-      value={pickedSubjectsEditor}
-      onChange={(_, newValue: ISubjectName[] | null) => setInstance({...instance, subjectNames: newValue ?? []})}
+      options={subjects}
+      value={pickedSubjects}
+      onChange={(_, newValue: ISubjectName[] | null) => setInstance({...instance, subjects: newValue ?? []})}
       disableCloseOnSelect
       getOptionLabel={(option) => option.verboseName}
       renderOption={(props, option, { selected }) => {
@@ -48,6 +44,6 @@ export function SubjectsEditor<T extends {subjectNames: ISubjectName[]}>({instan
         <TextField {...params} label={t('list')} placeholder={t('picked')} />
       )}
     />
-    <Subjects subjectNames={pickedSubjectsEditor} small={small} />
+    <Subjects subjects={pickedSubjects} small={small} />
   </Stack>
 }

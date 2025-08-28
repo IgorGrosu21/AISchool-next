@@ -1,6 +1,6 @@
 export type { ICity, IRegion } from './country'
-export type { ILessonTime, ILesson, INote, IHomework } from './lesson';
-export type { IStudent, ITeacher, ISubscription } from './person';
+export type { ILessonTime, ILesson, IHomework, INote, ISpecificLesson } from './lesson';
+export type { IParent, IStudent, ITeacher, ISubscription, IStudentWithKlass } from './person';
 export type { IPosition, ISchool, IKlass } from './school';
-export type { IProgress, ITheory, ITask, IBalance, IModuleWithSubject, IModule, ISubject, ITopic } from './subject';
+export type { ITheory, ITask, IBalance, IModuleWithManual, IModule, IManual, ITopic } from './manual';
 export type { IUser, ISocial } from './user';

@@ -1,11 +1,11 @@
-import type { IBalance } from './subject'
+import type { IBalance } from './manual'
 import type { IUser } from './user'
+import type { IKlassName, ISchoolName } from '../name/school'
 
 export type ISubscription = {
-  id: string
   plan: 'A' | 'Y' | 'K' | 'L'
   price: number
-  ending: Date
+  ending: string
 }
 
 type IPerson = {
@@ -13,11 +13,18 @@ type IPerson = {
   user: IUser
 }
 
+export type IParent = IPerson
+
 export type IStudent = IPerson & {
   subscription?: ISubscription
   balance: IBalance
   rank: number
   isManager: boolean
+}
+
+export type IStudentWithKlass = IStudent & {
+  klass?: IKlassName
+  school?: ISchoolName
 }
 
 export type ITeacher = IPerson

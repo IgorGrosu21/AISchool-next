@@ -12,7 +12,7 @@ interface KlassCircleProps {
 export function KlassLink({klass}: KlassCircleProps) {
   const t = useTranslations('klasses')
 
-  return <Link href={`/core/schools/${klass.school?.id}/klasses/${klass.id}`}>
+  return <Link href={`/core/schools/${klass.school?.id}/klasses/${klass.slug}`}>
     <Stack gap={2}>
       <Typography variant='h4'>
         {klass.grade}{klass.letter}

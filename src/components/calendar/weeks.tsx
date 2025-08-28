@@ -1,6 +1,5 @@
 'use client'
 
-import { IKlassWithDiary } from '@/utils/interfaces';
 import { Grid2 } from '@mui/material';
 import { addDays, startOfWeek } from 'date-fns';
 import { AnimatePresence, motion } from 'framer-motion';
@@ -10,11 +9,10 @@ import { Week } from './week';
 import { useCalendarContext } from '@/providers';
 
 interface WeeksProps {
-  klass?: IKlassWithDiary //as we pass the klass only to active month, some weeks will get undefined
   calendarDays: Array<Date | null>
 }
 
-export function Weeks({klass, calendarDays}: WeeksProps) {
+export function Weeks({calendarDays}: WeeksProps) {
   const { activeDay } = useCalendarContext()
 
   //we want to highlight current week, so we need to split days into weeks
@@ -44,7 +42,7 @@ export function Weeks({klass, calendarDays}: WeeksProps) {
       transition={{ duration: 0.4 }}
     >
       {/*as mentioned, unactive weeks have klass as undefined*/}
-      {klass && <Week klass={klass} dates={activeWeek} />}
+      <Week dates={activeWeek} />
     </motion.div> : <motion.div layout key='month-view'>
       <Grid2 container spacing={2} columns={7}>
         {weeks.map((week, i) => <Days key={i} week={week} />)}

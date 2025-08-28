@@ -17,12 +17,13 @@ interface ValueType<T> {
   setInstance: Dispatch<SetStateAction<T>>
 }
 
-export function SpecificLessonFilesProvider<T extends WithFiles>({children, value: {setInstance}}: ProviderProps<ValueType<T>>) {
+export function AttachedFilesProvider<T extends WithFiles>({children, value: {setInstance}}: ProviderProps<ValueType<T>>) {
   const [activeFile, setActiveFile] = useState<IDetailedMedia>()
   const [activeFileData, setActiveFileData] = useState<File>()
   const [imageLink, setImageLink] = useState<string>()
   const [fileLink, setFileLink] = useState<string>()
   const fileInputRef = useRef<HTMLInputElement | null>(null);
+  const createdUrlsRef = useRef<Set<string>>(new Set());
   const t = useTranslations('timetable.specific_lessons.files')
   
   const openFilePicker = useCallback(() => {
@@ -51,6 +52,14 @@ export function SpecificLessonFilesProvider<T extends WithFiles>({children, valu
     }
   }, [setInstance])
 
+  // Cleanup function to revoke all created URLs
+  const cleanupUrls = useCallback(() => {
+    createdUrlsRef.current.forEach(url => {
+      URL.revokeObjectURL(url);
+    });
+    createdUrlsRef.current.clear();
+  }, []);
+
   useEffect(() => {
     if (activeFile) {
       const isImage = activeFile.file.match(/\.(jpeg|jpg|png|gif|webp|bmp|svg)$/i);
@@ -63,6 +72,9 @@ export function SpecificLessonFilesProvider<T extends WithFiles>({children, valu
   }, [activeFile])
 
   useEffect(() => {
+    // Clean up previous URLs when activeFileData changes
+    cleanupUrls();
+    
     if (activeFileData) {
       if (activeFileData.type.startsWith('image/')) {
         const reader = new FileReader()
@@ -72,14 +84,21 @@ export function SpecificLessonFilesProvider<T extends WithFiles>({children, valu
         reader.readAsDataURL(activeFileData)
       } else {
         const link = URL.createObjectURL(activeFileData)
+        createdUrlsRef.current.add(link);
         setFileLink(link)
-        URL.revokeObjectURL(link)
       }
     } else {
       setImageLink(undefined)
       setFileLink(undefined)
     }
-  }, [activeFileData])
+  }, [activeFileData, cleanupUrls])
+
+  // Cleanup URLs when component unmounts
+  useEffect(() => {
+    return () => {
+      cleanupUrls();
+    };
+  }, [cleanupUrls]);
 
   return <FilesContext value={{
     openFilePicker,
@@ -105,12 +124,14 @@ export function SpecificLessonFilesProvider<T extends WithFiles>({children, valu
           <Typography variant='h6'>{t('no_image')}</Typography>
           {activeFile && <Link
             href={activeFile.file}
+            target='_blank'
             download={activeFile.file.split('/').at(-1)}
           >
             <Typography variant='h5' color='primary'>{activeFile.file.split('/').at(-1)}</Typography>
           </Link>}
           {activeFileData && fileLink && <Link
             href={fileLink}
+            target='_blank'
             download={activeFileData.name}
           >
             <Typography variant='h5' color='primary'>{activeFileData.name}</Typography>

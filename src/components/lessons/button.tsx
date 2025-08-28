@@ -4,13 +4,13 @@ import { Button, Link, Typography } from "@mui/material"
 import { getTranslations } from "next-intl/server"
 
 interface TimetableButtonProps {
-  schoolId: string
+  schoolSlug: string
 }
 
-export async function TimetableButton({schoolId}: TimetableButtonProps) {
+export async function TimetableButton({schoolSlug}: TimetableButtonProps) {
   const t = await getTranslations('timetable')
 
-  return <Link href={`/core/schools/${schoolId}/timetable`}>
+  return <Link href={`/core/schools/${schoolSlug}/timetable`}>
     <Button variant='contained'>
       <Typography>{t('singular')}</Typography>
     </Button>

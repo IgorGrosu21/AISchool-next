@@ -9,9 +9,10 @@ import { IPosition } from '@/utils/interfaces';
 
 interface TeacherPositionsProps {
   positions: IPosition[]
+  link?: (slug: string) => string
 }
 
-export async function TeacherPositions({positions}: TeacherPositionsProps) {
+export async function TeacherPositions({positions, link}: TeacherPositionsProps) {
   const t = await getTranslations('positions')
 
   return <Stack gap={2}>
@@ -21,9 +22,9 @@ export async function TeacherPositions({positions}: TeacherPositionsProps) {
         <Stack gap={2} sx={{flex: 1}}>
           <SchoolLink school={position.school} />
           <Typography variant='h6'>{t('singular')}: {t(position.type)}</Typography>
-          <Subjects subjectNames={position.subjectNames} small sx={{flex: 1, alignItems: 'center'}} />
+          <Subjects subjects={position.subjects} small sx={{flex: 1, alignItems: 'center'}} />
         </Stack>
-        <Link href={`/core/schools/${position.school.id}/`} style={{flex: 1}}>
+        <Link href={link ? link(position.school.slug) : `/core/schools/${position.school.slug}/`} style={{flex: 1}}>
           <Image
             width={1792}
             height={1024}

@@ -1,0 +1,33 @@
+import { ModuleHeader, NavigationContainer, TheoryButtons } from "@/components";
+import { fetchTopic } from "@/utils/api";
+import { getTranslations } from "next-intl/server";
+import { redirect } from "next/navigation";
+import { PdfViewer } from "@/components";
+import { Stack } from "@mui/material";
+
+export default async function Page({ params }: { params: Promise<{manualSlug: string, moduleSlug: string, topicSlug: string, theorySlug: string}> }) {
+  const { manualSlug, moduleSlug, topicSlug, theorySlug } = await params;
+  const topic = await fetchTopic(manualSlug, moduleSlug, topicSlug)
+  const t = await getTranslations('manuals')
+
+  const theory = topic.theories.find(t => t.slug === theorySlug)
+  const detailedModule = topic.module //next.js error: do not assign to module variable
+  const manual = detailedModule.manual
+
+  if (theory === undefined) {
+    redirect(`/core/manuals/${manualSlug}/${moduleSlug}/${topicSlug}`)
+  }
+
+  return <NavigationContainer segments={[
+      {label: t('plural'), href: 'manuals'},
+      {label: `${manual.subject.verboseName} ${manual.grade}`, href: manualSlug},
+      {label: detailedModule.name, href: moduleSlug},
+      {label: topic.name, href: topicSlug},
+    ]} last={theory.name}>
+    <ModuleHeader title={theory.name} progress={topic.progress} />
+    <Stack sx={{alignItems: 'center'}}>
+      <PdfViewer link={`${process.env.NEXT_PUBLIC_DJANGO_HOST_PROD}/public/theories/${manualSlug}/${moduleSlug}/${topicSlug}/${theorySlug}.pdf`} />
+    </Stack>
+    <TheoryButtons topic={topic} theory={theory} />
+  </NavigationContainer>
+}

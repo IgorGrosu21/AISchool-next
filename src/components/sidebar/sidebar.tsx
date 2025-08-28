@@ -38,7 +38,7 @@ export async function SideBar() {
       {path: '', label: t('home'), icon: <HomeOutlined color='primary' />},
     ],
     [
-      {path: 'subjects', icon: <AutoStoriesOutlined color='secondary' />},
+      {path: 'manuals', icon: <AutoStoriesOutlined color='secondary' />},
       {path: 'tests', icon: <QuizOutlined color='secondary' />},
     ],
     [
@@ -67,7 +67,7 @@ export async function SideBar() {
     }
   }
 
-  return <Stack sx={{height: '100%', ...(user?.isAccountVerified || !user ?  {minWidth: '15vw'} : {maxWidth: '17.5vw'})}}>
+  return <Stack sx={{height: '100vh', ...(user?.isAccountVerified || !user ?  {minWidth: '15vw'} : {maxWidth: '17.5vw'})}}>
     <Stack direction='row' sx={{p: 2, justifyContent: 'center', bgcolor: 'primary.dark'}}>
       <Image src='/images/logo-white.png' width={100} height={94} alt='light-logo' priority />
     </Stack>

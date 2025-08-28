@@ -1,8 +1,14 @@
 'use client'
 
-import { IDetailedStudent, IDetailedTeacher } from "@/utils/interfaces"
+import { IDetailedParent, IDetailedStudent, IDetailedTeacher } from "@/utils/interfaces"
 import { createContext, useContext } from "react"
 import { EditorContextType } from "./base"
+
+export type ParentEditorContextType = EditorContextType<IDetailedParent>
+
+export const ParentEditorContext = createContext<ParentEditorContextType | null>(null)
+
+export const useParentEditorContext = () => useContext(ParentEditorContext)!
 
 export type StudentEditorContextType = EditorContextType<IDetailedStudent>
 

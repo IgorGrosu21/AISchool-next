@@ -2,7 +2,7 @@
 
 import { DeleteOutline, FileUpload } from '@mui/icons-material';
 import { Stack, Button, Box } from '@mui/material';
-import { useCallback, useEffect, useRef, useState } from 'react';
+import { useCallback, useEffect, useRef, useState, useTransition } from 'react';
 import { useTranslations } from 'next-intl';
 import { Loader } from './loader';
 
@@ -17,7 +17,7 @@ interface ImageUploaderProps<T> {
 export function ImageUploader<T>({renderImage, existing, setExisting, sendFile, deleteFile}: ImageUploaderProps<T>) {
   const [file, setFile] = useState<File>();
   const [preview, setPreview] = useState(existing);
-  const [uploading, setUploading] = useState(false);
+  const [isPending, startTransition] = useTransition();
   const [hovering, setHovering] = useState(false)
   const fileInputRef = useRef<HTMLInputElement | null>(null);
   const t = useTranslations('components.image_uploader');
@@ -41,23 +41,21 @@ export function ImageUploader<T>({renderImage, existing, setExisting, sendFile, 
   const upload = useCallback(() => {
     const formData = new FormData();
     formData.append('file', file!);
-
-    setUploading(true);
-    sendFile(formData).then(url => {
+    
+    startTransition(async() => {
+      const url = await sendFile(formData)
       if (url) {
         setExisting(url)
-        setUploading(false)
       }
     })
   }, [file, sendFile, setExisting]);
 
   const onDelete = useCallback(() => {
     if (existing) {
-      setUploading(true);
-      deleteFile().then(() => {
+      startTransition(async () => {
+        await deleteFile()
         setExisting(undefined)
         setFile(undefined);
-        setUploading(false)
       })
     } else if (fileInputRef.current) {
       fileInputRef.current.value = ''
@@ -66,10 +64,14 @@ export function ImageUploader<T>({renderImage, existing, setExisting, sendFile, 
     }
   }, [deleteFile, existing, setExisting]);
 
-  return <Stack gap={2} direction='row' sx={{alignItems: 'center'}}>
+  return <Stack gap={2} direction='row' sx={{flex: 1, height: '100%', alignItems: 'center'}}>
     <input ref={fileInputRef} type='file' accept='image/*' style={{display: 'none'}} onChange={onFileChange} />
-    <Stack sx={{position: 'relative'}} onMouseOver={() => setHovering(true)} onMouseOut={() => setHovering(false)}>
-      <Box sx={{opacity: hovering ? 0.3 : 1, transition: '0.5s'}}>
+    <Stack sx={{
+      position: 'relative',
+      flex: 1,
+      height: '100%'
+    }} onMouseOver={() => setHovering(true)} onMouseOut={() => setHovering(false)}>
+      <Box sx={{flex: 1, opacity: hovering ? 0.3 : 1, transition: '0.5s'}}>
         {renderImage(preview ?? existing)}
       </Box>
       <Stack id='controls' gap={2} sx={{
@@ -94,6 +96,6 @@ export function ImageUploader<T>({renderImage, existing, setExisting, sendFile, 
         </Button>
       </Stack>
     </Stack>
-    <Loader open={uploading} />
+    <Loader open={isPending} />
   </Stack>
 }
