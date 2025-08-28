@@ -14,7 +14,7 @@ export default async function Page({ params }: { params: Promise<{id: string}> }
   return <Profile user={student.user} headerChildren={student.balance && <Balance balance={student.balance} />}>
     {klass && <KlassLink klass={klass} />}
     <Stack>
-      <Link href={`/core/schools/${school?.id}/`} style={{flex: 1, height: '100%'}}>
+      <Link href={`/core/schools/${school?.slug}/`} style={{flex: 1, height: '100%'}}>
         <Stack gap={4} sx={{justifyContent: 'space-between', height: '100%'}}>
           <Typography variant='h5' sx={{textAlign: 'center', color: 'primary.main'}}>{school?.name}</Typography>
           <Image
