@@ -6,7 +6,6 @@ const nextConfig: NextConfig = {
   images: {
     remotePatterns: [new URL(`${process.env.NEXT_PUBLIC_DJANGO_HOST_PROD}/media/**`)],
   },
-  distDir: 'build',
 };
 const withNextIntl = createNextIntlPlugin();
 
