@@ -26,7 +26,7 @@ export default async function Page({ params }: { params: Promise<{manualSlug: st
     ]} last={theory.name}>
     <ModuleHeader title={theory.name} progress={topic.progress} />
     <Stack sx={{alignItems: 'center'}}>
-      <PdfViewer link={`${process.env.NEXT_PUBLIC_DJANGO_HOST_PROD}/public/theories/${manualSlug}/${moduleSlug}/${topicSlug}/${theorySlug}.pdf`} />
+      <PdfViewer link={`${process.env.NEXT_PUBLIC_DJANGO_API_URL}/public/theories/${manualSlug}/${moduleSlug}/${topicSlug}/${theorySlug}.pdf`} />
     </Stack>
     <TheoryButtons topic={topic} theory={theory} />
   </NavigationContainer>

@@ -17,3 +17,4 @@ export {
   AttachedFilesProvider, useAttachedFilesContext,
   AttachedLinksProvider, useAttachedLinksContext
 } from "./specificLesson";
+export { useSubscriptionsContext, SubscriptionsProvider } from "./subscriptions";

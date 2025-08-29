@@ -7,7 +7,7 @@ import { IMedia } from '../interfaces';
 type updateCacheBehavior = 'replace' | 'ignore'
 
 const api = setupCache(axios.create({
-  baseURL: process.env.NEXT_PUBLIC_DJANGO_HOST_PROD,
+  baseURL: process.env.NEXT_PUBLIC_DJANGO_API_URL,
   withCredentials: true,
   headers: {
     'Content-Type': 'application/json'

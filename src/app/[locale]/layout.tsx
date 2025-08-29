@@ -32,7 +32,7 @@ export default async function RootLayout({ children, params }: { children: React
         <Providers>
           <Stack direction='row' sx={{height: '100%'}}>
             <SideBar />
-            <Stack sx={{flex: 1, height: '100%', bgcolor: 'background.paper', overflowY: 'auto', overscrollBehaviorY: 'auto'}}>
+            <Stack id='main' sx={{flex: 1, height: '100%', bgcolor: 'background.paper', overflowY: 'auto', overscrollBehaviorY: 'auto'}}>
               {children}
             </Stack>
           </Stack>

@@ -1,13 +1,12 @@
 import { Stack } from "@mui/material";
 import { redirect } from "next/navigation"
-import { cookies } from "next/headers";
 import Image from "next/image";
+import { isLoggedIn } from "@/app/actions/token";
 
 export default async function AuthLayout({ children }: { children: React.ReactNode }) {
-  const cookieStore = await cookies()
-  const isLoggedIn = cookieStore.get('refresh_token')?.value != undefined
+  const loggedIn = await isLoggedIn()
 
-  if (isLoggedIn) {
+  if (loggedIn) {
     redirect('/core')
   }
 

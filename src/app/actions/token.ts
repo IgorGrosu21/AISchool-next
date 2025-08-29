@@ -40,3 +40,8 @@ export async function deleteTokens() {
   await deleteToken('access')
   await deleteToken('refresh')
 }
+
+export async function isLoggedIn() {
+  const refresh = await getToken('refresh')
+  return refresh !== undefined
+}

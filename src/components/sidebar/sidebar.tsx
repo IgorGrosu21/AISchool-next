@@ -6,7 +6,7 @@ import Link from "next/link";
 import {
   HomeOutlined, AccountCircleOutlined, Group, School, 
   AutoStoriesOutlined, QuizOutlined, ClassOutlined, AutoStories,
-  VideocamOutlined, EmojiEvents, SchoolOutlined,SellOutlined,
+  //VideocamOutlined, EmojiEvents, SchoolOutlined,SellOutlined,
 } from "@mui/icons-material";
 import { Stack, Typography } from "@mui/material";
 import { fetchUserRoutes } from "@/utils/api";
@@ -41,12 +41,14 @@ export async function SideBar() {
       {path: 'manuals', icon: <AutoStoriesOutlined color='secondary' />},
       {path: 'tests', icon: <QuizOutlined color='secondary' />},
     ],
+    /*
     [
       {path: 'webinars', icon: <VideocamOutlined color='tertiary' />},
       {path: 'olimpiads', icon: <EmojiEvents color='tertiary' />},
       {path: 'universities', icon: <SchoolOutlined color='tertiary' />},
       {path: 'subscriptions', icon: <SellOutlined color='tertiary' />},
     ],
+    */
   ]
 
   if (user) {
@@ -73,7 +75,7 @@ export async function SideBar() {
     </Stack>
     {user ? <Stack sx={{height: '100%', width: '100%', justifyContent: 'center'}}>
       <Stack gap={2} direction='row' sx={{p: 2, bgcolor: 'primary.main', alignItems: 'center'}}>
-        <Link href={user.profileLink ?? '/'} style={{display: 'flex', alignItems: 'center', pointerEvents: user.profileLink ? 'unset' : 'none'}} as='image'>
+        <Link href={user.profileLink ?? '/core'} style={{display: 'flex', alignItems: 'center', pointerEvents: user.profileLink ? 'unset' : 'none'}}>
           <Image
             src={user.avatar ? `${user.avatar}` : '/images/default-avatar.png'}
             width={100}

@@ -8,8 +8,8 @@ export function RouteController() {
   const router = useRouter()
 
   useEffect(() => {
-    if (pathname.includes('core')) {
-      router.push('/')
+    if (pathname.includes('/core/')) {
+      router.push('/core')
     }
   }, [pathname, router])
 
