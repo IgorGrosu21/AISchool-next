@@ -7,6 +7,7 @@ import { Paginator } from "./paginator";
 import { ISchool } from "@/utils/interfaces";
 import { useMemo, useState } from "react";
 import { useTranslations } from "next-intl";
+import { useIsMobile } from "@/hooks";
 
 interface SchoolsTableProps {
   filteredSchools: ISchool[],
@@ -15,6 +16,7 @@ interface SchoolsTableProps {
 export function SchoolsTable({filteredSchools}: SchoolsTableProps) {
   const [page, setPage] = useState(0)
   const pages = 15
+  const isMobile = useIsMobile();
 
   const t = useTranslations('schools.details');
 
@@ -34,12 +36,12 @@ export function SchoolsTable({filteredSchools}: SchoolsTableProps) {
           <TableCell>
             <Typography variant='h6'>{t('name')}</Typography>
           </TableCell>
-          <TableCell>
+          {!isMobile && <TableCell>
             <Typography variant='h6'>{t('address')}</Typography>
-          </TableCell>
-          <TableCell align="right">
+          </TableCell>}
+          {!isMobile && <TableCell align="right">
             <Typography variant='h6'>{t('website')}</Typography>
-          </TableCell>
+          </TableCell>}
         </TableRow>
       </TableHead>
       <TableBody>
@@ -59,10 +61,10 @@ export function SchoolsTable({filteredSchools}: SchoolsTableProps) {
           <TableCell>
             <Link href={`/core/schools/${school.slug}/`}>{school.name}</Link>
           </TableCell>
-          <TableCell>{school.address}</TableCell>
-          <TableCell align="right" sx={{color: 'primary.main'}}>
+          {!isMobile && <TableCell>{school.address}</TableCell>}
+          {!isMobile && <TableCell align="right" sx={{color: 'primary.main'}}>
             <Link target='_blank' href={school.website}>{school.website}</Link>
-          </TableCell>
+          </TableCell>}
         </TableRow>)}
         <Paginator page={page} setPage={setPage} pages={pages} filteredSchoolsLength={filteredSchools.length} />
       </TableBody>

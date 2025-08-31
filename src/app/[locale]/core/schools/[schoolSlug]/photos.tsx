@@ -1,3 +1,5 @@
+'use server'
+
 import { IDetailedSchool } from "@/utils/interfaces";
 import { Stack, ImageList, ImageListItem } from "@mui/material";
 import Image from 'next/image';
@@ -8,7 +10,7 @@ interface PhotosProps {
 
 export async function Photos({school}: PhotosProps) {
   return <Stack sx={{alignItems: 'center'}}>
-    <ImageList sx={{ width: '75%', height: 'auto' }} cols={2}>
+    <ImageList sx={{ width: { xs: '100%', md: '75%' }, height: 'auto', columnCount: {xs: 1, md: 2}}}>
       {school.files.map((photo, i) => <ImageListItem key={i}>
         <Image
           width={1792}

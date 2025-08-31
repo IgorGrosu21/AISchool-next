@@ -12,10 +12,10 @@ interface SchoolLinkProps extends StackProps {
 export function SchoolLink({school, ...props}: SchoolLinkProps) {
   const t = useTranslations('schools')
   
-  return <Stack {...props} direction={props.direction ?? 'row'} gap={props.gap ?? 1}>
-    <Typography variant='h6'>{t('singular')}:</Typography>
+  return <Stack {...props} direction={props.direction ?? {xs: 'column', md: 'row'}} gap={props.gap ?? 1}>
+    <Typography variant='h6' sx={{textAlign: 'center'}}>{t('singular')}:</Typography>
     <Link href={`/core/schools/${school.slug}`}>
-      <Typography variant='h6' color='primary'>{school.name}</Typography>
+      <Typography variant='h6' color='primary' sx={{textAlign: 'center'}}>{school.name}</Typography>
     </Link>
   </Stack>
 }

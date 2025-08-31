@@ -26,6 +26,7 @@ export default function Container() {
         </FormControl>
       </Stack>
       <Autocomplete
+        isOptionEqualToValue={(option, value) => option.id === value.id}
         value={klass.teacher}
         onChange={(_, t) => t ? setKlass({...klass, teacher: {...t, user: {...t.user, isVerified: false}}}) : {}}
         options={allTeachers}

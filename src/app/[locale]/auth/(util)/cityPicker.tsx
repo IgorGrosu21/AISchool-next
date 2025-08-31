@@ -8,9 +8,11 @@ import { useEffect, useState } from 'react'
 import { useTranslations } from 'next-intl'
 import { Input } from './input'
 import { Select } from './select'
+import { useIsMobile } from '@/hooks'
 
 export function CityPicker() {
   const t = useTranslations('auth.city_picker')
+  const isMobile = useIsMobile();
   
   const [countries, setCountries] = useState<ICountryName[]>([])
   
@@ -114,32 +116,25 @@ export function CityPicker() {
 
   return (
     <>
-      <Box sx={{ display: 'flex', alignItems: 'center', gap: 2, width: '100%' }}>
-        <Typography variant="body1" sx={{ flex: 1 }}>
+      <Stack direction='row' gap={2} sx={{alignItems: 'center', justifyContent: 'space-between', flex: 1}}>
+        <Typography variant='h6'>
           {t('label')}: {city?.name || t('not_selected')}
         </Typography>
-        <Button 
-          variant="contained" 
-          size="small"
-          onClick={handleOpenModal}
-        >
+        <Button variant='contained' onClick={handleOpenModal}>
           {t('change')}
         </Button>
-      </Box>
+      </Stack>
       
       <Input hidden value={city?.id ?? ''} name='city_id' />
       
-      <Dialog 
-        open={isModalOpen} 
-        onClose={handleCloseModal}
-        maxWidth="sm"
-        fullWidth
-      >
-        <DialogTitle>{t('dialog_title')}</DialogTitle>
+      <Dialog open={isModalOpen} onClose={handleCloseModal} maxWidth='sm' fullWidth fullScreen={isMobile}>
+        <DialogTitle>
+          {t('dialog_title')}
+        </DialogTitle>
         <DialogContent>
-          <Stack gap={2} sx={{ mt: 1 }}>
+          <Stack gap={4}>
             <Select<ICountryName>
-              name='temp_country'
+              name='country'
               options={countries}
               value={tempCountry}
               setValue={setTempCountry}
@@ -148,11 +143,15 @@ export function CityPicker() {
                 return (
                   <Box
                     key={key}
-                    component="li"
-                    sx={{ '& > img': { mr: 2, flexShrink: 0 } }}
+                    component='li'
+                    sx={{ 
+                      '& > img': { mr: 2, flexShrink: 0 },
+                      display: 'flex',
+                      alignItems: 'center'
+                    }}
                     {...optionProps}
                   >
-                    <Image loading="lazy" width={40} height={20} src={option.flag} alt="" />
+                    <Image loading='lazy' width={40} height={20} src={option.flag} alt='' />
                     {option.name}
                   </Box>
                 );
@@ -160,23 +159,27 @@ export function CityPicker() {
             />
             <Select<IRegionName>
               disabled={!tempCountry}
-              name='temp_region'
+              name='region'
               options={tempRegions}
               value={tempRegion}
               setValue={setTempRegion}
             />
             <Select<ICityName>
               disabled={!tempRegion}
-              name='temp_city'
+              name='city'
               options={tempCities}
               value={tempCity}
               setValue={setTempCity}
             />
           </Stack>
         </DialogContent>
-        <DialogActions>
-          <Button onClick={handleCancelModal}>{t('cancel')}</Button>
-          <Button onClick={handleSaveModal} variant="contained">{t('save')}</Button>
+        <DialogActions sx={{p: 2, gap: 2}}>
+          <Button onClick={handleCancelModal}>
+            {t('cancel')}
+          </Button>
+          <Button onClick={handleSaveModal} variant='contained'>
+            {t('save')}
+          </Button>
         </DialogActions>
       </Dialog>
     </>

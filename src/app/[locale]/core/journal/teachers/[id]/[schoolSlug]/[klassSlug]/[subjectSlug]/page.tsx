@@ -11,7 +11,7 @@ type PageParams = {
 export default async function Page({ params }: { params: Promise<PageParams> }) {
   const { id, schoolSlug, klassSlug, subjectSlug } = await params;
 
-  const currentDate = new Date();
+  const currentDate = new Date(2025, 2, 25);
   const currentYear = getYear(currentDate);
   const currentMonth = getMonth(currentDate) + 1;
 

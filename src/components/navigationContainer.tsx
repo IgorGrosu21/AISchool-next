@@ -26,31 +26,49 @@ export async function NavigationContainer({segments, last, applyStyles = true, c
     segments[i].href = `${prev}/${curr}`
   }
 
-  return <Stack gap={8} sx={{flex: 1, p: 16, pt: 8}}>
+  return <Stack gap={{ xs: 4, md: 8 }} sx={{flex: 1, p: { xs: 2, md: 16 }, pt: { xs: 4, md: 8 }}}>
     <Breadcrumbs sx={{
       ['& ol']: {
-        alignItems: 'center'
+        alignItems: 'center',
+        flexWrap: 'wrap',
+        gap: { xs: 1, md: 0 }
       },
       ['& ol > li:first-child']: {
         lineHeight: 1
       },
       ['& ol > li > a']: {
         transition: '0.5s',
+        fontSize: { xs: '0.875rem', md: 'inherit' },
         [':hover']: {
           color: 'primary.main'
         }
+      },
+      ['& ol > li']: {
+        fontSize: { xs: '0.875rem', md: 'inherit' }
       }
     }}>
       <Link href='/core'>
-        <Home sx={{color: last === '' ? 'primary.main' : 'inherit'}} />
+        <Home sx={{
+          color: last === '' ? 'primary.main' : 'inherit',
+          fontSize: { xs: '1.25rem', md: 'inherit' }
+        }} />
       </Link>
       {segments.map((segment, i) => <Link key={i} href={'/core/' + segment.href}>
         {segment.label}
       </Link>)}
-      {last !== '' && <Typography color='primary'>{last === 'edit' ? t('edit') : last}</Typography>}
+      {last !== '' && <Typography 
+        color='primary' 
+        sx={{ fontSize: { xs: '0.875rem', md: 'inherit' } }}
+      >
+        {last === 'edit' ? t('edit') : last}
+      </Typography>}
     </Breadcrumbs>
     <Stack sx={{height: '100%', width: '100%', bgcolor: applyStyles ? 'background.default' : 'inherit'}}>
-      {applyStyles ? <Stack gap={8} sx={{p: 4, height: '100%'}}>
+      {applyStyles ? <Stack gap={{ xs: 4, md: 8 }} sx={{
+        p: { xs: 2, md: 4 }, 
+        height: '100%',
+        overflow: { xs: 'auto', md: 'visible' }
+      }}>
         {children}
       </Stack> : children}
     </Stack>

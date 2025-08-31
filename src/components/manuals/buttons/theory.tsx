@@ -46,7 +46,7 @@ export function TheoryButtons({topic, theory}: TheoryButtonsProps) {
     })
   }, [baseHref, nextTask, nextTheory, router])
 
-  return <Stack direction='row' sx={{justifyContent: 'space-between', alignItems: 'center'}}>
+  return <Stack direction={{xs: 'column', md: 'row'}} gap={2} sx={{justifyContent: 'space-between', alignItems: 'center'}}>
     <Button variant='contained' onClick={previous} disabled={prevTheory === undefined}>
       <Typography>{t('prev_theory')}</Typography>
     </Button>

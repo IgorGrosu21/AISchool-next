@@ -25,7 +25,7 @@ export async function KlassList({klasses, baseHref}: KlassListProps) {
 
   return <Stack gap={8}>
     {grades.filter(grade => grade < 7).map(grade => <Stack direction='row' key={grade} gap={8} sx={{width: '100%'}}>
-      <Stack direction='row' gap={4} sx={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
+      <Stack direction={{xs: 'column', md: 'row'}} gap={4} sx={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
         {grouped[grade - 1].klasses.map((klass, i) => <Link key={i} href={`/core/${baseHref}/${klass.slug}`}>
           <Stack sx={{
             bgcolor: 'primary.main',
@@ -39,7 +39,7 @@ export async function KlassList({klasses, baseHref}: KlassListProps) {
         </Link>)}
       </Stack>
       <Divider flexItem orientation='vertical' />
-      <Stack direction='row' gap={4} sx={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
+      <Stack direction={{xs: 'column', md: 'row'}} gap={4} sx={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
         {grouped[grade + 5].klasses.map((klass, i) => <Link key={i} href={`/core/${baseHref}/${klass.slug}`}>
           <Stack sx={{
             bgcolor: 'primary.main',

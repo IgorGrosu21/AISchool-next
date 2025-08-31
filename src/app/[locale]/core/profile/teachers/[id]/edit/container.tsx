@@ -18,8 +18,8 @@ export default function Container({schoolNames, subjects}: ContainerProps) {
   return <TeacherContainer user={teacher.user} setUser={user => setTeacher(t => ({...t, user}))}>
     <ExperienceEditor teacher={teacher} setTeacher={setTeacher} />
     <Stack>
-      <Typography variant='h5'>{t('pick')}</Typography>
-      <Typography>{t('helper')}</Typography>
+      <Typography variant='h5'>{t('pick_subjects')}</Typography>
+      <Typography>{t('helper_subjects')}</Typography>
     </Stack>
     <SubjectsEditor<IDetailedTeacher> instance={teacher} setInstance={setTeacher} subjects={subjects} />
     <Divider />

@@ -1,20 +1,18 @@
-'use server'
+'use client'
 
-import Image from "next/image";
-import Link from "next/link";
+import Image from "next/image"
+import Link from "next/link"
+import { useState, useEffect } from "react"
+import { usePathname } from "next/navigation"
 
-import {
-  HomeOutlined, AccountCircleOutlined, Group, School, 
-  AutoStoriesOutlined, QuizOutlined, ClassOutlined, AutoStories,
-  //VideocamOutlined, EmojiEvents, SchoolOutlined,SellOutlined,
-} from "@mui/icons-material";
-import { Stack, Typography } from "@mui/material";
-import { fetchUserRoutes } from "@/utils/api";
-import { getTranslations } from "next-intl/server";
-import { AuthButton } from "@/components";
-import { logoutThis, verify } from "@/app/actions/auth";
-import { getToken } from "@/app/actions/token";
-import { RouteController } from "./routeController";
+import { Menu, Close} from "@mui/icons-material"
+import { Stack, Typography, IconButton, Drawer } from "@mui/material"
+import { useTranslations } from "next-intl"
+import { AuthButton } from "@/components"
+import { logoutThis, verify } from "@/app/actions/auth"
+import { RouteController } from "./routeController"
+import { IUserRoutes } from "@/utils/interfaces/detailed/user"
+import { useIsMobile } from "@/hooks"
 
 type Routes = Array<Array<{
   path: string,
@@ -22,96 +20,151 @@ type Routes = Array<Array<{
   icon: React.ReactNode
 }>>
 
-export async function SideBar() {
-  let user;
-  const access = await getToken()
-  if (access) {
-    user = await fetchUserRoutes()
-  } else {
-    user = undefined
+interface SideBarProps {
+  user?: IUserRoutes
+  routes: Routes
+}
+
+export function SideBar({ user, routes }: SideBarProps) {
+  const [mobileOpen, setMobileOpen] = useState(false)
+  const isMobile = useIsMobile()
+  const pathname = usePathname()
+  const t = useTranslations('components.sidebar')
+
+  const handleDrawerToggle = () => {
+    setMobileOpen(!mobileOpen)
   }
 
-  const t = await getTranslations('components.sidebar');
-
-  const routes: Routes = [
-    [
-      {path: '', label: t('home'), icon: <HomeOutlined color='primary' />},
-    ],
-    [
-      {path: 'manuals', icon: <AutoStoriesOutlined color='secondary' />},
-      {path: 'tests', icon: <QuizOutlined color='secondary' />},
-    ],
-    /*
-    [
-      {path: 'webinars', icon: <VideocamOutlined color='tertiary' />},
-      {path: 'olimpiads', icon: <EmojiEvents color='tertiary' />},
-      {path: 'universities', icon: <SchoolOutlined color='tertiary' />},
-      {path: 'subscriptions', icon: <SellOutlined color='tertiary' />},
-    ],
-    */
-  ]
-
-  if (user) {
-    if (user.profileLink) {
-      routes[0].push({path: user.profileLink, label: t('profile'), icon: <AccountCircleOutlined color='primary' />})
-    }
-    if (user.klassLink) {
-      routes[0].push({path: user.klassLink, label: t('klass'), icon: <Group color='primary' />})
-    }
-    if (user.schoolLink) {
-      routes[0].push({path: user.schoolLink, label: t('school'), icon: <School color='primary' />})
-    }
-    if (user.diaryLink) {
-      routes[1].push({path: user.diaryLink, label: t('diary'), icon: <ClassOutlined color='secondary' />})
-    }
-    if (user.journalLink) {
-      routes[1].push({path: user.journalLink, label: t('journal'), icon: <AutoStories color='secondary' />})
+  const handleLinkClick = () => {
+    if (isMobile) {
+      setMobileOpen(false)
     }
   }
 
-  return <Stack sx={{height: '100vh', ...(user?.isAccountVerified || !user ?  {minWidth: '15vw'} : {maxWidth: '17.5vw'})}}>
-    <Stack direction='row' sx={{p: 2, justifyContent: 'center', bgcolor: 'primary.dark'}}>
-      <Image src='/images/logo-white.png' width={100} height={94} alt='light-logo' priority />
-    </Stack>
-    {user ? <Stack sx={{height: '100%', width: '100%', justifyContent: 'center'}}>
-      <Stack gap={2} direction='row' sx={{p: 2, bgcolor: 'primary.main', alignItems: 'center'}}>
-        <Link href={user.profileLink ?? '/core'} style={{display: 'flex', alignItems: 'center', pointerEvents: user.profileLink ? 'unset' : 'none'}}>
-          <Image
-            src={user.avatar ? `${user.avatar}` : '/images/default-avatar.png'}
-            width={100}
-            height={100}
-            style={{borderRadius: '50%'}}
-            alt='avatar'
-            priority
-          />
-        </Link>
-        <Stack sx={{flex: 1}}>
-          <Typography variant='h6' color='primary.contrastText'>{user.name}</Typography>
-          <Typography variant='h6' color='primary.contrastText'>{user.surname}</Typography>
+  // Close mobile sidebar when route changes
+  useEffect(() => {
+    if (isMobile) {
+      setMobileOpen(false)
+    }
+  }, [pathname, isMobile])
+
+  const sidebarContent = <Stack sx={{height: '100vh', minWidth: '15vw', width: isMobile ? '100vw' : 'auto', maxWidth: isMobile ? '100vw' : '17.5vw'}}>
+    <Stack sx={{
+      position: isMobile ? 'relative' : 'fixed',
+      top: 0,
+      left: 0,
+      minWidth: '15vw',
+      width: isMobile ? '100vw' : 'auto',
+      maxWidth: isMobile ? '100vw' : '17.5vw',
+      height: '100%',
+      bgcolor: 'background.default'
+    }}>
+      <Stack direction='row' sx={{p: 2, justifyContent: 'center', bgcolor: 'primary.dark', position: 'relative'}}>
+        {isMobile && (
+          <IconButton
+            onClick={handleDrawerToggle}
+            sx={{
+              position: 'absolute',
+              right: 8,
+              top: '50%',
+              transform: 'translateY(-50%)',
+              color: 'white'
+            }}
+          >
+            <Close />
+          </IconButton>
+        )}
+        <Image src='/images/logo-white.png' width={100} height={94} alt='light-logo' priority />
+      </Stack>
+      {user ? <Stack sx={{height: '100%', width: '100%', justifyContent: 'center'}}>
+        <Stack gap={2} direction='row' sx={{p: 2, bgcolor: 'primary.main', alignItems: 'center'}}>
+          <Link href={user.profileLink ?? '/core'} style={{display: 'flex', alignItems: 'center', pointerEvents: user.profileLink ? 'unset' : 'none'}}>
+            <Image
+              src={user.avatar ? `${user.avatar}` : '/images/default-avatar.png'}
+              width={100}
+              height={100}
+              style={{borderRadius: '50%'}}
+              alt='avatar'
+              priority
+            />
+          </Link>
+          <Stack sx={{flex: 1}}>
+            <Typography variant='h6' color='primary.contrastText'>{user.name}</Typography>
+            <Typography variant='h6' color='primary.contrastText'>{user.surname}</Typography>
+          </Stack>
         </Stack>
-      </Stack>
-      {user.isAccountVerified ? <Stack gap={4} sx={{p: 4}}>
-        {routes.map((group, i) => <Stack key={i} gap={2}>
-          {group.map((route, j) => <Link key={j} href={'/core/' + route.path}>
-            <Stack direction='row' gap={1}>
-              {route.icon}
-              <Typography>{route.label ?? t(route.path)}</Typography>
-            </Stack>
-          </Link>)}
-        </Stack>)}
-      </Stack> : <Stack component='form' action={verify} gap={2} sx={{p: 4}}>
-        <RouteController />
-        <Typography variant='h6' sx={{textAlign: 'center', textWrap: 'wrap'}}>{t('unverified.label')}</Typography>
-        <Typography sx={{textAlign: 'center', textWrap: 'wrap', whiteSpace: 'pre-wrap'}}>({t('unverified.helper')})</Typography>
-        <AuthButton type='verify' variant='h6' />
-      </Stack>}
-      <Stack component='form' action={logoutThis} sx={{p: 4, flex: 1, justifyContent: 'flex-end'}}>
-        <AuthButton type='logout' variant='h6' />
-      </Stack>
-    </Stack> : <Link href='/auth'>
-      <Stack sx={{p: 4}}>
-        <AuthButton type='login' variant='h6' />
-      </Stack>
-    </Link>}
+        {user.isAccountVerified ? <Stack gap={2} sx={{p: 4}}>
+          {routes.map((group, i) => <Stack key={i}>
+            {group.map((route, j) => (
+              <Link key={j} href={'/core/' + route.path} onClick={handleLinkClick}>
+                <Stack direction='row' gap={1} sx={{ 
+                  p: 1, 
+                  borderRadius: 1, 
+                  '&:hover': { bgcolor: 'action.hover' },
+                  transition: 'background-color 0.2s'
+                }}>
+                  {route.icon}
+                  <Typography>{route.label ?? t(route.path)}</Typography>
+                </Stack>
+              </Link>
+            ))}
+          </Stack>)}
+        </Stack> : <Stack component='form' action={verify} gap={2} sx={{p: 4}}>
+          <RouteController />
+          <Typography variant='h6' sx={{textAlign: 'center', textWrap: 'wrap'}}>{t('unverified.label')}</Typography>
+          <Typography sx={{textAlign: 'center', textWrap: 'wrap', whiteSpace: 'pre-wrap'}}>({t('unverified.helper')})</Typography>
+          <AuthButton type='verify' variant='h6' />
+        </Stack>}
+        <Stack component='form' action={logoutThis} sx={{p: 4, flex: 1, justifyContent: 'flex-end'}}>
+          <AuthButton type='logout' variant='h6' />
+        </Stack>
+      </Stack> : <Link href='/auth' onClick={handleLinkClick}>
+        <Stack sx={{p: 4}}>
+          <AuthButton type='login' variant='h6' />
+        </Stack>
+      </Link>}
+    </Stack>
   </Stack>
+
+  if (isMobile) {
+    return <>
+      <IconButton
+        onClick={handleDrawerToggle}
+        sx={{
+          position: 'fixed',
+          top: 16,
+          right: 16,
+          zIndex: 1200,
+          bgcolor: 'primary.main',
+          color: 'white',
+          '&:hover': {
+            bgcolor: 'primary.dark',
+          }
+        }}
+      >
+        <Menu />
+      </IconButton>
+
+      <Drawer
+        variant="temporary"
+        open={mobileOpen}
+        onClose={handleDrawerToggle}
+        ModalProps={{
+          keepMounted: true,
+        }}
+        sx={{
+          display: { xs: 'block', md: 'none' },
+          '& .MuiDrawer-paper': { 
+            boxSizing: 'border-box', 
+            width: '100%',
+            bgcolor: 'background.paper'
+          },
+        }}
+      >
+        {sidebarContent}
+      </Drawer>
+    </>
+  }
+
+  return sidebarContent
 }

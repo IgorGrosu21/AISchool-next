@@ -24,7 +24,7 @@ export function Groups({klass}: GroupsProps) {
           <Typography component="span">{subject.verboseName}</Typography>
         </AccordionSummary>
         <AccordionDetails>
-          <Stack direction='row' gap={4}>
+          <Stack direction={{xs: 'column', md: 'row'}} gap={4}>
             {subjectGroups.map((group, j) => <Stack key={j} sx={{flex: 1}} gap={2}>
               <Stack direction='row' gap={2} sx={{justifyContent: 'space-between'}}>
                 <Typography variant='h5'>

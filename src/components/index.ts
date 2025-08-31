@@ -20,7 +20,6 @@ export { Experience, ExperienceEditor } from "./teachers";
 export { Ad } from "./ad";
 export { AuthButton } from "./authButton";
 export { EditButton } from "./editButton";
-export { GradeGroup } from "./gradeGroup";
 export { ImageUploader } from "./imageUploader";
 export { Loader } from "./loader";
 export { NavigationContainer } from "./navigationContainer";

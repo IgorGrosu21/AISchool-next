@@ -4,7 +4,7 @@ import { getYear, getMonth } from 'date-fns';
 export default async function Page({ params }: { params: Promise<{id: string}> }) {
   const { id } = await params
 
-  const currentDate = new Date()
+  const currentDate = new Date(2025, 2, 25)
   const currentYear = getYear(currentDate)
   const currentMonth = getMonth(currentDate) + 1
 

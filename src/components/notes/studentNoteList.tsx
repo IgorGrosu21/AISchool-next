@@ -8,6 +8,7 @@ import Link from "next/link";
 import { fetchStudentNotes } from "@/utils/api";
 import { NotesContainer } from "./container";
 import { useJournalContext } from "@/providers";
+import { useIsMobile } from "@/hooks"
 
 interface StudentNoteListProps {
   subjects: ISubjectName[]
@@ -17,6 +18,7 @@ export function StudentNoteList({subjects}: StudentNoteListProps) {
   const {personId, period, groups, updateGroups} = useJournalContext()
   const [isPending, startTransition] = useTransition()
   const t = useTranslations('journal')
+  const isMobile = useIsMobile()
 
   useEffect(() => {
     startTransition(async () => {
@@ -50,27 +52,27 @@ export function StudentNoteList({subjects}: StudentNoteListProps) {
         borderRadius: 2
       }}>
         <Grid2 container spacing={2} sx={{flex: 1}}>
-          <Grid2 size={2}>
+          <Grid2 size={isMobile ? 12 : 2}>
             <Typography variant='h5' color='primary'>{group.name}</Typography>
           </Grid2>
-          <Grid2 size={10}>
-            <Stack direction='row' gap={2} sx={{height: '100%', alignItems: 'center'}}>
+          <Grid2 size={isMobile ? 12 : 10}>
+            <Stack direction='row' gap={2} sx={{height: '100%', alignItems: 'center', flexWrap: 'wrap'}}>
               {group.notes.map((note, i) => <Link key={i} href={getHref(note)}>
                 <Typography variant='h6'>{note.value}</Typography>
               </Link>)}
             </Stack>
           </Grid2>
-          <Grid2 size={2}>
+          <Grid2 size={isMobile ? 12 : 2}>
             <Typography color='secondary'>{t('absences.plural')}: {group.absences.total}</Typography>
           </Grid2>
-          <Grid2 size={10}>
+          <Grid2 size={isMobile ? 12 : 10}>
             {group.extraNotes > 0 && <Typography color='secondary'>
               {t('extra_notes')}:&nbsp;
-              <Typography component='span'>{'10 '.repeat(group.extraNotes)}</Typography>
+              <Typography component='span'>{group.extraNotes}</Typography>
             </Typography>}
           </Grid2>
         </Grid2>
-        <Stack direction='row' sx={{alignItems: 'center'}}>
+        <Stack direction='row' sx={{alignItems: isMobile ? 'flex-start' : 'center'}}>
           <Typography variant='h5' color='primary' sx={{textAlign: 'end'}}>
             {group.performance ? group.performance : '-'}
           </Typography>

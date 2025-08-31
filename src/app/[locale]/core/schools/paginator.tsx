@@ -3,6 +3,7 @@
 import { ChevronLeft, ChevronRight } from "@mui/icons-material";
 import { TableRow, TableCell, Stack, Typography } from "@mui/material";
 import { useCallback, useEffect } from "react";
+import { useIsMobile } from "@/hooks";
 
 interface PaginatorProps {
   page: number
@@ -12,6 +13,8 @@ interface PaginatorProps {
 }
 
 export function Paginator({page, setPage, pages, filteredSchoolsLength}: PaginatorProps) {
+  const isMobile = useIsMobile();
+
   const prevPage = useCallback(() => {
     if (page >= pages) {
       setPage(page - pages)
@@ -31,8 +34,8 @@ export function Paginator({page, setPage, pages, filteredSchoolsLength}: Paginat
   }, [filteredSchoolsLength, setPage])
   
   return <TableRow sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>
-    <TableCell></TableCell>
-    <TableCell></TableCell>
+    {!isMobile && <TableCell></TableCell>}
+    {!isMobile && <TableCell></TableCell>}
     <TableCell></TableCell>
     <TableCell colSpan={2} align="right">
       <Stack direction='row' gap={2} sx={{alignItems: 'center', justifyContent: 'flex-end', flexWrap: 'nowrap'}}>

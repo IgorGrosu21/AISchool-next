@@ -57,14 +57,14 @@ export function TeacherPositionsEditor({teacher, setTeacher, schoolNames}: Teach
       {positions.map((position, i) => <Stack key={i} gap={2} direction='row'>
         <Stack gap={2} sx={{width: '100%'}}>
           <SchoolLink school={position.school} />
-          <Stack direction='row' gap={2} sx={{alignItems: 'center'}}>
+          <Stack direction={{xs: 'column', md: 'row'}} gap={2} sx={{alignItems: 'center'}}>
             <Typography variant='h6'>{t('singular')}:</Typography>
             <TypePicker type={position.type} setType={type => setPositions(ps => ps.map((p, j) => i === j ? {...p, type: type} : p))} />
           </Stack>
-            <Stack>
-              <Typography variant='h5'>{t('pick')}</Typography>
-              <Typography>{t('helper')}</Typography>
-            </Stack>
+          <Stack>
+            <Typography variant='h5'>{t('pick_subjects')}</Typography>
+            <Typography>{t('helper_subjects')}</Typography>
+          </Stack>
           <SubjectsEditor<IPosition>
             instance={position}
             setInstance={instance => setPositions(ps => ps.map((p, j) => j === i ? instance : p))}

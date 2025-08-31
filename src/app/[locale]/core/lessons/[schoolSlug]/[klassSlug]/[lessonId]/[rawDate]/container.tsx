@@ -69,8 +69,8 @@ export function Container({date}: ContainerProps) {
       </AttachedFilesProvider>
     </AttachedLinksProvider>
     <Divider />
-    <Stack direction='row' sx={{flex: 1}}>
-      {students.length > 0 && <Stack sx={{overflowY: 'scroll', height: '60vh', width: '15vw'}}>
+    <Stack direction={{xs: 'column', md: 'row'}} sx={{flex: 1}}>
+      {students.length > 0 && <Stack sx={{overflowY: 'scroll', height: {xs: 'auto', md: '60vh'}, maxHeight: '60vh', width: {xs: '100%', md: '15vw'}}}>
         {students.map((student, i) => <Button
           key={i}
           onClick={() => setActiveStudent(student)}
@@ -79,7 +79,7 @@ export function Container({date}: ContainerProps) {
           <SmallProfile user={student.user} disableLink extraSmall />
         </Button>)}
       </Stack>}
-      <Stack gap={4} sx={{flex: 1, height: '100%', pt: 1, pl: 4}}>
+      <Stack gap={4} sx={{flex: 1, height: '100%', pt: {xs: 4, md: 1}, pl: {xs: 0, md: 4}, }}>
         <Stack direction='row' gap={4} sx={{justifyContent: 'space-between', alignItems: 'center'}}>
           <SmallProfile user={activeStudent.user} disableLink extraSmall />
           <Note value={activeNote?.value} onClick={() => openNotes(true)} />

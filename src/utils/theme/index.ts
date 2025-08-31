@@ -106,6 +106,18 @@ const theme = createTheme({
           backgroundColor: 'transparent'
         },
       },
+    },
+    MuiChip: {
+      styleOverrides: {
+        root: {
+          height: 'auto',
+          '& .MuiChip-label': {
+            paddingTop: 6,
+            paddingBottom: 6,
+            whiteSpace: 'normal',
+          }
+        }
+      }
     }
   }
 });

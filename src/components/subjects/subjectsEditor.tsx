@@ -23,6 +23,7 @@ export function SubjectsEditor<T extends {subjects: ISubjectName[]}>({instance, 
       multiple
       options={subjects}
       value={pickedSubjects}
+      isOptionEqualToValue={(option, value) => option.id === value.id}
       onChange={(_, newValue: ISubjectName[] | null) => setInstance({...instance, subjects: newValue ?? []})}
       disableCloseOnSelect
       getOptionLabel={(option) => option.verboseName}

@@ -52,7 +52,7 @@ export default function Container() {
 
   return <Grid2 container spacing={8} columns={2}>
     {grouped.map((group, i) => <Grid2 size={1} key={group.grade}>
-      <Stack direction='row' gap={2} sx={{alignItems: 'center'}}>
+      <Stack direction={{xs: 'column', md: 'row'}} gap={2} sx={{alignItems: 'center'}}>
         {group.klasses.map((klass, j) => <Button variant='contained' key={j} sx={{
           borderRadius: '15%',
           width: 75,

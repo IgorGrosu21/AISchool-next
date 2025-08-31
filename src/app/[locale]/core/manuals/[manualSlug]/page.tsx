@@ -9,7 +9,9 @@ export default async function Page({ params }: { params: Promise<{manualSlug: st
   const manual = await fetchManual(manualSlug)
   const t = await getTranslations('manuals');
 
-  return <NavigationContainer segments={[{label: t('plural'), href: 'manuals'}]} last={`${manual.subject.verboseName} ${manual.grade}`}>
+  return <NavigationContainer segments={[
+    {label: t('plural'), href: 'manuals'}
+  ]} last={`${manual.subject.verboseName} ${manual.grade}`} applyStyles={false}>
     <ModuleHeader title={`${manual.subject.verboseName} ${manual.grade}`} progress={manual.progress} />
     {manual.modules.map((module, i) => <ModuleList
       key={i}

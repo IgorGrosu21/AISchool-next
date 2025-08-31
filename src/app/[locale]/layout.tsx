@@ -30,9 +30,9 @@ export default async function RootLayout({ children, params }: { children: React
     <body className={roboto.variable}>
       <NextIntlClientProvider>
         <Providers>
-          <Stack direction='row' sx={{height: '100%'}}>
+          <Stack direction='row' sx={{minHeight: '100%'}}>
             <SideBar />
-            <Stack id='main' sx={{flex: 1, height: '100%', bgcolor: 'background.paper', overflowY: 'auto', overscrollBehaviorY: 'auto'}}>
+            <Stack id='main' sx={{flex: 1, minHeight: '100%', bgcolor: 'background.paper'}}>
               {children}
             </Stack>
           </Stack>

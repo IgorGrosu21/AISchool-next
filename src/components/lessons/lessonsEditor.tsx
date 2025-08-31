@@ -47,7 +47,7 @@ export function LessonsEditor<T extends ILessonTimeName, R extends ILessonName>(
     }
   }, [createLesson, deleteLesson, getLesson, updateLesson])
 
-  return <Grid2 container spacing={4} columns={3}>
+  return <Grid2 container spacing={4} columns={{xs: 1, md: 3}}>
     {lessonTimeGroups.map((lessonGroup, i) => <Grid2 key={i} size={1}>
       <Stack gap={4} sx={{p: 2, border: '1px solid primary.main'}}>
         <Typography variant='h6' sx={{textAlign: 'center'}}>{t(`weekdays.${lessonGroup.weekday}`)}</Typography>
@@ -59,23 +59,27 @@ export function LessonsEditor<T extends ILessonTimeName, R extends ILessonName>(
             const groups = lesson ? getGroups(lesson.subject) : []
             return <Stack key={j} direction='row' gap={2} sx={{alignItems: 'center'}}>
               <Typography variant='h6'>{j + 1}.</Typography>
-              <Autocomplete
-                sx={{transition: '0.5s', ...(teachers.length === 0 || groups.length > 0  ? {flex: 1} : {})}}
-                value={lesson?.subject ?? null}
-                onChange={(_, s: ISubjectName | null) => updateSubject(lessonTime, s)}
-                options={subjects}
-                renderInput={(params) => <TextField {...params} label={t('lessons.subject')} />}
-                getOptionLabel={(option) => option.verboseName}
-              />
-              <Autocomplete
-                disabled={teachers.length === 0}
-                sx={{transition: '0.5s', ...(groups.length === 0 ? (teachers.length === 0 ? {} : {flex: 1}) : {display: 'none'})}}
-                value={lesson?.teacher ?? null}
-                onChange={(_, t: ITeacherName | null) => t ? updateTeacher(lessonTime, t) : {}}
-                options={teachers}
-                renderInput={(params) => <TextField {...params} label={t('lessons.teacher')} />}
-                getOptionLabel={(option) => `${option.user.surname} ${option.user.name}`}
-              />
+              <Stack direction={{xs: 'column', md: 'row'}} gap={2} sx={{flex: 1}}>
+                <Autocomplete
+                  isOptionEqualToValue={(option, value) => option.id === value.id}
+                  sx={{transition: '0.5s', ...(teachers.length === 0 || groups.length > 0  ? {flex: 1} : {})}}
+                  value={lesson?.subject ?? null}
+                  onChange={(_, s: ISubjectName | null) => updateSubject(lessonTime, s)}
+                  options={subjects}
+                  renderInput={(params) => <TextField {...params} label={t('lessons.subject')} />}
+                  getOptionLabel={(option) => option.verboseName}
+                />
+                <Autocomplete
+                  isOptionEqualToValue={(option, value) => option.id === value.id}
+                  disabled={teachers.length === 0}
+                  sx={{transition: '0.5s', ...(groups.length === 0 ? (teachers.length === 0 ? {} : {flex: 1}) : {display: 'none'})}}
+                  value={lesson?.teacher ?? null}
+                  onChange={(_, t: ITeacherName | null) => t ? updateTeacher(lessonTime, t) : {}}
+                  options={teachers}
+                  renderInput={(params) => <TextField {...params} label={t('lessons.teacher')} />}
+                    getOptionLabel={(option) => `${option.user.surname} ${option.user.name}`}
+                  />
+              </Stack>
             </Stack>
           })}
         </Stack>

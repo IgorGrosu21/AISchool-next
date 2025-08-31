@@ -36,7 +36,7 @@ export default function Container() {
   }, [setSchool])
 
   return <>
-    <Stack direction='row' gap={4}>
+    <Stack direction={{xs: 'column', md: 'row'}} gap={4}>
       <Stack sx={{flex: 1, alignItems: 'flex-start'}} direction='row'>
         <ImageUploader<IMedia>
           existing={school.preview}

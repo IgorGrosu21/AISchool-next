@@ -1,1 +1,1 @@
-export { SideBar } from "./sidebar";
+export { SideBarWrapper as SideBar } from "./sidebarWrapper";

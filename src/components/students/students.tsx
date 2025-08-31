@@ -2,7 +2,7 @@
 
 import { Balance, SmallProfile } from "@/components";
 import { IStudent } from "@/utils/interfaces";
-import { Stack, Typography, Table, TableHead, TableRow, TableCell, TableBody, Checkbox } from "@mui/material";
+import { Stack, Typography, Checkbox, Grid2 } from "@mui/material";
 import { getTranslations } from "next-intl/server";
 
 interface StudentsProps {
@@ -14,39 +14,29 @@ export async function Students({students}: StudentsProps) {
 
   return <Stack gap={2}>
     <Typography variant='h5'>{t('list')}:</Typography>
-    <Table>
-      <TableHead>
-        <TableRow>
-          <TableCell>№</TableCell>
-          <TableCell>{t('singular')}</TableCell>
-          <TableCell>{t('balance')}</TableCell>
-          <TableCell align="right">{t('rank')}</TableCell>
-          <TableCell align="right">{t('subscription')}</TableCell>
-          <TableCell align="right">{t('is_manager')}</TableCell>
-        </TableRow>
-      </TableHead>
-      <TableBody>
-        {students.map((student, i) => <TableRow key={i} sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>
-          <TableCell component="th" scope="row">
-            <Typography variant='h6'>{i + 1}</Typography>
-          </TableCell>
-          <TableCell>
-            <SmallProfile user={student.user} />
-          </TableCell>
-          <TableCell>
+    <Stack gap={4}>
+      {students.map((student, i) => <Grid2 key={i} container spacing={4} columns={4}>
+        <Grid2 size={{xs: 4, md: 'auto'}} sx={{display: 'flex', justifyContent: 'center'}}>
+          <SmallProfile user={student.user} />
+        </Grid2>
+        <Grid2 size={{xs: 4, md: 'auto'}}>
+          <Stack direction='row' sx={{height: '100%', alignItems: 'center', justifyContent: 'center'}}>
             <Balance balance={student.balance} showText={false} />
-          </TableCell>
-          <TableCell align="right">
-            <Typography variant='h6'>#{student.rank}</Typography>
-          </TableCell>
-          <TableCell align="right">
+          </Stack>
+        </Grid2>
+        <Grid2 size={{xs: 2, md: 'grow'}}>
+          <Stack direction={{xs: 'column', md: 'row'}} sx={{height: '100%', alignItems: 'center', justifyContent: 'flex-end'}}>
+            <Typography variant='h6'>{t('subscription')}</Typography>
             <Checkbox checked={student.subscription != undefined} />
-          </TableCell>
-          <TableCell align="right">
+          </Stack>
+        </Grid2>
+        <Grid2 size={{xs: 2, md: 'grow'}}>
+          <Stack direction={{xs: 'column', md: 'row'}} sx={{height: '100%', alignItems: 'center', justifyContent: 'flex-end'}}>
+            <Typography variant='h6'>{t('is_manager')}</Typography>
             <Checkbox checked={student.isManager} />
-          </TableCell>
-        </TableRow>)}
-      </TableBody>
-    </Table>
+          </Stack>
+        </Grid2>
+      </Grid2>)}
+    </Stack>
   </Stack>
 }

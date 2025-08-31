@@ -17,7 +17,7 @@ interface JournalProviderValue {
 }
 
 export function JournalProvider({children, value}: ProviderProps<JournalProviderValue>) {
-  const currentDate = useMemo(() => new Date(), [])
+  const currentDate = useMemo(() => new Date(2025, 2, 25), [])
   const currentYear = useMemo(() => getYear(currentDate), [currentDate])
   const currentMonth = useMemo(() => getMonth(currentDate) + 1, [currentDate])
   const year = useMemo(() => currentMonth < 9 ? currentYear : currentYear + 1, [currentYear, currentMonth])

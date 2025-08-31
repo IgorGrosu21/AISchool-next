@@ -5,6 +5,7 @@ import { useMemo } from "react"
 import { useTranslations } from "next-intl"
 import { useJournalContext } from "@/providers"
 import { AnnualNoteList } from "./anualNoteList"
+import { useIsMobile } from "@/hooks"
 
 interface NotesContainerProps {
   children: React.ReactNode | React.ReactNode[]
@@ -25,10 +26,11 @@ const allAbsences: Array<keyof Absences> = ['ma', 'ua', 'da']
 export function NotesContainer({children, loading}: NotesContainerProps) {
   const t = useTranslations('journal')
   const {semester, period, setSemester, groups} = useJournalContext()
+  const isMobile = useIsMobile()
 
   // Determine if today is in the first semester (September 1st to December 31st)
   const isFirstSemester = useMemo(() => {
-    const today = new Date()
+    const today = new Date(2025, 2, 25)
     const currentMonth = today.getMonth() + 1 // getMonth() returns 0-11, so add 1
     return currentMonth >= 9 && currentMonth <= 12
   }, [])
@@ -60,7 +62,8 @@ export function NotesContainer({children, loading}: NotesContainerProps) {
       })
       const frstPerformance = frstCount > 0 ? Math.round(frstSum / frstCount) : 0
       const scndPerformance = scndCount > 0 ? Math.round(scndSum / scndCount) : 0
-      const annualPerformance = Math.round((frstPerformance + scndPerformance) / 2).toFixed(2)
+      const semestersCount = (frstPerformance > 0 ? 1 : 0) + (scndPerformance > 0 ? 1 : 0)
+      const annualPerformance = semestersCount > 0 ? Math.round((frstPerformance + scndPerformance) / semestersCount).toFixed(2) : '-'
       return {
         id: group.id,
         name: group.name,
@@ -83,7 +86,7 @@ export function NotesContainer({children, loading}: NotesContainerProps) {
     let [sum, count] = [0, 0]
     const groups1 = annualGroups ?? groups
     groups1.forEach(group => {
-      if (group.performance !== '-') {
+      if (group.performance !== '-' && group.performance !== '0.00') {
         sum += parseFloat(group.performance)
         count++
       }
@@ -92,23 +95,25 @@ export function NotesContainer({children, loading}: NotesContainerProps) {
   }, [annualGroups, groups])
 
   return <Stack gap={2}>
-    <Stack direction='row' gap={2}>
+    <Stack direction={isMobile ? 'column-reverse' : 'row'} gap={2}>
       <Typography variant='h4' color='primary'>{t('performance')}: {performance}</Typography>
       <Box sx={{flex: 1}} />
-      {semesters.map((s, i) => <Button
-        key={i}
-        variant={semester === s ? 'contained' : 'outlined'}
-        color='primary'
-        onClick={() => setSemester(s)}
-        disabled={s === 'scnd' && isFirstSemester}
-      >
-        {t(`periods.${s}`)}
-      </Button>)}
+      <Stack direction={isMobile ? 'column' : 'row'} gap={2}>
+        {semesters.map((s, i) => <Button
+          key={i}
+          variant={semester === s ? 'contained' : 'outlined'}
+          color='primary'
+          onClick={() => setSemester(s)}
+          disabled={s === 'scnd' && isFirstSemester}
+        >
+          {t(`periods.${s}`)}
+        </Button>)}
+      </Stack>
     </Stack>
     <Box sx={{position: 'relative'}}>
       <Stack gap={8} sx={{opacity: loading ? 0.2 : 1, transition: '0.35s'}}>
         {semester === 'annual' ? <AnnualNoteList groups={annualGroups!} /> : children}
-        <Stack direction='row' gap={4}>
+        <Stack direction={isMobile ? 'column' : 'row'} gap={4}>
           {absences.map((absence, i) => <Stack key={i} direction='row' gap={2} sx={{
             flex: 1,
             bgcolor: 'background.default',

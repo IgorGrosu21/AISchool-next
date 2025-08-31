@@ -15,7 +15,7 @@ export function AttachedFiles({files}: AttachedFilesProps) {
   
   return <Stack gap={2}>
     <Typography variant='h5'>{t('files.plural')}:</Typography>
-    {files && <Stack direction='row' gap={2}>
+    {files && <Stack direction={{xs: 'column', md: 'row'}} gap={2}>
       {files.map((file, i) => <Button key={i} variant='outlined' sx={{gap: 2, p: 2}}>
         <Typography>{file.file.split('/').at(-1)}</Typography>
         <Link style={{display: 'flex', alignItems: 'center'}} href={file.file} target='_blank'>

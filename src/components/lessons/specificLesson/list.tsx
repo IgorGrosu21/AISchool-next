@@ -11,6 +11,7 @@ import { format, isWithinInterval } from "date-fns";
 import { ru } from "date-fns/locale/ru";
 import { Note } from "./note";
 import { useDiaryContext } from "@/providers";
+import { useIsMobile } from "@/hooks";
 
 interface SpecificLessonsProps {
   specificLessons: ISpecificLessonName[]
@@ -28,6 +29,7 @@ export function SpecificLessons({specificLessons, dates}: SpecificLessonsProps) 
   const [message, setMessage] = useState<string>('no_lesson')
   const [alertShowed, showAlert] = useState<boolean>(false)
   const router = useRouter()
+  const isMobile = useIsMobile()
 
   const pickSpecificLesson = useCallback((lesson: ILessonName | undefined, specificLesson: ISpecificLessonName | undefined, date: Date) => {
     if (!lesson) {
@@ -49,7 +51,7 @@ export function SpecificLessons({specificLessons, dates}: SpecificLessonsProps) 
   }, [holidays])
 
   return <Stack>
-    <Grid2 container spacing={4} columns={3}>
+    <Grid2 container spacing={4} columns={isMobile ? 1 : 3}>
       {lessonTimeGroups.map((lessonGroup, i) => <Grid2 key={i} size={1}>
         <Stack gap={4} sx={{p: 2, height: lessonGroup.timetable.length === 0 || isHoliday(dates[i]) ? '100%' : 'auto'}}>
           <Stack direction='row' sx={{justifyContent: 'space-between', alignItems: 'center'}}>

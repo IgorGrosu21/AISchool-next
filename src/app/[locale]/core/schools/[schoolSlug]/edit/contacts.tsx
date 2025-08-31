@@ -40,19 +40,19 @@ export function Contacts({school, setSchool}: ContactsProps) {
     <Grid2 size={12}>
       <Typography variant='h5' sx={{textAlign: 'center'}}>{t('contacts')}</Typography>
     </Grid2>
-    {[0, 1, 2].map((i) => <Grid2 key={i} size={4}>
+    {[0, 1, 2].map((i) => <Grid2 key={i} size={{xs: 12, md: 4}}>
       <TextField sx={{width: '100%'}} label={t('phone') + (i + 1)} value={phones[i] ?? ''} onChange={e => editPhone(i, e.target.value)} />
     </Grid2>)}
-    {[0, 1, 2].map((i) => <Grid2 key={i} size={4}>
+    {[0, 1, 2].map((i) => <Grid2 key={i} size={{xs: 12, md: 4}}>
       <TextField sx={{width: '100%'}} label={t('email') + (i + 1)} value={emails[i] ?? ''} onChange={e => editEmail(i, e.target.value)} />
     </Grid2>)}
-    <Grid2 size={6}>
+    <Grid2 size={{xs: 12, md: 6}}>
       <TextField sx={{width: '100%'}} label={t('address')} value={school.address} onChange={e => setSchool({...school, address: e.target.value})} />
     </Grid2>
-    <Grid2 size={3}>
+    <Grid2 size={{xs: 12, md: 3}}>
       <TextField sx={{width: '100%'}} label={t('website')} value={school.website} onChange={e => setSchool({...school, website: e.target.value})} />
     </Grid2>
-    <Grid2 size={3}>
+    <Grid2 size={{xs: 12, md: 3}}>
       <TextField sx={{width: '100%'}} label={t('work_hours')} value={school.workHours} onChange={e => setSchool({...school, workHours: e.target.value})} />
     </Grid2>
   </Grid2>

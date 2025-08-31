@@ -18,7 +18,7 @@ export function Lessons<T extends ILessonTimeName>({groups, timetable, getLesson
   const t = useTranslations('timetable')
   const getGroups = useCallback((subject: ISubjectName) => groups.filter(g => g.subject.id === subject.id), [groups])
 
-  return <Grid2 container spacing={4} columns={3}>
+  return <Grid2 container spacing={4} columns={{xs: 1, md: 3}}>
     {lessonTimeGroups.map((lessonGroup, i) => <Grid2 key={i} size={1}>
       <Stack gap={4} sx={{p: 2, border: '1px solid primary.main'}}>
         <Typography variant='h6' color='primary' sx={{textAlign: 'center'}}>{t(`weekdays.${lessonGroup.weekday}`)}</Typography>

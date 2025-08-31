@@ -44,7 +44,7 @@ export function Photos({school, setSchool}: PhotosProps) {
   }, [school.preview, school.slug, setSchool])
 
   return <Stack sx={{alignItems: 'center'}}>
-    <ImageList sx={{ width: '75%', height: 'auto' }} cols={2}>
+    <ImageList sx={{ width: { xs: '100%', md: '75%' }, height: 'auto', columnCount: {xs: 1, md: 2}}}>
       {photos.map((photo, i) => <ImageListItem key={i}>
         <ImageUploader<IDetailedMedia>
           existing={photo.file}

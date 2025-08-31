@@ -23,11 +23,13 @@ export default async function Page({ params }: { params: Promise<{manualSlug: st
       {label: `${manual.subject.verboseName} ${manual.grade}`, href: manualSlug},
       {label: detailedModule.name, href: moduleSlug},
       {label: topic.name, href: topicSlug},
-    ]} last={theory.name}>
-    <ModuleHeader title={theory.name} progress={topic.progress} />
-    <Stack sx={{alignItems: 'center'}}>
-      <PdfViewer link={`${process.env.NEXT_PUBLIC_DJANGO_API_URL}/public/theories/${manualSlug}/${moduleSlug}/${topicSlug}/${theorySlug}.pdf`} />
+    ]} last={theory.name} applyStyles={false}>
+    <Stack gap={4}>
+      <ModuleHeader title={theory.name} progress={topic.progress} />
+      <Stack sx={{alignItems: 'center', bgcolor: 'background.default', p: 2}}>
+        <PdfViewer link={`${process.env.NEXT_PUBLIC_DJANGO_API_URL}/public/theories/${manualSlug}/${moduleSlug}/${topicSlug}/${theorySlug}.pdf`} />
+      </Stack>
+      <TheoryButtons topic={topic} theory={theory} />
     </Stack>
-    <TheoryButtons topic={topic} theory={theory} />
   </NavigationContainer>
 }

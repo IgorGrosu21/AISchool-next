@@ -1,6 +1,6 @@
 'use client'
 
-import { Backdrop, Stack, Button, Typography, TextField, Box, Link } from "@mui/material"
+import { Backdrop, Stack, Button, Typography, TextField, Link } from "@mui/material"
 import { useTranslations } from "next-intl"
 import { INoteName } from "@/utils/interfaces"
 import { useCallback, useEffect, useState } from "react"
@@ -46,8 +46,8 @@ export function NotePicker<T extends Note>({notesOpened, openNotes, activeNote, 
   }, [])
 
   return <Backdrop sx={{ zIndex: 1300 }} open={notesOpened}>
-    <Stack gap={2} sx={{bgcolor: 'background.default', p: 4}}>
-      <Stack direction='row' gap={2}>
+    <Stack gap={2} sx={{bgcolor: 'background.default', p: 4, mx: 4}}>
+      <Stack direction='row' sx={{flexWrap: 'wrap', justifyContent: 'center'}} gap={2}>
         {hasNotes ? notes.map(note => <Button
           key={note}
           variant={newNote?.value === note ? 'contained' : 'outlined'}
@@ -62,7 +62,7 @@ export function NotePicker<T extends Note>({notesOpened, openNotes, activeNote, 
           <Typography variant='h6'>{t(descriptor)}</Typography>
         </Button>)}
       </Stack>
-      <Stack direction='row' gap={2}>
+      <Stack direction={{xs: 'column', md: 'row'}} gap={2}>
         {abscences.map(abscence => <Button
           key={abscence}
           variant={newNote?.value === abscence ? 'contained' : 'outlined'}
@@ -77,12 +77,11 @@ export function NotePicker<T extends Note>({notesOpened, openNotes, activeNote, 
         onChange={e => updateNoteComment(e.target.value)}
         sx={{height: 67.5}}
       />
-      <Stack direction='row' gap={2}>
+      <Stack direction={{xs: 'column', md: 'row'}} gap={2}>
         <Button variant='outlined' onClick={() => openNotes(false)}>{t('close')}</Button>
         {link && <Link href={link}>
           <Button variant='outlined'>{t('open_lesson')}</Button>
         </Link>}
-        <Box sx={{flex: 1}} />
         <Button variant='outlined' onClick={discard}>{t('discard')}</Button>
         <Button variant='contained' onClick={save}>{t('save')}</Button>
       </Stack>

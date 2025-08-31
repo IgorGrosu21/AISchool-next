@@ -19,8 +19,9 @@ export function PickSchools({value, setValue, options}: PickSchoolsProps) {
       multiple
       options={options}
       value={value}
+      isOptionEqualToValue={(option, value) => option.id === value.id}
       onChange={(_, v: ISchoolName[]) => setValue(v)}
-      getOptionLabel={(option) => `${option.name} (${option.city.name})`}
+      getOptionLabel={(option) => `${option.name}`}
       renderInput={(params) => <TextField {...params} label={t('singular')} />}
     />
   </Stack>

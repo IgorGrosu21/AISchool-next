@@ -19,7 +19,7 @@ export function MonthButton({month, activeMonth, onClick}: MonthButtonProps) {
     return name.charAt(0).toUpperCase() + name.slice(1)
   }, [month])
 
-  return <Button color={isActive ? 'secondary' : 'primary'} onClick={onClick}>
+  return <Button color={isActive ? 'secondary' : 'primary'} sx={{width: '100%', justifyContent: 'center'}} onClick={onClick}>
     <Typography variant='h5' sx={{textAlign: 'center'}}>{monthName}</Typography>
   </Button>
 }

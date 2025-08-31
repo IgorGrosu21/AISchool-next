@@ -5,6 +5,7 @@ import { IDetailedCountry } from "@/utils/interfaces";
 import { Grid2, Stack, Typography, Checkbox } from "@mui/material";
 import { useTranslations } from "next-intl";
 import { Dispatch, SetStateAction, useCallback, useMemo } from "react";
+import { useIsMobile } from "@/hooks";
 
 interface FiltersProps {
   country: IDetailedCountry,
@@ -14,6 +15,7 @@ interface FiltersProps {
 
 export function Filters({country, params, setParams}: FiltersProps) {
   const t = useTranslations('schools.filters');
+  const isMobile = useIsMobile();
   
   const toggleValue = useCallback((arr: string[], value: string) => {
     if (arr.length === 1 && arr[0] === '') {
@@ -38,7 +40,7 @@ export function Filters({country, params, setParams}: FiltersProps) {
 
   return <Stack gap={4}>
     <Grid2 container spacing={2}>
-      {structuredParams.map((param, i) => <Grid2 key={i} size={param.size}>
+      {structuredParams.map((param, i) => <Grid2 key={i} size={isMobile ? 12 : param.size}>
         <Stack gap={2}>
           <Typography variant='h6'>{t(`${param.name}.title`)}:</Typography>
           <Stack direction='row' gap={4} sx={{flexWrap: 'wrap'}}>
@@ -49,7 +51,7 @@ export function Filters({country, params, setParams}: FiltersProps) {
           </Stack>
         </Stack>
       </Grid2>)}
-      <Grid2 size={4}>
+      <Grid2 size={isMobile ? 12 : 4}>
         <KlassesRange
           startGrade={params.startGrade}
           finalGrade={params.finalGrade}

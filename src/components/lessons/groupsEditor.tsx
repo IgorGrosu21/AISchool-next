@@ -96,11 +96,12 @@ export function GroupsEditor({allSubjects, staff, klass, updateGroups}: GroupsEd
           <Typography component="span">{subject.verboseName}</Typography>
         </AccordionSummary>
         <AccordionDetails>
-          <Stack direction='row' gap={4}>
+          <Stack direction={{xs: 'column', md: 'row'}} gap={4}>
             {subjectGroups.map((group, j) => {
               const pairedGroup = groups.find(g => group.subject.id === g.subject.id && group.order !== g.order)
               return <Stack key={j} sx={{flex: 1}} gap={4}>
                 <Autocomplete
+                  isOptionEqualToValue={(option, value) => option.id === value.id}
                   value={group.teacher ?? null}
                   onChange={(_, t: ITeacherName | null) => updateTeacher(group, t)}
                   options={teachers}

@@ -1,10 +1,11 @@
 import { SubscriptionsProvider } from '@/providers'
 import { NavigationContainer } from '@/components'
 import { getTranslations } from 'next-intl/server'
-import { Stack, Typography, Divider, List, ListItem, ListItemButton, ListItemIcon, Checkbox, ListItemText, Box } from '@mui/material'
+import { Stack, Typography, Divider, List, ListItem, ListItemButton, ListItemIcon, ListItemText, Box } from '@mui/material'
 import { Plans } from './plans'
 import { GroupsDiscount } from './groupsDiscount'
 import { ShowTeacherPrices } from './showTeacherPrices'
+import { Navigation } from '@mui/icons-material'
 
 export default async function Page() {
   const t = await getTranslations('subscriptions')
@@ -29,7 +30,7 @@ export default async function Page() {
               {soloPluses.map((plus, i) => <ListItem key={i} disablePadding>
                 <ListItemButton>
                   <ListItemIcon>
-                    <Checkbox edge='start' checked disableRipple />
+                    <Navigation color='primary' sx={{transform: 'rotate(90deg)'}} />
                   </ListItemIcon>
                   <ListItemText primary={plus} />
                 </ListItemButton>
@@ -45,7 +46,7 @@ export default async function Page() {
               {groupPluses.map((plus, i) => <ListItem key={i} disablePadding>
                 <ListItemButton>
                   <ListItemIcon>
-                    <Checkbox edge='start' checked disableRipple />
+                    <Navigation color='primary' sx={{transform: 'rotate(90deg)'}} />
                   </ListItemIcon>
                   <ListItemText primary={plus} />
                 </ListItemButton>

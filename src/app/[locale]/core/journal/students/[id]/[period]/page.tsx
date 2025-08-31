@@ -21,9 +21,7 @@ export default async function Page({ params }: { params: Promise<{id: string, pe
         notes: []
       }))
     }}>
-      <StudentNoteList
-        subjects={subjects}
-      /> 
+      <StudentNoteList subjects={subjects} /> 
     </JournalProvider>
   </NavigationContainer>
 }

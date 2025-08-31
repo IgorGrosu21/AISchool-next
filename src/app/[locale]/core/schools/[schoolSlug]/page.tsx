@@ -15,7 +15,7 @@ export default async function Page({ params }: { params: Promise<{schoolSlug: st
     <Stack direction='row' sx={{justifyContent: 'flex-end', alignItems: 'center'}}>
       <EditButton link={`/core/schools/${schoolSlug}`} editable={school} />
     </Stack>
-    <Stack direction='row' gap={4}>
+    <Stack direction={{ xs: 'column', md: 'row' }} gap={4}>
       <Stack sx={{flex: 1}}>
         <Image
           width={1792}
@@ -32,13 +32,13 @@ export default async function Page({ params }: { params: Promise<{schoolSlug: st
       </Stack>
     </Stack>
     <Contacts school={school} />
-    <SchoolPositions school={school} />
     <Stack sx={{alignItems: 'center'}}>
       <KlassesButton schoolSlug={schoolSlug} />
     </Stack>
     <Stack sx={{alignItems: 'center'}}>
       <TimetableButton schoolSlug={schoolSlug} />
     </Stack>
+    <SchoolPositions school={school} />
     <Photos school={school} />
   </NavigationContainer>
 }

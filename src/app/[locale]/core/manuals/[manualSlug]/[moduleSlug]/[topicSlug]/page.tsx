@@ -14,7 +14,7 @@ export default async function Page({ params }: { params: Promise<{manualSlug: st
       {label: t('plural'), href: 'manuals'},
       {label: `${manual.subject.verboseName} ${manual.grade}`, href: manualSlug},
       {label: detailedModule.name, href: moduleSlug}
-    ]} last={topic.name}>
+    ]} last={topic.name} applyStyles={false}>
     <ModuleHeader title={topic.name} progress={topic.progress} balance={topic.balance} />
     <ModuleList
       list={topic.theories}

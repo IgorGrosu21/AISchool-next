@@ -15,7 +15,7 @@ export function LessonTimeContainer({timetable, render}: LessonTimeProps) {
   const lessonTimeGroups = useMemo(() => getLessonGroups(timetable), [timetable])
   const t = useTranslations('timetable');
 
-  return <Grid2 container spacing={4} columns={3}>
+  return <Grid2 container spacing={4} columns={{xs: 1, md: 3}}>
     {lessonTimeGroups.map((lessonTimeGroup, i) => <Grid2 key={i} size={1}>
       <Stack gap={4} sx={{p: 2, border: '1px solid primary.main'}}>
         <Typography variant='h6' sx={{textAlign: 'center'}}>{t(`weekdays.${lessonTimeGroup.weekday}`)}</Typography>

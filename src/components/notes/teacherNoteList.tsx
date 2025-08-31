@@ -22,7 +22,6 @@ export function TeacherNoteList({klass, subjectSlug}: TeacherNoteListProps) {
   const [isPending, startTransition] = useTransition()
   const tableContainerRef = useRef<HTMLDivElement>(null)
   const [activeNote, setActiveNote] = useState<INote>()
-  const [notesOpened, openNotes] = useState(false)
 
   // Get today's date for comparison
   const today = useMemo(() => startOfDay(new Date(2025, 2, 27)), [])
@@ -127,7 +126,6 @@ export function TeacherNoteList({klass, subjectSlug}: TeacherNoteListProps) {
 
     if (note) {
       setActiveNote(note)
-      openNotes(true)
       return
     }
     const student = klass.students.find(s => s.id === studentId)
@@ -169,7 +167,6 @@ export function TeacherNoteList({klass, subjectSlug}: TeacherNoteListProps) {
       comment: '',
       lastModified: ''
     })
-    openNotes(true)
   }, [klass, today])
 
   const updateNote = useCallback((note?: INote) => {
@@ -261,8 +258,8 @@ export function TeacherNoteList({klass, subjectSlug}: TeacherNoteListProps) {
       </Table>
     </TableContainer>
     <NotePicker<INote>
-      notesOpened={notesOpened}
-      openNotes={openNotes}
+      notesOpened={activeNote !== undefined}
+      openNotes={() => setActiveNote(undefined)}
       activeNote={activeNote}
       updateNote={updateNote}
       hasNotes={activeNote?.specificLesson.lesson.subject.hasNotes ?? true}

@@ -24,10 +24,7 @@ export default async function Page({ params }: { params: Promise<{id: string, sc
         notes: []
       }))
     }}>
-      <TeacherNoteList
-        klass={klass}
-        subjectSlug={subjectSlug}
-      /> 
+      <TeacherNoteList klass={klass} subjectSlug={subjectSlug} /> 
     </JournalProvider>
   </NavigationContainer>
 }
