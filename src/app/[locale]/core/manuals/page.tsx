@@ -35,7 +35,11 @@ export default async function Page() {
               </Stack>
             </Stack>
           </Grid2>}
-          <Subjects subjects={group.subGroup.map(s => s.subject)} showText={false} baseHref='/core/manuals' />
+          <Subjects
+            subjects={group.subGroup.map(s => s.subject)}
+            showText={false}
+            hrefTemplate={`/core/manuals/<subjectSlug>-${group.grade}`}
+          />
         </Grid2>
       </Stack>)}
     </Stack>

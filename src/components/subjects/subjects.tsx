@@ -11,10 +11,10 @@ interface SubjectsProps extends StackProps {
   subjects: ISubjectName[],
   small?: boolean
   showText?: boolean
-  baseHref?: string
+  hrefTemplate?: string
 }
 
-export function Subjects({subjects, small = false, showText = true, baseHref, ...props}: SubjectsProps) {
+export function Subjects({subjects, small = false, showText = true, hrefTemplate, ...props}: SubjectsProps) {
   const t = useTranslations('subjects')
   const isMobile = useIsMobile();
 
@@ -42,8 +42,8 @@ export function Subjects({subjects, small = false, showText = true, baseHref, ..
           <Typography variant={small ? 'h6' : 'h5'} sx={{fontSize: {xs: '0.875rem', md: '1rem'}}}>{subject.verboseName}</Typography>
         </Stack>
 
-        if (baseHref) {
-          return <Link key={i} href={`${baseHref}/${subject.slug}`} style={{ textDecoration: 'none', color: 'inherit' }}>
+        if (hrefTemplate) {
+          return <Link key={i} href={hrefTemplate.replace('<subjectSlug>', subject.slug)} style={{ textDecoration: 'none', color: 'inherit' }}>
             {subjectContent}
           </Link>
         }

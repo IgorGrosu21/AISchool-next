@@ -19,6 +19,6 @@ export default async function TeacherJournalPage({ params }: { params: Promise<{
     {label: klass.school.name, href: `teachers/${id}/${schoolSlug}`},
   ]} last={`${klass.grade}${klass.letter}`}>
     <Typography variant='h5'>{t('pick_subject')}</Typography>
-    <Subjects subjects={subjects} showText={false} baseHref={`journal/teachers/${id}/${schoolSlug}/${klassSlug}`} />
+    <Subjects subjects={subjects} showText={false} hrefTemplate={`journal/teachers/${id}/${schoolSlug}/${klassSlug}/<subjectSlug>`} />
   </NavigationContainer>
 }
