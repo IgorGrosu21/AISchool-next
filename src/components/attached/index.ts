@@ -1,4 +1,2 @@
-export { AttachedFiles } from "./files";
-export { AttachedFilesEditor } from "./filesEditor";
-export { AttachedLinks } from "./links";
-export { AttachedLinksEditor } from "./linksEditor";
+export { AttachedFiles, AttachedFilesEditor } from "./files";
+export { AttachedLinks, AttachedLinksEditor } from "./links";

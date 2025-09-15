@@ -1,5 +1,5 @@
 import { fetchSchoolWithKlasses } from '@/utils/api';
-import Container from './container';
+import { Editor } from './editor';
 import { editSchoolWithKlasses } from '@/app/actions/school';
 import { SchoolWithKlassesEditorContext } from '@/providers';
 import { EditorProvider } from '@/providers';
@@ -23,7 +23,7 @@ export default async function Page({ params }: { params: Promise<{schoolSlug: st
       action: editSchoolWithKlasses,
       segments
     }}>
-      <Container />
+      <Editor />
     </EditorProvider>
   </NavigationContainer>
 }

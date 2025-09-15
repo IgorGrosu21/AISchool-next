@@ -21,7 +21,6 @@ export default async function Page() {
 
   return <NavigationContainer segments={[]} last={t('plural')}>
     <Typography variant='h4'>{t('plural')}</Typography>
-
     <Stack gap={8}>
       {grouped.length === 1 && <Stack sx={{p: 2, bgcolor: 'primary.main'}}>
         <Typography variant='h5' sx={{textAlign: 'center', color: 'primary.contrastText'}}>{grouped[0].grade} {tKlasses('singular')}</Typography>
@@ -29,17 +28,19 @@ export default async function Page() {
       {grouped.map((group, i) => <Stack key={i} gap={4}>
         <Grid2 container spacing={4} columns={{xs: 2, md: 5}}>
           {grouped.length > 1 && <Grid2 size={1}>
-            <Stack sx={{height: '100%', alignItems: 'center'}}>
+            <Stack sx={{height: '100%', alignItems: 'center', justifyContent: 'center'}}>
               <Stack sx={{bgcolor: 'primary.main', borderRadius: '50%', width: {xs: 123, md: 164}, aspectRatio: 1, justifyContent: 'center'}}>
                 <Typography variant='h5' sx={{textAlign: 'center', color: 'primary.contrastText'}}>{group.grade} {tKlasses('singular')}</Typography>
               </Stack>
             </Stack>
           </Grid2>}
-          <Subjects
-            subjects={group.subGroup.map(s => s.subject)}
-            showText={false}
-            hrefTemplate={`/core/manuals/<subjectSlug>-${group.grade}`}
-          />
+          <Grid2 size='grow'>
+            <Subjects
+              subjects={group.subGroup.map(s => s.subject)}
+              showText={false}
+              hrefTemplate={`/core/manuals/<subjectSlug>-${group.grade}`}
+            />
+          </Grid2>
         </Grid2>
       </Stack>)}
     </Stack>

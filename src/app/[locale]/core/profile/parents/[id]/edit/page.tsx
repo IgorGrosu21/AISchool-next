@@ -1,5 +1,5 @@
 import { fetchParent } from "@/utils/api";
-import Container from "./container";
+import { Editor } from "./editor";
 import { ParentEditorContext } from "@/providers";
 import { EditorProvider } from "@/providers";
 import { editParent } from "@/app/actions/person";
@@ -17,7 +17,7 @@ export default async function Page({ params }: { params: Promise<{id: string}> }
       action: editParent,
       segments
     }}>
-      <Container />
+      <Editor />
     </EditorProvider>
   </NavigationContainer>
 }

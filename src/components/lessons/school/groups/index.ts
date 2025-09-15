@@ -1,1 +1,0 @@
-export { GroupsContainer } from "./groupsContainer";

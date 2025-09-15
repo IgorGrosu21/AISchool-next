@@ -21,10 +21,6 @@ html, body, #root {
   height: 100%;
 }
 
-#root {
-  overflow-y: auto;
-}
-
 a {
   color: inherit;
   text-decoration: none;

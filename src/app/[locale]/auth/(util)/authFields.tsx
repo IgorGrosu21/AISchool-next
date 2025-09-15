@@ -6,12 +6,10 @@ import { useTranslations } from 'next-intl';
 import { useState } from 'react';
 import { IconButton, InputAdornment } from '@mui/material';
 import { VisibilityOff, Visibility } from '@mui/icons-material';
-import { useIsMobile } from '@/hooks';
 
 export function AuthFields({state}: {state: FormState}) {
   const [masked, setMasked] = useState(true)
   const t = useTranslations('auth.errors')
-  const isMobile = useIsMobile();
 
   return <>
     <Input
@@ -22,8 +20,8 @@ export function AuthFields({state}: {state: FormState}) {
       defaultValue={state.email.value}
       sx={{
         '& .MuiInputBase-root': {
-          minHeight: isMobile ? '56px' : 'auto',
-          fontSize: isMobile ? '1rem' : 'inherit'
+          minHeight: {xs: '56px', md: 'auto'},
+          fontSize: {xs: '1rem', md: 'inherit'}
         }
       }}
     />
@@ -35,8 +33,8 @@ export function AuthFields({state}: {state: FormState}) {
       defaultValue={state.password.value}
       sx={{
         '& .MuiInputBase-root': {
-          minHeight: isMobile ? '56px' : 'auto',
-          fontSize: isMobile ? '1rem' : 'inherit'
+          minHeight: {xs: '56px', md: 'auto'},
+          fontSize: {xs: '1rem', md: 'inherit'}
         }
       }}
       slotProps={{
@@ -47,10 +45,10 @@ export function AuthFields({state}: {state: FormState}) {
               onClick={() => setMasked(!masked)}  
               edge='end'
               sx={{
-                minWidth: isMobile ? '48px' : 'auto',
-                minHeight: isMobile ? '48px' : 'auto',
+                minWidth: {xs: '48px', md: 'auto'},
+                minHeight: {xs: '48px', md: 'auto'},
                 '& .MuiSvgIcon-root': {
-                  fontSize: isMobile ? '1.5rem' : 'inherit'
+                  fontSize: {xs: '1.5rem', md: 'inherit'}
                 }
               }}
             >

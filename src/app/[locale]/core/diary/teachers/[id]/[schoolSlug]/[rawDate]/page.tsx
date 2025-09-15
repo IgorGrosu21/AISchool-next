@@ -15,7 +15,7 @@ export default async function Page({ params }: { params: Promise<{id: string, sc
 
   return <NavigationContainer segments={[
     {label: t('singular'), href: `diary/teachers/${id}`},
-  ]} last={rawDate} applyStyles={false}>
+  ]} last={rawDate}>
     <DiaryProvider value={{
       lessonTimes: school.timetable,
       lessons: lessons,

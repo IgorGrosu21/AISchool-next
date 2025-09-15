@@ -11,11 +11,10 @@ interface NavigationContainerProps {
     href: string
   }>
   last: string
-  applyStyles?: boolean
   children: React.ReactNode | React.ReactNode[]
 }
 
-export async function NavigationContainer({segments, last, applyStyles = true, children}: NavigationContainerProps) {
+export async function NavigationContainer({segments, last, children}: NavigationContainerProps) {
   const t = await getTranslations('components.edit');
 
   for (let i = 1; i < segments.length; i++) {
@@ -63,14 +62,8 @@ export async function NavigationContainer({segments, last, applyStyles = true, c
         {last === 'edit' ? t('edit') : last}
       </Typography>}
     </Breadcrumbs>
-    <Stack sx={{height: '100%', width: '100%', bgcolor: applyStyles ? 'background.default' : 'inherit'}}>
-      {applyStyles ? <Stack gap={{ xs: 4, md: 8 }} sx={{
-        p: { xs: 2, md: 4 }, 
-        height: '100%',
-        overflow: { xs: 'auto', md: 'visible' }
-      }}>
-        {children}
-      </Stack> : children}
+    <Stack gap={{ xs: 4, md: 8 }} sx={{height: '100%', width: '100%', overflow: { xs: 'auto', md: 'visible' }}}>
+      {children}
     </Stack>
   </Stack>
 }

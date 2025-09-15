@@ -57,13 +57,13 @@ async function refreshToken() {
 
 export async function send<T>(config: CacheRequestConfig, updateCacheType?: updateCacheBehavior) {
   try {
-    return await request<T>(config, updateCacheType)
+    return request<T>(config, updateCacheType)
   } catch (error: unknown) {
     if (error instanceof AxiosError && error.status == 401) {
       const { access } = await refreshToken()
       if (access) {
         try {
-          return await request<T>(config, updateCacheType, access)
+          return request<T>(config, updateCacheType, access)
         } catch {
           return undefined
         }

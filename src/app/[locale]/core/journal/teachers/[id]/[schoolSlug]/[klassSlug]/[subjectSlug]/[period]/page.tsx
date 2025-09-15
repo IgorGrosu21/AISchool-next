@@ -14,7 +14,7 @@ export default async function Page({ params }: { params: Promise<{id: string, sc
     {label: t('singular'), href: 'journal'},
     {label: school.name, href: `teachers/${id}/${schoolSlug}`},
     {label: `${klass.grade}${klass.letter}`, href: klassSlug},
-  ]} last={period} applyStyles={false}>
+  ]} last={period}>
     <JournalProvider value={{
       personId: id,
       period,

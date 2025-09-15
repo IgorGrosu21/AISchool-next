@@ -25,7 +25,7 @@ export function Plans() {
 
   return <Stack gap={4} sx={{p: 4, flex: 1}}>
     <Stack direction='row' sx={{alignItems: 'center', justifyContent: 'space-between'}}>
-      <Typography variant='h5' color='primary'>{t('title')}</Typography>
+      <Typography variant='h5' color={type === 'group' ? 'secondary' : 'primary'}>{t('title')}</Typography>
         <Select value={type} onChange={e => setType(e.target.value as 'solo' | 'group')}>
         <MenuItem value='solo'>{t('user_type.solo')}</MenuItem>
         <MenuItem value='group'>{t('user_type.group')}</MenuItem>

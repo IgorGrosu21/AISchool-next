@@ -12,7 +12,7 @@ export default async function Page({ params }: { params: Promise<{manualSlug: st
   return <NavigationContainer segments={[
       {label: t('plural'), href: 'manuals'},
       {label: `${manual.subject.verboseName} ${manual.grade}`, href: manualSlug}
-    ]} last={detailedModule.name} applyStyles={false}>
+    ]} last={detailedModule.name}>
     <ModuleHeader title={detailedModule.name} progress={detailedModule.progress} balance={detailedModule.balance} />
     <ModuleList list={detailedModule.topics} baseLink={`${manualSlug}/${moduleSlug}`} renderCost={
       topic => <Balance balance={topic.balance} showText={false} hideZeros />

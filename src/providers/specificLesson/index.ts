@@ -1,2 +1,3 @@
-export { AttachedFilesProvider, useAttachedFilesContext } from "./files";
-export { AttachedLinksProvider, useAttachedLinksContext } from "./links";
+export { useAttachedFilesContext } from "./files";
+export { useAttachedLinksContext } from "./links";
+export { AttachedItemsProvider } from "./provider";

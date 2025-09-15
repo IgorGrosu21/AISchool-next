@@ -23,7 +23,7 @@ export function Credentials() {
             value={lang} 
             control={<Radio />} 
             label={lang}
-            sx={{margin: isMobile ? '4px 0' : '0 8px 0 0'}}
+            sx={{margin: {xs: '4px 0', md: '0 8px 0 0'}}}
           />
         ))}
       </RadioGroup>

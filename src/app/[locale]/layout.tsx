@@ -1,11 +1,11 @@
 import type { Metadata } from "next";
 import { Roboto } from 'next/font/google';
-import { NextIntlClientProvider, hasLocale } from 'next-intl';
+import { hasLocale } from 'next-intl';
 import { notFound } from 'next/navigation';
 import { routing } from '@/i18n/routing';
 import { Providers } from "./providers";
 import { Stack } from "@mui/material";
-import { SideBar } from "@/components";
+import { SideBar, AnimatedBackground } from "@/components";
 import "./globals.css";
 
 const roboto = Roboto({
@@ -28,16 +28,15 @@ export default async function RootLayout({ children, params }: { children: React
 
   return <html lang={locale}>
     <body className={roboto.variable}>
-      <NextIntlClientProvider>
-        <Providers>
-          <Stack direction='row' sx={{minHeight: '100%'}}>
-            <SideBar />
-            <Stack id='main' sx={{flex: 1, minHeight: '100%', bgcolor: 'background.paper'}}>
-              {children}
-            </Stack>
+      <Providers>
+        <AnimatedBackground />
+        <Stack direction='row' sx={{minHeight: '100%', width: '100%'}}>
+          <SideBar />
+          <Stack id='main' sx={{flex: 1, minHeight: '100%', bgcolor: 'transparent', overflowX: 'auto'}}>
+            {children}
           </Stack>
-        </Providers>
-      </NextIntlClientProvider>
+        </Stack>
+      </Providers>
     </body>
   </html>
 }

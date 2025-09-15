@@ -4,7 +4,7 @@ import { EditorProvider, HomeworkEditorContext } from "@/providers"
 import { format } from "date-fns"
 import { ru } from "date-fns/locale/ru";
 import { getTranslations } from "next-intl/server"
-import { Container } from "./container"
+import { Editor } from "./editor"
 import { fetchHomework } from "@/utils/api"
 
 interface Params {
@@ -44,7 +44,7 @@ export default async function Page({ params }: { params: Promise<Params> }) {
         href: `diary/students/${studentId}/${schoolSlug}/${format(date, 'y.M.d')}`
       }]
     }}>
-      <Container date={dateLabel} />
+      <Editor date={dateLabel} />
     </EditorProvider>
   </NavigationContainer>
 }

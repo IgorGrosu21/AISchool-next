@@ -11,7 +11,7 @@ export default async function Page({ params }: { params: Promise<{id: string, pe
 
   return <NavigationContainer segments={[
     {label: t('singular'), href: 'journal'}
-  ]} last={period} applyStyles={false}>
+  ]} last={period}>
     <JournalProvider value={{
       personId: id,
       period,

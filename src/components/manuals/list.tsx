@@ -1,3 +1,5 @@
+'use server'
+
 import { Stack, Typography, Divider } from "@mui/material";
 import Link from "next/link";
 
@@ -41,7 +43,7 @@ export async function ModuleList<T extends { slug: string, name: string}>({list,
             color: 'primary.contrastText',
           }
         }}>
-            <Typography variant='h6'>{j + 1}. {item.name}</Typography>
+          <Typography variant='h6'>{j + 1}. {item.name}</Typography>
           {renderCost && renderCost(item)}
         </Stack>
       </Link>

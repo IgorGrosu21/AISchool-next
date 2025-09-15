@@ -1,5 +1,5 @@
 import { Typography } from '@mui/material'
-import { NavigationContainer, Subjects } from '@/components'
+import { NavigationContainer, Panel, Subjects } from '@/components'
 import { getTranslations } from 'next-intl/server'
 import { fetchKlass, fetchTeachedSubjects } from '@/utils/api'
 import { redirect } from 'next/navigation'
@@ -18,7 +18,9 @@ export default async function TeacherJournalPage({ params }: { params: Promise<{
     {label: t('singular'), href: 'journal'},
     {label: klass.school.name, href: `teachers/${id}/${schoolSlug}`},
   ]} last={`${klass.grade}${klass.letter}`}>
-    <Typography variant='h5'>{t('pick_subject')}</Typography>
-    <Subjects subjects={subjects} showText={false} hrefTemplate={`journal/teachers/${id}/${schoolSlug}/${klassSlug}/<subjectSlug>`} />
+    <Panel sx={{flexGrow: 0}}>
+      <Typography variant='h5'>{t('pick_subject')}</Typography>
+    </Panel>
+    <Subjects subjects={subjects} showText={false} hrefTemplate={`/core/journal/teachers/${id}/${schoolSlug}/${klassSlug}/<subjectSlug>`} />
   </NavigationContainer>
 }

@@ -1,3 +1,3 @@
+export { Note } from "./item"
 export { NotePicker } from "./picker"
-export { StudentNoteList } from "./studentNoteList"
-export { TeacherNoteList } from "./teacherNoteList"
+export { StudentNoteList, TeacherNoteList } from "./list"

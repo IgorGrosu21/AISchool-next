@@ -1,6 +1,6 @@
 'use server'
 
-import { sendKlass, sendSchool, sendSchoolWithKlasses, sendSchoolWithTimetable } from "@/utils/api"
+import { deleteSchoolPhoto, deleteSchoolPreview, sendKlass, sendSchool, sendSchoolPhoto, sendSchoolPreview, sendSchoolWithKlasses, sendSchoolWithTimetable } from "@/utils/api"
 import { IDetailedKlass, IDetailedSchool, ISchoolWithKlasses, ISchoolWithTimetable } from "@/utils/interfaces"
 import { redirect } from "next/navigation"
 
@@ -20,6 +20,22 @@ export async function editSchool(instance: IDetailedSchool) {
     redirect(`/core/schools/${data.slug}`)
   }
   return data ?? instance
+}
+
+export async function editSchoolPreview(instance: IDetailedSchool, formData: FormData) {
+  return sendSchoolPreview(instance.slug, formData)
+}
+
+export async function removeSchoolPreview(instance: IDetailedSchool) {
+  return deleteSchoolPreview(instance.slug)
+}
+
+export async function editSchoolPhoto(instance: IDetailedSchool, formData: FormData) {
+  return sendSchoolPhoto(instance.slug, formData)
+}
+
+export async function removeSchoolPhoto(instance: IDetailedSchool, id: string) {
+  return deleteSchoolPhoto(instance.slug, id)
 }
 
 export async function editSchoolWithKlasses(instance: ISchoolWithKlasses) {

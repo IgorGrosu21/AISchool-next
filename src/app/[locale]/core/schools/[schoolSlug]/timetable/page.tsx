@@ -1,6 +1,5 @@
-import { EditButton, NavigationContainer, TimetableStepper } from "@/components"
+import { NavigationContainer, TimetableStepper, Title } from "@/components"
 import { fetchSchoolWithTimetable } from "@/utils/api"
-import { Stack, Typography } from "@mui/material"
 import { getTranslations } from "next-intl/server"
 
 export default async function Page({ params }: { params: Promise<{schoolSlug: string}> }) {
@@ -12,10 +11,7 @@ export default async function Page({ params }: { params: Promise<{schoolSlug: st
       {label: t('list'), href: 'schools'},
       {label: school.name, href: schoolSlug}
     ]} last={t('timetable')}>
-    <Stack direction='row' sx={{justifyContent: 'space-between', alignItems: 'center'}}>
-      <Typography variant='h4'>{t('timetable')}</Typography>
-      <EditButton link={`/core/schools/${schoolSlug}/timetable`} editable={school} />
-    </Stack>
+    <Title label={t('timetable')} link={`/core/schools/${schoolSlug}/timetable`} editable={school} />
     <TimetableStepper school={school} />
   </NavigationContainer>
 }

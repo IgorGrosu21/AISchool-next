@@ -2,15 +2,10 @@
 
 import { ISocial } from "@/utils/interfaces"
 import { Button, Stack, TextField, Typography } from "@mui/material"
-import { useCallback, useEffect, useMemo, useState } from "react"
+import { useCallback } from "react"
 import { Instagram, Facebook, QuestionMark, Close, Add } from "@mui/icons-material"
 import { useTranslations } from "next-intl"
-
-const dummySocial = {
-    id: '',
-    type: 'un' as const,
-    link: ''
-  }
+import { useSocialsEditor } from "@/hooks"
 
 interface SocialsProps {
   socials: ISocial[]
@@ -18,35 +13,9 @@ interface SocialsProps {
 }
 
 export function Socials({socials, setSocials}: SocialsProps) {
-  const [social, setSocial] = useState<ISocial>(dummySocial)
+  const {social, setSocial, updateSocial, deleteSocial, addSocial, isUnique} = useSocialsEditor(socials, setSocials)
   const t = useTranslations('profile')
-
-  const getSocialType = useCallback((link: string) => {
-    if (link.startsWith('https://www.instagram.com/')) {
-      return 'ig'
-    } else if (link.startsWith('https://www.facebook.com/')) {
-      return 'fb'
-    }
-    return 'un'
-  }, [])
-
-  const updateSocial = useCallback((i: number, link: string) => {
-    const type = getSocialType(link)
-    setSocials(socials.map((s, k) => k === i ? s : { ...s, link, type }))
-  }, [getSocialType, setSocials, socials])
-
-  const deleteSocial = useCallback((i: number) => {
-    setSocials(socials.filter((_, k) => k != i))
-  }, [setSocials, socials])
-
-  const addSocial = useCallback(() => {
-    setSocials([...socials, social])
-    setSocial(dummySocial)
-  }, [setSocials, social, socials])
-
-  useEffect(() => {
-    setSocial(s => ({...s, type: getSocialType(social.link)}))
-  }, [getSocialType, social.link])
+  
 
   const getIcon = useCallback((type: ISocial['type']) => {
     switch (type) {
@@ -55,10 +24,6 @@ export function Socials({socials, setSocials}: SocialsProps) {
       default: return <QuestionMark color='primary' />
     }
   }, [])
-
-  const isUnique = useMemo(() => {
-    return !socials.map(s => s.type).includes(social.type)
-  }, [social, socials])
 
   return <Stack gap={2}>
     <Typography variant='h6'>{t('pick_socials')}</Typography>

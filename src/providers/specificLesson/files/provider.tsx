@@ -95,9 +95,7 @@ export function AttachedFilesProvider<T extends WithFiles>({children, value: {se
 
   // Cleanup URLs when component unmounts
   useEffect(() => {
-    return () => {
-      cleanupUrls();
-    };
+    return () => cleanupUrls();
   }, [cleanupUrls]);
 
   return <FilesContext value={{

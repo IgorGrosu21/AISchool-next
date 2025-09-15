@@ -27,9 +27,14 @@ interface SideBarProps {
 
 export function SideBar({ user, routes }: SideBarProps) {
   const [mobileOpen, setMobileOpen] = useState(false)
+  const [isClient, setIsClient] = useState(false)
   const isMobile = useIsMobile()
   const pathname = usePathname()
   const t = useTranslations('components.sidebar')
+
+  useEffect(() => {
+    setIsClient(true)
+  }, [])
 
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen)
@@ -40,13 +45,16 @@ export function SideBar({ user, routes }: SideBarProps) {
       setMobileOpen(false)
     }
   }
-
-  // Close mobile sidebar when route changes
+  
   useEffect(() => {
     if (isMobile) {
       setMobileOpen(false)
     }
   }, [pathname, isMobile])
+
+  if (!isClient) {
+    return null
+  }
 
   const sidebarContent = <Stack sx={{height: '100vh', minWidth: '15vw', width: isMobile ? '100vw' : 'auto', maxWidth: isMobile ? '100vw' : '17.5vw'}}>
     <Stack sx={{
@@ -60,20 +68,18 @@ export function SideBar({ user, routes }: SideBarProps) {
       bgcolor: 'background.default'
     }}>
       <Stack direction='row' sx={{p: 2, justifyContent: 'center', bgcolor: 'primary.dark', position: 'relative'}}>
-        {isMobile && (
-          <IconButton
-            onClick={handleDrawerToggle}
-            sx={{
-              position: 'absolute',
-              right: 8,
-              top: '50%',
-              transform: 'translateY(-50%)',
-              color: 'white'
-            }}
-          >
-            <Close />
-          </IconButton>
-        )}
+        {isMobile && <IconButton
+          onClick={handleDrawerToggle}
+          sx={{
+            position: 'absolute',
+            right: 8,
+            top: '50%',
+            transform: 'translateY(-50%)',
+            color: 'white'
+          }}
+        >
+          <Close />
+        </IconButton>}
         <Image src='/images/logo-white.png' width={100} height={94} alt='light-logo' priority />
       </Stack>
       {user ? <Stack sx={{height: '100%', width: '100%', justifyContent: 'center'}}>
@@ -137,9 +143,6 @@ export function SideBar({ user, routes }: SideBarProps) {
           zIndex: 1200,
           bgcolor: 'primary.main',
           color: 'white',
-          '&:hover': {
-            bgcolor: 'primary.dark',
-          }
         }}
       >
         <Menu />
@@ -149,17 +152,8 @@ export function SideBar({ user, routes }: SideBarProps) {
         variant="temporary"
         open={mobileOpen}
         onClose={handleDrawerToggle}
-        ModalProps={{
-          keepMounted: true,
-        }}
-        sx={{
-          display: { xs: 'block', md: 'none' },
-          '& .MuiDrawer-paper': { 
-            boxSizing: 'border-box', 
-            width: '100%',
-            bgcolor: 'background.paper'
-          },
-        }}
+        ModalProps={{ keepMounted: true }}
+        sx={{ display: { xs: 'block', md: 'none' } }}
       >
         {sidebarContent}
       </Drawer>

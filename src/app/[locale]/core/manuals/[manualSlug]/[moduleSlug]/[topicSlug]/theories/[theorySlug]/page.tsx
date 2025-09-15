@@ -23,7 +23,7 @@ export default async function Page({ params }: { params: Promise<{manualSlug: st
       {label: `${manual.subject.verboseName} ${manual.grade}`, href: manualSlug},
       {label: detailedModule.name, href: moduleSlug},
       {label: topic.name, href: topicSlug},
-    ]} last={theory.name} applyStyles={false}>
+    ]} last={theory.name}>
     <Stack gap={4}>
       <ModuleHeader title={theory.name} progress={topic.progress} />
       <Stack sx={{alignItems: 'center', bgcolor: 'background.default', p: 2}}>

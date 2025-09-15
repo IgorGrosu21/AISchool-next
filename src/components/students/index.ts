@@ -1,3 +1,2 @@
-
-export { Students } from "./students";
-export { StudentsEditor } from "./studentsEditor";
+export { Students } from "./list";
+export { StudentsEditor } from "./editor";

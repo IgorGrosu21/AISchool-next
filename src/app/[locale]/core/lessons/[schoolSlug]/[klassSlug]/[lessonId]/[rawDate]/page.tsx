@@ -5,7 +5,7 @@ import { fetchSpecificLesson } from "@/utils/api"
 import { format } from "date-fns"
 import { ru } from "date-fns/locale/ru";
 import { getTranslations } from "next-intl/server"
-import { Container } from "./container"
+import { Editor } from "./editor"
 
 export default async function Page({ params }: { params: Promise<{schoolSlug: string, klassSlug: string, lessonId: string, rawDate: string}> }) {
   const { schoolSlug, klassSlug, lessonId, rawDate } = await params
@@ -35,7 +35,7 @@ export default async function Page({ params }: { params: Promise<{schoolSlug: st
         href: `diary/${schoolSlug}/${klassSlug}/calendar/${rawDate}`
       }]
     }}>
-      <Container date={dateLabel} />
+      <Editor date={dateLabel} />
     </EditorProvider>
   </NavigationContainer>
 }

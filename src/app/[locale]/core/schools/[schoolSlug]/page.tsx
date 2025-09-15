@@ -1,10 +1,8 @@
-import { EditButton, KlassesButton, NavigationContainer, SchoolPositions, TimetableButton } from '@/components';
+import { Contacts, Photos, KlassesButton, NavigationContainer, SchoolPositions, TimetableButton, Title } from '@/components';
 import { fetchSchool } from '@/utils/api';
 import { Stack, Typography } from '@mui/material';
 import { getTranslations } from 'next-intl/server';
 import Image from 'next/image';
-import { Contacts } from './contacts';
-import { Photos } from './photos';
 
 export default async function Page({ params }: { params: Promise<{schoolSlug: string}> }) {
   const { schoolSlug } = await params;
@@ -12,23 +10,41 @@ export default async function Page({ params }: { params: Promise<{schoolSlug: st
   const t = await getTranslations('schools');
   
   return <NavigationContainer segments={[{label: t('list'), href: 'schools'}]} last={school.name}>
-    <Stack direction='row' sx={{justifyContent: 'flex-end', alignItems: 'center'}}>
-      <EditButton link={`/core/schools/${schoolSlug}`} editable={school} />
-    </Stack>
-    <Stack direction={{ xs: 'column', md: 'row' }} gap={4}>
-      <Stack sx={{flex: 1}}>
+    <Title label={school.name} link={`/core/schools/${schoolSlug}`} editable={school} />
+    <Stack direction='column' gap={4}>
+      <Stack sx={{position: 'relative', width: '100%', overflow: 'hidden'}}>
         <Image
           width={1792}
           height={1024}
           src={school.preview ?? '/images/default-school.png'}
           alt='school-preview'
-          style={{width: '100%', height: 'auto'}}
+          style={{
+            width: '100%',
+            height: '100%',
+            objectFit: 'cover'
+          }}
           priority
         />
-      </Stack>
-      <Stack gap={2} sx={{flex: 1}}>
-        <Typography variant='h5'>{school.name}</Typography>
-        <Typography variant='h6'>{school.desc}</Typography>
+        <Stack sx={{
+          position: 'absolute',
+          top: 0,
+          left: 0,
+          width: '100%',
+          height: '100%',
+          backgroundColor: 'rgba(0, 0, 0, 0.4)',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center'
+        }}>
+          <Typography variant='h5' sx={{
+            color: 'white',
+            textAlign: 'center',
+            px: 3,
+            textShadow: '2px 2px 4px rgba(0, 0, 0, 0.8)',
+          }}>
+            {school.desc}
+          </Typography>
+        </Stack>
       </Stack>
     </Stack>
     <Contacts school={school} />

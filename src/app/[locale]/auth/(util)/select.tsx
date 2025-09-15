@@ -3,7 +3,6 @@
 import { Autocomplete } from "@mui/material";
 import { useState } from "react";
 import { Input } from "./input";
-import { useIsMobile } from "@/hooks";
 
 interface SelectProps<T> {
   disabled?: boolean
@@ -16,7 +15,6 @@ interface SelectProps<T> {
 
 export function Select<T extends { name: string }>({disabled = false, name, options, value, setValue, renderOption}: SelectProps<T>) {
   const [inputValue, setInputValue] = useState('');
-  const isMobile = useIsMobile();
 
   return <Autocomplete
     disabled={disabled}
@@ -31,12 +29,12 @@ export function Select<T extends { name: string }>({disabled = false, name, opti
     renderInput={(params) => <Input {...params} name={name} />}
     sx={{
       '& .MuiAutocomplete-popupIndicator': {
-        minWidth: isMobile ? '48px' : 'auto',
-        minHeight: isMobile ? '48px' : 'auto',
+        minWidth: {xs: '48px', md: 'auto'},
+        minHeight: {xs: '48px', md: 'auto'},
       },
       '& .MuiAutocomplete-clearIndicator': {
-        minWidth: isMobile ? '48px' : 'auto',
-        minHeight: isMobile ? '48px' : 'auto',
+        minWidth: {xs: '48px', md: 'auto'},
+        minHeight: {xs: '48px', md: 'auto'},
       }
     }}
   />

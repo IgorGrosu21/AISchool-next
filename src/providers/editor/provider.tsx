@@ -3,9 +3,8 @@
 import { Context, ProviderProps, useCallback, useMemo, useState, useTransition } from "react"
 
 import { useTranslations } from "next-intl";
-import { Loader } from "@/components";
-import { ArrowBack } from "@mui/icons-material";
-import { Stack, Divider, Button, Typography } from "@mui/material";
+import { ClientPanel, Loader, Title } from "@/components";
+import { Stack, Button } from "@mui/material";
 import Link from "next/link";
 import { EditorContextType } from "./contexts";
 
@@ -19,7 +18,7 @@ interface EditorProviderValue<T> {
 export function EditorProvider<T>({children, value: {Context, initial, action, segments}}: ProviderProps<EditorProviderValue<T>>) {
   const t = useTranslations('components.edit');
   const returnLink = useMemo(() => '/core/' + segments.at(-1)?.href, [segments])
-  const returnLabel = useMemo(() => segments.at(-1)?.label, [segments])
+  const returnLabel = useMemo(() => '' + segments.at(-1)?.label, [segments])
 
   const [instance, setInstance] = useState<T>(initial)
   const [pending, startTransition] = useTransition()
@@ -36,15 +35,9 @@ export function EditorProvider<T>({children, value: {Context, initial, action, s
   }, [action, instance])
 
   return <Context.Provider value={{instance, setInstance}}>
-    {returnLabel !== '' && <Link href={returnLink}>
-      <Stack direction='row' gap={2} sx={{alignItems: 'center'}}>
-        <ArrowBack />
-        <Typography variant='h5'>{returnLabel}</Typography>
-      </Stack>
-    </Link>}
+    {returnLabel !== '' && <Title label={returnLabel} link={returnLink} type='back' />}
     {children}
-    <Divider />
-    <Stack direction='row' sx={{justifyContent: 'space-between'}}>
+    <ClientPanel direction='row' sx={{justifyContent: 'space-between'}}>
       <Link href={returnLink}>
         <Button variant='outlined'>{t('return')}</Button>
       </Link>
@@ -52,7 +45,7 @@ export function EditorProvider<T>({children, value: {Context, initial, action, s
         <Button variant='outlined' onClick={discard}>{t('discard')}</Button>
         <Button variant='contained' onClick={save}>{t('save')}</Button>
       </Stack>
-    </Stack>
+    </ClientPanel>
     <Loader open={pending} />
   </Context.Provider>
 }

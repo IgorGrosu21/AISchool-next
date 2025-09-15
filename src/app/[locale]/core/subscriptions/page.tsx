@@ -1,10 +1,9 @@
 import { SubscriptionsProvider } from '@/providers'
 import { NavigationContainer } from '@/components'
 import { getTranslations } from 'next-intl/server'
-import { Stack, Typography, Divider, List, ListItem, ListItemButton, ListItemIcon, ListItemText, Box } from '@mui/material'
+import { Stack, Typography, Divider, List, ListItem, ListItemButton, ListItemIcon, ListItemText } from '@mui/material'
 import { Plans } from './plans'
 import { GroupsDiscount } from './groupsDiscount'
-import { ShowTeacherPrices } from './showTeacherPrices'
 import { Navigation } from '@mui/icons-material'
 
 export default async function Page() {
@@ -52,8 +51,6 @@ export default async function Page() {
                 </ListItemButton>
               </ListItem>)}
             </List>
-            <Box sx={{flex: 1}} />
-            <ShowTeacherPrices />
           </Stack>
         </Stack>
       </Stack>

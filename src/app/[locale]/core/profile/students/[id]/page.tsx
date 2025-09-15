@@ -12,7 +12,9 @@ export default async function Page({ params }: { params: Promise<{id: string}> }
   const school = klass?.school
 
   return <Profile user={student.user} headerChildren={student.balance && <Balance balance={student.balance} />}>
-    {klass && <KlassLink klass={klass} />}
+    {klass && <Stack direction='row' sx={{justifyContent: 'center'}}>
+      <KlassLink baseHref={`/core/schools/${school?.slug}/klasses`} klass={klass} big />
+    </Stack>}
     <Stack>
       <Link href={`/core/schools/${school?.slug}/`} style={{flex: 1, height: '100%'}}>
         <Stack gap={4} sx={{justifyContent: 'space-between', height: '100%'}}>

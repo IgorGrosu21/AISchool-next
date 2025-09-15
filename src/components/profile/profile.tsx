@@ -1,12 +1,13 @@
 'use server'
 
-import { Stack, Typography, Divider } from '@mui/material'
+import { Stack, Typography } from '@mui/material'
 import Image from 'next/image';
 import { getTranslations } from 'next-intl/server';
 import { Socials } from './socials';
 import { IDetailedUser } from '@/utils/interfaces';
-import { EditButton } from '../editButton';
 import { NavigationContainer } from '../navigationContainer';
+import { Panel } from '../panel';
+import { Title } from '../editable';
 
 interface ProfileProps {
   user: IDetailedUser
@@ -18,82 +19,46 @@ export async function Profile({user, headerChildren, children}: ProfileProps) {
   const t = await getTranslations('profile')
   
   return <NavigationContainer segments={[]} last={`${user.name} ${user.surname}`}>
-    <Stack direction='row' sx={{justifyContent: 'space-between', alignItems: 'center'}}>
-      <Typography 
-        variant='h4'
-        sx={{ 
-          textAlign: { xs: 'center', md: 'left' },
-          fontSize: { xs: '1.5rem', md: '2.125rem' }
-        }}
-      >
-        {t('title')} {t(user.profileLink!.split('/')[1])}
-      </Typography>
-      <EditButton link={`/core/${user.profileLink}`} editable={user} />
-    </Stack>
-    <Stack 
-      gap={{ xs: 4, md: 4 }} 
-      direction={{ xs: 'column', md: 'row' }} 
-      sx={{ 
-        justifyContent: 'space-between',
-        alignItems: { xs: 'center', md: 'flex-start' }
-      }}
-    >
-      <Stack sx={{
-        border: 1,
-        borderColor: 'primary.main',
-        borderRadius: '50%',
-        width: { xs: 150, md: 200 },
-        height: { xs: 150, md: 200 },
-        justifyContent: 'center',
-        alignItems: 'center',
-        alignSelf: { xs: 'center', md: 'flex-start' }
-      }}>
-        <Image 
-          src={user.avatar ?? '/images/default-avatar.png'} 
-          width={200} 
-          height={200} 
-          style={{ 
-            borderRadius: '50%',
-            width: '100%',
-            height: '100%',
-            objectFit: 'cover'
-          }} 
-          alt='avatar' 
-          priority 
-        />
-      </Stack>
-      <Divider 
-        orientation='vertical'
-        flexItem 
-        sx={{ 
-          width: { xs: '100%', md: 'auto' },
-          height: { xs: 'auto', md: '100%' },
-          display: { xs: 'block', md: 'block' }
-        }}
-      />
-      <Stack 
-        gap={{ xs: 3, md: 4 }} 
-        sx={{
-          flex: 1, 
-          justifyContent: 'space-evenly',
-          alignItems: { xs: 'center', md: 'flex-start' },
-          textAlign: { xs: 'center', md: 'left' }
-        }}
-      >
-        <Typography 
-          variant='h5'
-          sx={{ fontSize: { xs: '1.25rem', md: '1.5rem' } }}
-        >
+    <Title
+      label={`${t('title')} ${t(user.profileLink!.split('/')[1])}`}
+      link={`/core/${user.profileLink}`}
+      editable={user}
+    />
+    <Stack gap={4} direction={{ xs: 'column', md: 'row' }}>
+      <Panel sx={{flexGrow: 0, height: '100%', alignItems: 'center', justifyContent: 'center'}}>
+        <Stack sx={{
+          border: 1,
+          borderColor: 'primary.main',
+          borderRadius: '50%',
+          width: { xs: 150, md: 200 },
+          height: { xs: 150, md: 200 },
+          justifyContent: 'center',
+          alignItems: 'center',
+          alignSelf: 'center'
+        }}>
+          <Image 
+            src={user.avatar ?? '/images/default-avatar.png'} 
+            width={200} 
+            height={200} 
+            style={{ 
+              borderRadius: '50%',
+              width: '100%',
+              height: '100%',
+              objectFit: 'cover'
+            }} 
+            alt='avatar' 
+            priority 
+          />
+        </Stack>
+      </Panel>
+      <Panel gap={4} sx={{justifyContent: 'center'}}>
+        <Typography variant='h5' sx={{ fontSize: { xs: '1.25rem', md: '1.5rem' } }}>
           {user.name} {user.surname}
         </Typography>
-        <Stack 
-          direction='row' 
-          sx={{
-            alignItems: 'center',
-            justifyContent: { xs: 'center', md: 'flex-start' }
-          }} 
-          gap={1}
-        >
+        <Stack direction='row' gap={1} sx={{
+          alignItems: 'center',
+          justifyContent: { xs: 'center', md: 'flex-start' }
+        }}>
           <Image 
             loading='lazy' 
             width={40} 
@@ -101,17 +66,16 @@ export async function Profile({user, headerChildren, children}: ProfileProps) {
             src={user.city.region.country.flag} 
             alt='' 
           />
-          <Typography 
-            variant='h6'
-            sx={{ fontSize: { xs: '1rem', md: '1.25rem' } }}
-          >
+          <Typography variant='h6' sx={{ fontSize: { xs: '1rem', md: '1.25rem' } }}>
             {user.city.region.country.name}, {user.city.name}
           </Typography>
         </Stack>
         {headerChildren}
         <Socials user={user} />
-      </Stack>
+      </Panel>
     </Stack>
-    {children}
+    <Stack gap={{ xs: 6, md: 8 }}>
+      {children}
+    </Stack>
   </NavigationContainer>
 }

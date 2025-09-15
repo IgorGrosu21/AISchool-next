@@ -1,34 +1,18 @@
 'use client'
 
-import { Divider, Stack } from '@mui/material';
-import { getDay, getDaysInMonth, setDate } from 'date-fns';
-import { useMemo } from 'react';
-import { motion } from 'framer-motion'
-import { Weeks } from './weeks';
+import { Divider, Grid2, Stack } from '@mui/material';
+import { AnimatePresence, motion } from 'framer-motion'
 import { MonthButton } from './monthButton';
-import { useCalendarContext } from '@/providers';
+import { useMonthView } from '@/hooks';
+import { Days } from './days';
+import { Week } from './week';
 
 interface MonthProps {
   month: Date
 }
 
 export function Month({month}: MonthProps) {
-  const { activeMonth, setActiveMonth, currentMonth, setActiveDay } = useCalendarContext()
-
-  const isActive = useMemo(() => activeMonth?.getMonth() === month.getMonth(), [activeMonth, month])
-  const daysInMonth = useMemo(() => getDaysInMonth(month), [month])
-  const firstDayIndex = useMemo(() => (getDay(month) + 6) % 7, [month]) //as 0 represents sunday, we add 6 and modulo by 7 so mon -> 0, sun -> 6
-
-  const calendarDays = useMemo(() => {
-    const days = []
-    for (let i = 0; i < firstDayIndex; i++) {
-      days.push(null); //we want the days be calendaric, so fill the voids with null
-    }
-    for (let day = 1; day <= daysInMonth; day++) {
-      days.push(setDate(month, day));
-    }
-    return days
-  }, [daysInMonth, firstDayIndex, month]);
+  const { isActive, weeks, activeWeek, setActiveMonth, setActiveDay, currentMonth } = useMonthView(month)
 
   return <motion.div
     layout
@@ -49,7 +33,24 @@ export function Month({month}: MonthProps) {
     <Stack gap={2}>
       <MonthButton month={month} activeMonth={currentMonth} onClick={() => setActiveDay(undefined)} />
       <Divider />
-      <Weeks calendarDays={calendarDays} />
+      <AnimatePresence mode='wait'>
+        {activeWeek ? <motion.div
+          layout
+          layoutRoot
+          key='zoomed-week'
+          initial={{ opacity: 0, y: 10 }}
+          animate={{ opacity: 1, y: 0 }}
+          exit={{ opacity: 0, y: 10 }}
+          transition={{ duration: 0.4 }}
+        >
+          {/*as mentioned, unactive weeks have klass as undefined*/}
+          <Week dates={activeWeek} />
+        </motion.div> : <motion.div layout key='month-view'>
+          <Grid2 container spacing={2} columns={7}>
+            {weeks.map((week, i) => <Days key={i} week={week} />)}
+          </Grid2>
+        </motion.div>}
+      </AnimatePresence>
     </Stack>
   </motion.div>
 }

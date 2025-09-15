@@ -5,11 +5,9 @@ import { Month } from './month'
 import { AnimatePresence, motion } from 'framer-motion'
 import { MonthButton } from './monthButton'
 import { useCalendarContext } from '@/providers'
-import { useIsMobile } from '@/hooks'
 
 export function Calendar() {
   const { monthGroups, activeMonth, setActiveMonth, setActiveDay } = useCalendarContext()
-  const isMobile = useIsMobile()
 
   return <AnimatePresence mode='wait'>
     {activeMonth !== undefined ? <motion.div
@@ -23,7 +21,7 @@ export function Calendar() {
     >
       <Month month={activeMonth} />
       <Divider sx={{my: 8}} />
-      <Grid2 container columns={isMobile ? 3 : 9} spacing={isMobile ? 2 : 8}>
+      <Grid2 container columns={{xs: 3, md: 9}} spacing={{xs: 2, md: 8}}>
         {monthGroups.map(group => group.map(month => <Grid2 key={month.getMonth()} size={1}>
           <MonthButton
             key={month.getMonth()}
@@ -38,7 +36,7 @@ export function Calendar() {
         </Grid2>))}
       </Grid2>
     </motion.div> : <motion.div layout key='year-view'>
-      <Grid2 container columns={isMobile ? 1 : 3} spacing={isMobile ? 2 : 8}>
+      <Grid2 container columns={{xs: 1, md: 3}} spacing={{xs: 2, md: 8}}>
         {monthGroups.map(group => group.map(month => <Grid2 key={month.getMonth()} size={1}>
           <Month month={month} />
         </Grid2>))}

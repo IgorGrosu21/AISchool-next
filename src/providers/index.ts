@@ -14,7 +14,8 @@ export {
 } from "./editor";
 export { useJournalContext, JournalProvider } from "./journal";
 export {
-  AttachedFilesProvider, useAttachedFilesContext,
-  AttachedLinksProvider, useAttachedLinksContext
+  useAttachedFilesContext,
+  useAttachedLinksContext,
+  AttachedItemsProvider
 } from "./specificLesson";
 export { useSubscriptionsContext, SubscriptionsProvider } from "./subscriptions";

@@ -11,7 +11,7 @@ interface ImageUploaderProps<T> {
   existing?: string
   setExisting: (val?: T) => void,
   sendFile: (formData: FormData) => Promise<T | undefined>
-  deleteFile: () => Promise<undefined>
+  deleteFile: () => Promise<undefined | void>
 }
 
 export function ImageUploader<T>({renderImage, existing, setExisting, sendFile, deleteFile}: ImageUploaderProps<T>) {
@@ -64,14 +64,15 @@ export function ImageUploader<T>({renderImage, existing, setExisting, sendFile, 
     }
   }, [deleteFile, existing, setExisting]);
 
-  return <Stack gap={2} direction='row' sx={{flex: 1, height: '100%', alignItems: 'center'}}>
+  return <Stack gap={2} direction='row' sx={{flex: 1, height: '100%'}}>
     <input ref={fileInputRef} type='file' accept='image/*' style={{display: 'none'}} onChange={onFileChange} />
     <Stack sx={{
       position: 'relative',
       flex: 1,
-      height: '100%'
+      height: '100%',
+      justifyContent: 'center',
     }} onMouseOver={() => setHovering(true)} onMouseOut={() => setHovering(false)}>
-      <Box sx={{flex: 1, opacity: hovering ? 0.3 : 1, transition: '0.5s'}}>
+      <Box sx={{opacity: hovering ? 0.3 : 1, transition: '0.5s'}}>
         {renderImage(preview ?? existing)}
       </Box>
       <Stack id='controls' gap={2} sx={{

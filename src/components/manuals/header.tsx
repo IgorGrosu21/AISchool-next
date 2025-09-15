@@ -1,3 +1,5 @@
+'use server'
+
 import { IBalance } from '@/utils/interfaces';
 import { LinearProgress, Stack, Typography } from '@mui/material';
 import { Currency } from './currency';

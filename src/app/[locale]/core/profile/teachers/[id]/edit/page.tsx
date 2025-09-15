@@ -1,5 +1,5 @@
 import { fetchSchoolNames, fetchSubjectsNames, fetchTeacher } from "@/utils/api";
-import Container from "./container";
+import { Editor } from "./editor";
 import { editTeacher } from "@/app/actions/person";
 import { TeacherEditorContext } from "@/providers";
 import { EditorProvider } from "@/providers";
@@ -17,7 +17,7 @@ export default async function Page({ params }: { params: Promise<{id: string}> }
       action: editTeacher,
       segments
     }}>
-      <Container schoolNames={schoolNames} subjects={subjects} />
+      <Editor schoolNames={schoolNames} subjects={subjects} />
     </EditorProvider>
   </NavigationContainer>
 }
