@@ -1,7 +1,7 @@
 'use client'
 
 import { Checkbox, Grid2, Stack, Table, TableBody, TableCell, TableHead, TableRow, Typography } from "@mui/material"
-import Link from "next/link";
+import { Link } from '@/i18n';
 import Image from "next/image";
 import { ISchool, IDetailedCountry } from "@/utils/interfaces";
 import { useTranslations } from "next-intl";

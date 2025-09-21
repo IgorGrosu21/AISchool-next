@@ -14,9 +14,9 @@ interface LessonsEditorProps<T, R> {
   timetable: T[]
   getLesson: (lessonTime: T) => R | undefined
   createLesson: (lessonTime: T, subject: ISubjectName) => void
-  updateLesson: (lesson: R, lessonTime: T, subject: ISubjectName) => void
-  deleteLesson: (lessonTime: T) => void
-  updateTeacher: (lessonTime: T, teacher: ITeacherName) => void
+  updateLesson: (lesson: R, subject: ISubjectName) => void
+  deleteLesson: (lesson: R) => void
+  updateTeacher: (lesson: R, teacher: ITeacherName) => void
 }
 
 export function LessonsEditor<T extends ILessonTimeName, R extends ILessonName>({
@@ -35,15 +35,15 @@ export function LessonsEditor<T extends ILessonTimeName, R extends ILessonName>(
   const t = useTranslations('timetable')
 
   const updateSubject = useCallback((lessonTime: T, subject: ISubjectName | null) => {
-    if (subject) {
-      const lesson = getLesson(lessonTime)
-      if (lesson) {
-        updateLesson(lesson, lessonTime, subject)
+    const lesson = getLesson(lessonTime)
+    if (lesson) {
+      if (subject) {
+        updateLesson(lesson, subject)
       } else {
-        createLesson(lessonTime, subject)
+        deleteLesson(lesson)
       }
-    } else {
-      deleteLesson(lessonTime)
+    } else if (subject) {
+      createLesson(lessonTime, subject)
     }
   }, [createLesson, deleteLesson, getLesson, updateLesson])
 
@@ -51,7 +51,7 @@ export function LessonsEditor<T extends ILessonTimeName, R extends ILessonName>(
     const lesson = getLesson(lessonTime)
     const teachers = lesson ? getTeachers(lesson?.subject) : []
     const groups = lesson ? getGroups(lesson.subject) : []
-
+    
     return <Lesson
       key={lessonTime.order}
       lessonTime={lessonTime}
@@ -62,7 +62,7 @@ export function LessonsEditor<T extends ILessonTimeName, R extends ILessonName>(
     >
       <Autocomplete
         isOptionEqualToValue={(option, value) => option.id === value.id}
-        sx={{transition: '0.5s', ...(teachers.length === 0 || groups.length > 0  ? {flex: 1} : {})}}
+        sx={{transition: '0.5s', flex: 1}}
         value={lesson?.subject ?? null}
         onChange={(_, s: ISubjectName | null) => updateSubject(lessonTime, s)}
         options={subjects}
@@ -74,7 +74,7 @@ export function LessonsEditor<T extends ILessonTimeName, R extends ILessonName>(
         disabled={teachers.length === 0}
         sx={{transition: '0.5s', ...(groups.length === 0 ? (teachers.length === 0 ? {} : {flex: 1}) : {display: 'none'})}}
         value={lesson?.teacher ?? null}
-        onChange={(_, t: ITeacherName | null) => t ? updateTeacher(lessonTime, t) : {}}
+        onChange={(_, t: ITeacherName | null) => t ? updateTeacher(lesson!, t) : {}}
         options={teachers}
         renderInput={(params) => <TextField {...params} label={t('lessons.teacher')} />}
         getOptionLabel={(option) => `${option.user.surname} ${option.user.name}`}

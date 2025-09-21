@@ -5,7 +5,7 @@ import { useTranslations } from "next-intl"
 import { INoteName } from "@/utils/interfaces"
 import { useNotePicker } from "@/hooks"
 import { Note } from "./item"
-import { ClientPanel } from "@/components/panel"
+import { ClientPanel } from "@/components"
 
 interface NotePickerProps<T> {
   notesOpened: boolean

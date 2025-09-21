@@ -23,7 +23,7 @@ export function Editor({date}: ContainerProps) {
   }, [setHomework])
 
   return <Stack gap={8}>
-    <SpecificLessonHeader specificLesson={specificLesson} date={date}>
+    <SpecificLessonHeader specificLesson={specificLesson} date={date} editable={homework.student.isManager}>
       <Stack gap={2}>
         <ClientPanel gap={2}>
           <Typography variant='h5'>{t('title')}</Typography>
@@ -43,11 +43,11 @@ export function Editor({date}: ContainerProps) {
           <ClientPanel sx={{flexGrow: 0}}>
             {lesson.teacher && <SmallProfile user={lesson.teacher.user} disableLink extraSmall />}
           </ClientPanel>
-          <ClientPanel sx={{height: '100%', justifyContent: 'center'}}>
+          <ClientPanel sx={{justifyContent: 'center'}}>
             <Typography variant='h5'>{t('comment')}:</Typography>
             <Typography variant='h6'>{note?.comment}</Typography>
           </ClientPanel>
-          <ClientPanel sx={{height: '100%', justifyContent: 'center'}}>
+          <ClientPanel sx={{justifyContent: 'center'}}>
             <Typography variant='h5'>{t('last_modified')}:</Typography>
             <Typography variant='h6'>{note?.lastModified}</Typography>
           </ClientPanel>

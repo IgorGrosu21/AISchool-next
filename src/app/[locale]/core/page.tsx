@@ -1,7 +1,5 @@
-import { NavigationContainer } from "@/components";
+'use server'
 
 export default async function App() {
-  return <NavigationContainer segments={[]} last=''>
-    <></>
-  </NavigationContainer>
+  return <></>
 }

@@ -5,9 +5,8 @@ import { Dispatch, SetStateAction } from "react"
 import { Box, Checkbox, Grid2, Stack, Typography } from "@mui/material";
 import { useTranslations } from "next-intl";
 import { Close } from "@mui/icons-material";
-import { SmallProfile, UserVerifier } from "@/components/profile";
+import { UserVerifier, ClientPanel } from "@/components";
 import { TypePicker } from "../typePicker";
-import { ClientPanel } from "@/components";
 
 interface SchoolPositionsEditorProps {
   school: IDetailedSchool
@@ -21,19 +20,14 @@ export function SchoolPositionsEditor({school, setSchool}: SchoolPositionsEditor
     <Typography variant='h5' sx={{textAlign: 'center'}}>{t('staff')}</Typography>
     <Stack gap={4}>
       {school.staff.map((position, i) => <Grid2 key={i} container spacing={4} columns={12}>
-        <Grid2 size={{xs: 12, md: 3}}>
-          <ClientPanel sx={{height: '100%', justifyContent: 'center', alignItems: {xs: 'center', md: 'flex-start'}}}>
-            <SmallProfile user={position.teacher.user} />
-          </ClientPanel>
-        </Grid2>
-        <Grid2 size={{xs: 12, md: 3}}>
+        <Grid2 size={{xs: 12, md: 5}}>
           <ClientPanel sx={{height: '100%', justifyContent: 'center'}}>
             <UserVerifier user={position.teacher.user} setUser={user => setSchool(
               s => ({...s, staff: s.staff.map((p, j) => i === j ? {...p, teacher: {...p.teacher, user}} : p)})
             )} />
           </ClientPanel>
         </Grid2>
-        <Grid2 size={{xs: 12, md: 3}}>
+        <Grid2 size={{xs: 12, md: 4}}>
           <ClientPanel sx={{height: '100%', justifyContent: 'center'}}>
             <TypePicker
               type={position.type}
@@ -42,7 +36,7 @@ export function SchoolPositionsEditor({school, setSchool}: SchoolPositionsEditor
           </ClientPanel>
         </Grid2>
         <Grid2 size={{xs: 12, md: 3}}>
-          <ClientPanel direction='row' sx={{height: '100%', alignItems: 'center', justifyContent: 'center'}}>
+          <ClientPanel direction='row' sx={{height: '100%', alignItems: 'center', justifyContent: 'center', flexWrap: 'wrap'}}>
             <Box />
             <Typography variant='h6'>{t('is_manager')}</Typography>
             <Checkbox checked={position.isManager} onChange={() => setSchool(

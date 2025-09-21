@@ -6,7 +6,7 @@ import theme from '../../utils/theme';
 
 export async function Providers({ children }: { children: ReactNode }) {
   return <NextIntlClientProvider>
-      <AppRouterCacheProvider>
+    <AppRouterCacheProvider>
       <ThemeProvider theme={theme}>
         {children}
       </ThemeProvider>

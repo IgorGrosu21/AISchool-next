@@ -1,7 +1,7 @@
 'use client'
 
 import { Stack, Typography } from "@mui/material";
-import Link from "next/link";
+import { Link } from '@/i18n';
 import Image from "next/image";
 import { IUser } from "@/utils/interfaces";
 

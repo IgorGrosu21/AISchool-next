@@ -1,20 +1,22 @@
 'use client'
 
-import { Stack, Typography } from '@mui/material'
+import { Fab, Stack, Typography } from '@mui/material'
 import Image from 'next/image';
-import Link from 'next/link'
+import { Link } from '@/i18n'
 import { ISpecificLesson } from '@/utils/interfaces';
 import { useMemo } from 'react';
 import { useIsMobile } from '@/hooks';
 import { ClientPanel, KlassLink } from '@/components';
+import { Edit } from '@mui/icons-material';
 
 interface SpecificLessonHeaderProps {
   specificLesson: ISpecificLesson
   date: string
   children: React.ReactNode | React.ReactNode[]
+  editable?: boolean
 }
 
-export function SpecificLessonHeader({specificLesson, date, children}: SpecificLessonHeaderProps) {
+export function SpecificLessonHeader({specificLesson, date, children, editable = false}: SpecificLessonHeaderProps) {
   const lesson = useMemo(() => specificLesson.lesson, [specificLesson.lesson])
   const klass = useMemo(() => lesson.klass, [lesson.klass])
   const isMobile = useIsMobile()
@@ -22,10 +24,25 @@ export function SpecificLessonHeader({specificLesson, date, children}: SpecificL
   return <Stack gap={2}>
     <Stack direction={{xs: 'column', md: 'row'}} gap={2}>
       <Stack gap={2} sx={{flex: 1}}>
-        <ClientPanel>
+        <ClientPanel direction='row' sx={{justifyContent: 'space-between', alignItems: 'center'}}>
           <Link href={`/core/diary/${klass.school.slug}/${klass.slug}/calendar/${specificLesson.date}`}>
             <Typography variant='h5' color='primary'>{lesson.subject.verboseName}</Typography>
           </Link>
+          {editable && <Link href={`/core/lessons/${klass.school.slug}/${klass.slug}/${lesson.id}/${specificLesson.date}`}>
+            <Fab 
+              color='primary'
+              size='medium'
+              sx={{
+                width: { xs: 48, md: 56 },
+                height: { xs: 48, md: 56 },
+                '& .MuiSvgIcon-root': {
+                  fontSize: { xs: '1.25rem', md: '1.5rem' }
+                }
+              }}
+            >
+              <Edit />
+            </Fab>
+          </Link>}
         </ClientPanel>
         {!isMobile && children}
       </Stack>

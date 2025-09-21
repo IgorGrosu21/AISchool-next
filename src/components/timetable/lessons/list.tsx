@@ -4,7 +4,7 @@ import { IGroupName, ILessonName, ILessonTimeName, ISubjectName } from "@/utils/
 import { Typography, Breadcrumbs } from "@mui/material";
 import { useCallback } from "react";
 import { TimetableContainer } from "../container";
-import Link from "next/link";
+import { Link } from '@/i18n';
 import { Lesson } from "./item";
 
 interface LessonsProps<T> {

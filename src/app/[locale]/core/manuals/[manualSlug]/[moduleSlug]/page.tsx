@@ -1,10 +1,11 @@
 import { Balance, ModuleHeader, ModuleList, NavigationContainer } from "@/components";
-import { fetchModule } from "@/utils/api";
+import { errorHandler, fetchModule } from "@/utils/api";
 import { getTranslations } from "next-intl/server";
 
 export default async function Page({ params }: { params: Promise<{manualSlug: string, moduleSlug: string}> }) {
   const { manualSlug, moduleSlug } = await params;
-  const detailedModule = await fetchModule(manualSlug, moduleSlug) //next.js error: do not assign to module variable
+  const [detailedModuleRaw, status] = await fetchModule(manualSlug, moduleSlug) //next.js error: do not assign to module variable
+  const detailedModule = await errorHandler(detailedModuleRaw, status)
   const t = await getTranslations('manuals');
 
   const manual = detailedModule.manual

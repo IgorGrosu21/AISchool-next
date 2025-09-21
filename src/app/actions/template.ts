@@ -1,0 +1,1 @@
+export type EditActionFunction<T> = (instance: T) => Promise<[T | undefined, number]>

@@ -4,24 +4,37 @@ import { Context, ProviderProps, useCallback, useMemo, useState, useTransition }
 
 import { useTranslations } from "next-intl";
 import { ClientPanel, Loader, Title } from "@/components";
-import { Stack, Button } from "@mui/material";
-import Link from "next/link";
+import { Stack, Button, Alert, Snackbar, SnackbarCloseReason } from "@mui/material";
+import { Link } from '@/i18n';
 import { EditorContextType } from "./contexts";
+import { ICanEdit } from "@/utils/interfaces";
+import { useRouter } from "@/i18n";
 
 interface EditorProviderValue<T> {
   Context: Context<EditorContextType<T> | null>
   initial: T
-  action: (instance: T) => Promise<T>
+  action: (instance: T) => Promise<[T | undefined, number]>
   segments: Array<{ label: string, href: string }>
 }
 
-export function EditorProvider<T>({children, value: {Context, initial, action, segments}}: ProviderProps<EditorProviderValue<T>>) {
+export function EditorProvider<T extends ICanEdit>({children, value: {Context, initial, action, segments}}: ProviderProps<EditorProviderValue<T>>) {
   const t = useTranslations('components.edit');
   const returnLink = useMemo(() => '/core/' + segments.at(-1)?.href, [segments])
   const returnLabel = useMemo(() => '' + segments.at(-1)?.label, [segments])
 
   const [instance, setInstance] = useState<T>(initial)
   const [pending, startTransition] = useTransition()
+  const [status, setStatus] = useState<number | undefined>(undefined)
+  const router = useRouter()
+  
+  const handleClose = useCallback((e?: React.SyntheticEvent | Event, reason?: SnackbarCloseReason) => {
+    e?.preventDefault()
+    if (reason === 'clickaway') {
+      return;
+    }
+
+    setStatus(undefined);
+  }, [])
 
   const discard = useCallback(() => {
     setInstance(initial)
@@ -29,10 +42,21 @@ export function EditorProvider<T>({children, value: {Context, initial, action, s
 
   const save = useCallback(() => {
     startTransition(async () => {
-      const updatedInstance = await action(instance)
-      setInstance({...updatedInstance})
+      const [updatedInstance, status] = await action(instance)
+      if (updatedInstance && status === 200) {
+        setStatus(status)
+        setInstance({...updatedInstance})
+      } else if (status === 401) {
+        router.push('/unauthorized')
+      } else {
+        setStatus(status)
+      }
     })
-  }, [action, instance])
+  }, [action, instance, router])
+
+  if (!initial.canEdit) {
+    router.push('/forbidden')
+  }
 
   return <Context.Provider value={{instance, setInstance}}>
     {returnLabel !== '' && <Title label={returnLabel} link={returnLink} type='back' />}
@@ -47,5 +71,15 @@ export function EditorProvider<T>({children, value: {Context, initial, action, s
       </Stack>
     </ClientPanel>
     <Loader open={pending} />
+    <Snackbar open={status !== undefined} autoHideDuration={6000} onClose={handleClose}>
+      <Alert
+        onClose={handleClose}
+        severity={status === 200 ? 'success' : 'error'}
+        variant="filled"
+        sx={{ width: '100%' }}
+      >
+        {status && t(status.toString())}
+      </Alert>
+    </Snackbar>
   </Context.Provider>
 }

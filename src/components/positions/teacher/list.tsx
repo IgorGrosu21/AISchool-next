@@ -2,7 +2,7 @@
 
 import { Stack, Typography } from '@mui/material'
 import { Panel, SchoolLink, Subjects } from '@/components';
-import Link from 'next/link'
+import { Link } from '@/i18n'
 import Image from 'next/image';
 import { getTranslations } from 'next-intl/server';
 import { IPosition } from '@/utils/interfaces';

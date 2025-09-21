@@ -39,7 +39,6 @@ export function useGroupedNotes() {
         if (date > firstSemesterEnd) {
           isInFirstSemester = false
         }
-        console.log(note.value)
         if (isInFirstSemester) {
           if (note.value !== '' && !note.value.includes('a')) {
             frstSum += parseInt(note.value)

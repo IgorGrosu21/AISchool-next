@@ -1,7 +1,7 @@
 import { editSpecificLesson } from "@/app/actions/lesson"
 import { NavigationContainer } from "@/components"
 import { EditorProvider, SpecificLessonEditorContext } from "@/providers"
-import { fetchSpecificLesson } from "@/utils/api"
+import { errorHandler, fetchSpecificLesson } from "@/utils/api"
 import { format } from "date-fns"
 import { ru } from "date-fns/locale/ru";
 import { getTranslations } from "next-intl/server"
@@ -11,7 +11,8 @@ export default async function Page({ params }: { params: Promise<{schoolSlug: st
   const { schoolSlug, klassSlug, lessonId, rawDate } = await params
   const date = new Date(rawDate)
 
-  const specificLesson = await fetchSpecificLesson(schoolSlug, klassSlug, lessonId, rawDate)
+  const [specificLessonRaw, status] = await fetchSpecificLesson(schoolSlug, klassSlug, lessonId, rawDate)
+  const specificLesson = await errorHandler(specificLessonRaw, status)
   const lesson = specificLesson.lesson
   const klass = lesson.klass
   const school = klass.school

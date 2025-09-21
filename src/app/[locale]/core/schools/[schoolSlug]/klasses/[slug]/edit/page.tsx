@@ -1,4 +1,4 @@
-import { fetchKlass } from '@/utils/api';
+import { errorHandler, fetchKlass } from '@/utils/api';
 import { Editor } from './editor';
 import { EditorProvider } from '@/providers';
 import { editKlass } from '@/app/actions/school';
@@ -8,7 +8,8 @@ import { NavigationContainer } from '@/components';
 
 export default async function Page({ params }: { params: Promise<{schoolSlug: string, slug: string}> }) {
   const { schoolSlug, slug } = await params;
-  const klass = await fetchKlass(schoolSlug, slug)
+  const [klassRaw, status] = await fetchKlass(schoolSlug, slug)
+  const klass = await errorHandler(klassRaw, status)
   const t = await getTranslations('klasses')
   const segments = [
     {label: t('school_list'), href: 'schools'},

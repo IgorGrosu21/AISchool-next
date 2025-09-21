@@ -1,12 +1,13 @@
 import { Stack, Typography } from "@mui/material"
-import Link from "next/link"
+import { Link } from '@/i18n'
 import Image from 'next/image';
-import { fetchStudent } from "@/utils/api";
+import { errorHandler, fetchStudent } from "@/utils/api";
 import { Balance, KlassLink, Profile } from "@/components";
 
 export default async function Page({ params }: { params: Promise<{id: string}> }) {
   const { id } = await params;
-  const student = await fetchStudent(id)
+  const [studentRaw, status] = await fetchStudent(id)
+  const student = await errorHandler(studentRaw, status)
   
   const klass = student.klass
   const school = klass?.school

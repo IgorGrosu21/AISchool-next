@@ -2,7 +2,7 @@
 
 import { Fab } from "@mui/material";
 import { ArrowBack } from "@mui/icons-material";
-import Link from "next/link";
+import { Link } from '@/i18n';
 
 interface ReturnButtonProps {
   link: string

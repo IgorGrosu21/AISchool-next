@@ -1,7 +1,7 @@
-import { redirect } from "next/navigation"
+import { redirect } from '@/i18n'
 
 export default async function Page({ params }: { params: Promise<{schoolSlug: string, klassSlug: string}> }) {
   const { schoolSlug, klassSlug } = await params
 
-  redirect(`/core/schools${schoolSlug}/klasses/${klassSlug}`)
+  await redirect(`/core/schools${schoolSlug}/klasses/${klassSlug}`)
 }

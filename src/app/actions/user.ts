@@ -1,11 +1,14 @@
 'use server'
 
-import { deleteAvatar, sendAvatar } from "@/utils/api"
+import { deleteAvatar, errorHandler, sendAvatar } from "@/utils/api"
 
 export async function editAvatar(formData: FormData) {
-  return sendAvatar(formData)
+  const [dataRaw, status] = await sendAvatar(formData)
+  const data = await errorHandler(dataRaw, status)
+  return data ?? formData
 }
 
 export async function removeAvatar() {
-  return deleteAvatar()
+  const [dataRaw, status] = await deleteAvatar()
+  await errorHandler(dataRaw, status)
 }

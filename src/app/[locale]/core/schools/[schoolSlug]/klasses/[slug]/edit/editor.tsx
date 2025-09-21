@@ -36,8 +36,8 @@ export function Editor() {
         />
       </ClientPanel>
     </Stack>
+    <StudentsEditor students={klass.students} setStudents={students => setKlass(k => ({...k, students: students}))} />
     <KlassLessonsEditor staff={klass.school.staff} timetable={klass.school.timetable} klass={klass} setKlass={setKlass} />
     <KlassGroupsEditor staff={klass.school.staff} klass={klass} setKlass={setKlass} />
-    <StudentsEditor students={klass.students} setStudents={students => setKlass(k => ({...k, students: students}))} />
   </>
 }

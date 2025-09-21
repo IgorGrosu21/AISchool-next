@@ -6,7 +6,7 @@ import { Backdrop, Stack, Typography } from "@mui/material";
 import { useTranslations } from "next-intl";
 import { IDetailedMedia } from "@/utils/interfaces";
 import Image from "next/image";
-import Link from "next/link";
+import { Link } from '@/i18n';
 
 type WithFiles = {
   files: IDetailedMedia[]

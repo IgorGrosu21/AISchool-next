@@ -1,13 +1,13 @@
-import { ModuleHeader, NavigationContainer, TheoryButtons } from "@/components";
-import { fetchTopic } from "@/utils/api";
+import { ModuleHeader, NavigationContainer, TheoryButtons, PdfViewer } from "@/components";
+import { errorHandler, fetchTopic } from "@/utils/api";
 import { getTranslations } from "next-intl/server";
-import { redirect } from "next/navigation";
-import { PdfViewer } from "@/components";
+import { redirect } from '@/i18n';
 import { Stack } from "@mui/material";
 
 export default async function Page({ params }: { params: Promise<{manualSlug: string, moduleSlug: string, topicSlug: string, theorySlug: string}> }) {
   const { manualSlug, moduleSlug, topicSlug, theorySlug } = await params;
-  const topic = await fetchTopic(manualSlug, moduleSlug, topicSlug)
+  const [topicRaw, status] = await fetchTopic(manualSlug, moduleSlug, topicSlug)
+  const topic = await errorHandler(topicRaw, status)
   const t = await getTranslations('manuals')
 
   const theory = topic.theories.find(t => t.slug === theorySlug)
@@ -15,7 +15,7 @@ export default async function Page({ params }: { params: Promise<{manualSlug: st
   const manual = detailedModule.manual
 
   if (theory === undefined) {
-    redirect(`/core/manuals/${manualSlug}/${moduleSlug}/${topicSlug}`)
+    return await redirect(`/core/manuals/${manualSlug}/${moduleSlug}/${topicSlug}`)
   }
 
   return <NavigationContainer segments={[

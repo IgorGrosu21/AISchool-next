@@ -1,13 +1,14 @@
 import { NavigationContainer, SmallProfile } from "@/components"
-import { fetchParent } from "@/utils/api"
+import { errorHandler, fetchParent } from "@/utils/api"
 import { Grid2, Typography } from "@mui/material"
 import { getTranslations } from "next-intl/server"
-import Link from "next/link"
+import { Link } from '@/i18n'
 
 export default async function Page({ params }: { params: Promise<{id: string}> }) {
   const { id } = await params
 
-  const parent = await fetchParent(id)
+  const [parentRaw, status] = await fetchParent(id)
+  const parent = await errorHandler(parentRaw, status)
   const t = await getTranslations('journal')
   
   return <NavigationContainer segments={[

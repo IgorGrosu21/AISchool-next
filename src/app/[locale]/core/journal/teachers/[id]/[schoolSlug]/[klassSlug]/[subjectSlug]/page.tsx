@@ -1,4 +1,4 @@
-import { redirect } from 'next/navigation';
+import { redirect } from '@/i18n';
 import { getYear, getMonth } from 'date-fns';
 
 type PageParams = {
@@ -23,5 +23,5 @@ export default async function Page({ params }: { params: Promise<PageParams> }) 
     semester = `${currentYear}.01.01-${currentYear}.05.31`;
   }
 
-  redirect(`/core/journal/teachers/${id}/${schoolSlug}/${klassSlug}/${subjectSlug}/${semester}`);
+  await redirect(`/core/journal/teachers/${id}/${schoolSlug}/${klassSlug}/${subjectSlug}/${semester}`);
 }

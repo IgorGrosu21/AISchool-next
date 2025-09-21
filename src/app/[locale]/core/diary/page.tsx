@@ -1,8 +1,9 @@
-import { fetchUserRoutes } from "@/utils/api";
-import { redirect } from "next/navigation";
+import { errorHandler, fetchUserRoutes } from "@/utils/api";
+import { redirect } from '@/i18n';
 
 export default async function Page() {
-  const userRoutes = await fetchUserRoutes()
-
-  redirect(userRoutes.diaryLink ?? '/core')
+  const [userRoutesRaw, status] = await fetchUserRoutes()
+  const userRoutes = await errorHandler(userRoutesRaw, status)
+  
+  await redirect(userRoutes.diaryLink ?? '/core')
 }

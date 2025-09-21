@@ -1,10 +1,12 @@
 'use server'
 
-import { fetchStudentNotes, fetchTeacherNotes, sendNote } from "@/utils/api"
+import { errorHandler, fetchStudentNotes, fetchTeacherNotes, sendNote } from "@/utils/api"
 import { IDetailedKlass, INote, ISubjectName } from "@/utils/interfaces"
+import { EditActionFunction } from "./template"
 
 export async function getGroupedStudentNotes(personId: string, period: string, subjects: ISubjectName[]) {
-  const notes = await fetchStudentNotes(personId, period)
+  const [notesRaw, status] = await fetchStudentNotes(personId, period)
+  const notes = await errorHandler(notesRaw, status)
   const groups = subjects.map(subject => {
     return {
       id: subject.id,
@@ -17,7 +19,8 @@ export async function getGroupedStudentNotes(personId: string, period: string, s
 }
 
 export async function getGroupedTeacherNotes(personId: string, klass: IDetailedKlass, subjectSlug: string, period: string) {
-  const notes = await fetchTeacherNotes(personId, klass.school.slug, klass.slug, subjectSlug, period)
+  const [notesRaw, status] = await fetchTeacherNotes(personId, klass.school.slug, klass.slug, subjectSlug, period)
+  const notes = await errorHandler(notesRaw, status)
   const groups = klass.students.map(student => {
     return {
       id: student.id,
@@ -28,6 +31,6 @@ export async function getGroupedTeacherNotes(personId: string, klass: IDetailedK
   return groups
 }
 
-export async function editNote(note: INote) {
-  return sendNote(note)
+export const editNote: EditActionFunction<INote> = async (instance) => {
+  return sendNote(instance)
 }

@@ -18,12 +18,12 @@ export async function SchoolPositions({school}: SchoolPositionsProps) {
     </Panel>
     <Stack gap={4}>
       {school.staff.map((position, i) => <Grid2 key={i} container spacing={4} columns={12}>
-        <Grid2 size={{xs: 12, md: 3}}>
+        <Grid2 size={{xs: 12, md: 4}}>
           <Panel sx={{height: '100%', justifyContent: 'center', alignItems: {xs: 'center', md: 'flex-start'}}}>
             <SmallProfile user={position.teacher.user} />
           </Panel>
         </Grid2>
-        <Grid2 size={{xs: 12, md: 4}} sx={{display: {xs: 'none', md: 'block'}}}>
+        <Grid2 size={{xs: 12, md: 3}} sx={{display: {xs: 'none', md: 'block'}}}>
           <Panel sx={{height: '100%', justifyContent: 'center', alignItems: 'center'}}>
             <Typography variant='h6'>{t(position.type)}</Typography>
           </Panel>

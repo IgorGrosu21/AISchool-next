@@ -3,7 +3,7 @@
 import { Stack, Grid2, Typography } from "@mui/material"
 import { Group } from "@/providers/journal/context"
 import { useTranslations } from "next-intl"
-import { ClientPanel } from "@/components/panel"
+import { ClientPanel } from "@/components"
 
 interface AnnualNoteListProps {
   groups: Array<Omit<Group, 'notes' | 'extraNotes'> & {notes: string[]}>

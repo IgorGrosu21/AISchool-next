@@ -1,4 +1,4 @@
-import { fetchSchoolNames, fetchStudent } from "@/utils/api";
+import { errorHandler, fetchSchoolNames, fetchStudent } from "@/utils/api";
 import { Editor } from "./editor";
 import { StudentEditorContext } from "@/providers";
 import { EditorProvider } from "@/providers";
@@ -7,7 +7,12 @@ import { NavigationContainer } from "@/components";
 
 export default async function Page({ params }: { params: Promise<{id: string}> }) {
   const { id } = await params;
-  const [student, schoolNames] = await Promise.all([fetchStudent(id), fetchSchoolNames()])
+  const [[studentRaw, studentStatus], [schoolNamesRaw, schoolNamesStatus]] = await Promise.all([
+    fetchStudent(id),
+    fetchSchoolNames()
+  ])
+  const student = await errorHandler(studentRaw, studentStatus)
+  const schoolNames = await errorHandler(schoolNamesRaw, schoolNamesStatus)
   const segments = [{label: `${student.user.name} ${student.user.surname}`, href: `profile/students/${student.id}`}]
 
   return <NavigationContainer segments={segments} last='edit'>

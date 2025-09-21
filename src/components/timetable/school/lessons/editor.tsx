@@ -32,19 +32,19 @@ export function SchoolLessonsEditor({school, setSchool}: SchoolLessonsEditorProp
         klassSlug: ''
       }]} : lt)})
     )}
-    updateLesson={(lesson, lessonTime, subject) => setSchool(
-      s => ({...s, timetable: s.timetable.map(lt => lt.id === lessonTime.id ? {...lt, lessons: lt.lessons.map(
+    updateLesson={(lesson, subject) => setSchool(
+      s => ({...s, timetable: s.timetable.map(lt => lt.id === lesson.lessonTime ? {...lt, lessons: lt.lessons.map(
         l => l.klass === lesson.klass ? {...l, teacher: undefined, subject: subject} : l
       )} : lt)})
     )}
-    deleteLesson={lessonTime => setSchool(
-      s => ({...s, timetable: s.timetable.map(lt => lt.id === lessonTime.id ? {...lt, lessons: lt.lessons.filter(
-        l => l.klass !== getLessonName(klass)(lessonTime)!.klass
+    deleteLesson={lesson => setSchool(
+      s => ({...s, timetable: s.timetable.map(lt => lt.id === lesson.lessonTime ? {...lt, lessons: lt.lessons.filter(
+        l => l.klass !== lesson.klass
       )} : lt)})
     )}
-    updateTeacher={(lessonTime, teacher) =>setSchool(
-      s => ({...s, timetable: s.timetable.map(lt => lt.id === lessonTime.id ? {...lt, lessons: lt.lessons.map(
-        l => l.klass === getLessonName(klass)(lessonTime)!.klass ? {...l, teacher: teacher} : l
+    updateTeacher={(lesson, teacher) =>setSchool(
+      s => ({...s, timetable: s.timetable.map(lt => lt.id === lesson.lessonTime ? {...lt, lessons: lt.lessons.map(
+        l => l.klass === lesson.klass ? {...l, teacher: teacher} : l
       )} : lt)})
     )}
   />} />

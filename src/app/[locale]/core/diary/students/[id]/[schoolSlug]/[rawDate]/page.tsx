@@ -1,5 +1,5 @@
 import { NavigationContainer, Calendar } from "@/components"
-import { fetchLessonNames, fetchSchoolLessonTimeNames } from "@/utils/api"
+import { errorHandler, fetchLessonNames, fetchSchoolLessonTimeNames } from "@/utils/api"
 import { getTranslations } from "next-intl/server"
 import { CalendarProvider, DiaryProvider } from "@/providers"
 
@@ -7,10 +7,12 @@ export default async function Page({ params }: { params: Promise<{id: string, sc
   const { id, schoolSlug, rawDate } = await params
 
   const date = new Date(rawDate)
-  const [school, lessons] = await Promise.all([
+  const [[schoolRaw, schoolStatus], [lessonsRaw, lessonsStatus]] = await Promise.all([
     fetchSchoolLessonTimeNames(schoolSlug),
     fetchLessonNames('student', id)
   ])
+  const school = await errorHandler(schoolRaw, schoolStatus)
+  const lessons = await errorHandler(lessonsRaw, lessonsStatus)
   const t = await getTranslations('diary')
 
   return <NavigationContainer segments={[

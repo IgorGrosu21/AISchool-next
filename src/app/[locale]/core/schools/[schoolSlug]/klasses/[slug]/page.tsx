@@ -1,11 +1,12 @@
-import { fetchKlass } from "@/utils/api"
+import { errorHandler, fetchKlass } from "@/utils/api"
 import { Typography } from "@mui/material"
 import { getTranslations } from "next-intl/server"
 import { NavigationContainer, Students, KlassLessons, KlassGroups, Title } from "@/components"
 
 export default async function Page({ params }: { params: Promise<{schoolSlug: string, slug: string}> }) {
   const { schoolSlug, slug } = await params
-  const klass = await fetchKlass(schoolSlug, slug)
+  const [klassRaw, status] = await fetchKlass(schoolSlug, slug)
+  const klass = await errorHandler(klassRaw, status)
   const t = await getTranslations('klasses');
 
   return <NavigationContainer segments={[
@@ -18,10 +19,10 @@ export default async function Page({ params }: { params: Promise<{schoolSlug: st
       link={`/core/schools/${schoolSlug}/klasses/${slug}`}
       editable={klass}
     />
+    <Students students={klass.students} />
     <Typography variant='h5' sx={{textAlign: 'center'}}>{t('timetable')}:</Typography>
     <KlassLessons groups={klass.groups} timetable={klass.school.timetable} lessons={klass.lessons} />
     <Typography variant='h5' sx={{textAlign: 'center'}}>{t('groups')}:</Typography>
     <KlassGroups klass={klass} />
-    <Students students={klass.students} />
   </NavigationContainer>
 }

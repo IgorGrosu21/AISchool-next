@@ -3,7 +3,7 @@
 import { ICanEdit } from "@/utils/interfaces";
 import { Fab } from "@mui/material";
 import { Edit } from "@mui/icons-material";
-import Link from "next/link";
+import { Link } from '@/i18n';
 
 interface EditButtonProps<T> {
   link: string

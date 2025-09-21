@@ -1,12 +1,12 @@
-import { isLoggedIn } from "@/app/actions/token";
-import { redirect } from "next/navigation";
+'use server'
+
+import { Hero, Pluses, CTA } from '@/components'
+import { Stack } from '@mui/material'
 
 export default async function Page() {
-  const loggedIn = await isLoggedIn()
-
-  if (loggedIn) {
-    redirect('/core')
-  }
-  
-  redirect('/auth')
+  return <Stack>
+    <Hero />
+    <Pluses />
+    <CTA />
+  </Stack>
 }

@@ -2,7 +2,7 @@
 
 import { ISubjectName } from "@/utils/interfaces"
 import React from "react"
-import { Subjects as SubjectList } from "@/components/subjects"
+import { Subjects as SubjectList } from "@/components"
 
 interface SubjectsProps {
   subjects: ISubjectName[]

@@ -82,7 +82,7 @@ export function ImageUploader<T>({renderImage, existing, setExisting, sendFile, 
         height: '100%',
         justifyContent: 'center',
         alignItems: 'center',
-        bgcolor: 'white',
+        bgcolor: 'background.default',
         opacity: hovering ? 0.7 : 0,
         transition: '0.5s'
       }}>

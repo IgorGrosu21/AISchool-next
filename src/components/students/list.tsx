@@ -13,7 +13,7 @@ export async function Students({students}: StudentsProps) {
   const t = await getTranslations('students');
 
   return <Stack gap={2}>
-    <Typography variant='h5'>{t('list')}:</Typography>
+    <Typography variant='h5' sx={{textAlign: 'center'}}>{t('list')}:</Typography>
     <Stack gap={4}>
       {students.map((student, i) => <Grid2 key={i} container spacing={4} columns={4}>
         <Grid2 size={{xs: 4, md: 'auto'}} sx={{display: 'flex', justifyContent: 'center'}}>

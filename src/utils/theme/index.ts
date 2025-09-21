@@ -96,7 +96,7 @@ const theme = createTheme({
         root: ({ theme }) => ({
           padding: theme.spacing(2),
           borderTop: '1px solid rgba(0, 0, 0, .125)',
-          backgroundColor: '#fff',
+          backgroundColor: 'transparent',
         }),
       },
     },

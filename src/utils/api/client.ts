@@ -14,7 +14,7 @@ const api = setupCache(axios.create({
   }
 }));
 
-export async function request<T>(config: CacheRequestConfig, updateCacheType?: updateCacheBehavior, access?: string) {
+export async function request<T>(config: CacheRequestConfig, updateCacheType?: updateCacheBehavior, access?: string): Promise<[T | undefined, number]> {
   access = access ?? await getToken()
   config.method = config.method ?? 'GET'
   if (updateCacheType) {
@@ -33,16 +33,24 @@ export async function request<T>(config: CacheRequestConfig, updateCacheType?: u
     config = {...config, cache: { update: update }}
   }
   
-  const response = await api.request<T>({
-    ...config,
-    id: `${config.method?.toLowerCase()}_${config.url}`,
-    headers: {
-      ...config.headers,
-      Authorization: `Bearer ${access}`,
-      'Content-Type': config.data instanceof FormData ? 'multipart/form-data' : 'application/json',
+  try {
+    const response = await api.request<T>({
+      ...config,
+      id: `${config.method?.toLowerCase()}_${config.url}`,
+      headers: {
+        ...config.headers,
+        Authorization: `Bearer ${access}`,
+        'Content-Type': config.data instanceof FormData ? 'multipart/form-data' : 'application/json',
+      }
+    })
+    return [response.data, response.status];
+  } catch (error: unknown) {
+    if (error instanceof AxiosError) {
+      return [undefined, error.status ?? 500]
     }
-  })
-  return response.data;
+    return [undefined, 500]
+  }
+  
 }
 
 async function refreshToken() {
@@ -55,29 +63,36 @@ async function refreshToken() {
   }
 }
 
-export async function send<T>(config: CacheRequestConfig, updateCacheType?: updateCacheBehavior) {
+export async function send<T>(config: CacheRequestConfig, updateCacheType?: updateCacheBehavior): Promise<[T | undefined, number]> {
+  if (config.method === 'GET') {
+    return request<T>(config, updateCacheType)
+  }
   try {
     return request<T>(config, updateCacheType)
   } catch (error: unknown) {
-    if (error instanceof AxiosError && error.status == 401) {
-      const { access } = await refreshToken()
-      if (access) {
-        try {
-          return request<T>(config, updateCacheType, access)
-        } catch {
-          return undefined
+    if (error instanceof AxiosError) {
+      if (error.status == 401) {
+        const { access } = await refreshToken()
+        if (access) {
+          try {
+            return request<T>(config, updateCacheType, access)
+          } catch {
+            return [undefined, 401]
+          }
         }
       }
+      return [undefined, error.status ?? 500]
     }
   }
-  return undefined
+  return [undefined, 500]
 }
 
-export async function sendFile(config: CacheRequestConfig, updateCacheType?: updateCacheBehavior) {
-  const response = await send<{file: IMedia}>(config, updateCacheType)
+export async function sendFile(config: CacheRequestConfig, updateCacheType?: updateCacheBehavior): Promise<[IMedia | undefined, number]> {
+  const [response, status] = await send<{file: IMedia}>(config, updateCacheType)
   if (response) {
-    return response.file
+    return [response.file, status]
   }
+  return [undefined, status]
 }
 
 export async function getCachedData(key: string) {

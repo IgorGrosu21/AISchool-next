@@ -1,12 +1,13 @@
 import { Balance, ModuleHeader, ModuleList, NavigationContainer } from "@/components";
-import { fetchManual } from "@/utils/api";
+import { errorHandler, fetchManual } from "@/utils/api";
 import { Typography } from "@mui/material";
 import { getTranslations } from "next-intl/server";
-import Link from "next/link";
+import { Link } from '@/i18n';
 
 export default async function Page({ params }: { params: Promise<{manualSlug: string}> }) {
   const { manualSlug } = await params;
-  const manual = await fetchManual(manualSlug)
+  const [manualRaw, status] = await fetchManual(manualSlug)
+  const manual = await errorHandler(manualRaw, status)
   const t = await getTranslations('manuals');
 
   return <NavigationContainer segments={[

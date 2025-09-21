@@ -1,5 +1,5 @@
-import { redirect } from "next/navigation"
+import { redirect } from '@/i18n'
 
 export default async function Page() {
-  redirect(`/core`)
+  await redirect(`/core`)
 }

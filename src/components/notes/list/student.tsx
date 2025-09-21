@@ -3,11 +3,11 @@
 import { ISubjectName } from "@/utils/interfaces"
 import { Grid2, Stack, Typography } from "@mui/material"
 import { useTranslations } from "next-intl"
-import Link from "next/link";
+import { Link } from '@/i18n';
 import { NotesContainer } from "../container";
 import { useJournalContext } from "@/providers";
 import { useStudentNotes } from "@/hooks"
-import { ClientPanel } from "@/components/panel";
+import { ClientPanel } from "@/components";
 
 interface StudentNoteListProps {
   subjects: ISubjectName[]

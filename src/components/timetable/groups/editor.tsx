@@ -2,7 +2,7 @@
 
 import { IGroupName, IPositionName, ISubjectName, ITeacherName, IKlassNameWithGroups } from "@/utils/interfaces"
 import { useEffect, useMemo, useState } from "react";
-import { SubjectsEditor } from "@/components/subjects";
+import { SubjectsEditor } from "@/components";
 import { ArrowBack, ArrowForward } from "@mui/icons-material";
 import { Stack, Typography, Autocomplete, TextField, Button } from "@mui/material";
 import { useTranslations } from "next-intl";

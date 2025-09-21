@@ -1,12 +1,14 @@
 import { Contacts, Photos, KlassesButton, NavigationContainer, SchoolPositions, TimetableButton, Title } from '@/components';
-import { fetchSchool } from '@/utils/api';
+import { errorHandler, fetchSchool } from '@/utils/api';
 import { Stack, Typography } from '@mui/material';
 import { getTranslations } from 'next-intl/server';
 import Image from 'next/image';
 
 export default async function Page({ params }: { params: Promise<{schoolSlug: string}> }) {
   const { schoolSlug } = await params;
-  const school = await fetchSchool(schoolSlug)
+
+  const [schoolRaw, status] = await fetchSchool(schoolSlug)
+  const school = await errorHandler(schoolRaw, status)
   const t = await getTranslations('schools');
   
   return <NavigationContainer segments={[{label: t('list'), href: 'schools'}]} last={school.name}>
@@ -37,7 +39,7 @@ export default async function Page({ params }: { params: Promise<{schoolSlug: st
           justifyContent: 'center'
         }}>
           <Typography variant='h5' sx={{
-            color: 'white',
+            color: 'primary.contrastText',
             textAlign: 'center',
             px: 3,
             textShadow: '2px 2px 4px rgba(0, 0, 0, 0.8)',

@@ -4,8 +4,8 @@ import { ILessonName, ISpecificLessonName } from "@/utils/interfaces";
 import { Stack, Typography, Snackbar, Slide, SlideProps, Alert } from "@mui/material";
 import { useCallback, useState } from "react";
 import { useTranslations } from "next-intl";
-import Link from "next/link";
-import { useRouter } from "next/navigation";
+import { Link } from '@/i18n';
+import { useRouter } from "@/i18n";
 import { format } from "date-fns";
 import { Note } from "../../notes/item";
 import { useDiaryContext } from "@/providers";
@@ -55,7 +55,8 @@ export function SpecificLessons({specificLessons, dates}: SpecificLessonsProps) 
       const lesson = lessons.find(l => l.lessonTime === lessonTime.id)
       const specificLesson = lesson ? specificLessons.find(sl => sl.lesson === lesson.id) : undefined
 
-      return <Lesson key={lessonTime.order}
+      return <Lesson
+        key={lessonTime.order}
         lessonTime={lessonTime}
         lesson={lesson}
         onClick={() => pickSpecificLesson(lesson, specificLesson, dates[groupIndex])}

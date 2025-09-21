@@ -22,7 +22,7 @@ export function GroupsContainer({klass, subjects, render}: GroupsContainerProps)
         <AccordionSummary expandIcon={<ArrowForwardIosSharp sx={{ fontSize: '0.9rem' }} />}>
           <Typography component="span">{subject.verboseName}</Typography>
         </AccordionSummary>
-        <AccordionDetails sx={{bgcolor: 'transparent'}}>
+        <AccordionDetails>
           <Stack direction={{xs: 'column', md: 'row'}} gap={4}>
             {subjectGroups.map((group, j) => <Stack key={j} sx={{flex: 1}} gap={2}>
               {render(group)}

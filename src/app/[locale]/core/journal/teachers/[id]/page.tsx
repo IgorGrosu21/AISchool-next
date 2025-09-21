@@ -1,12 +1,13 @@
 import { NavigationContainer, Panel, TeacherPositions } from "@/components"
-import { fetchTeacher } from "@/utils/api"
+import { errorHandler, fetchTeacher } from "@/utils/api"
 import { Typography } from "@mui/material"
 import { getTranslations } from "next-intl/server"
 
 export default async function Page({ params }: { params: Promise<{id: string}> }) {
   const { id } = await params
 
-  const teacher = await fetchTeacher(id)
+  const [teacherRaw, status] = await fetchTeacher(id)
+  const teacher = await errorHandler(teacherRaw, status)
   const t = await getTranslations('journal')
 
   return <NavigationContainer segments={[

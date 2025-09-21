@@ -1,17 +1,21 @@
 import { Typography } from '@mui/material'
 import { NavigationContainer, Panel, Subjects } from '@/components'
 import { getTranslations } from 'next-intl/server'
-import { fetchKlass, fetchTeachedSubjects } from '@/utils/api'
-import { redirect } from 'next/navigation'
+import { errorHandler, fetchKlass, fetchTeachedSubjects } from '@/utils/api'
+import { redirect } from '@/i18n'
 
 export default async function TeacherJournalPage({ params }: { params: Promise<{id: string, schoolSlug: string, klassSlug: string}> }) {
   const { id, schoolSlug, klassSlug } = await params
-  const subjects = await fetchTeachedSubjects(id, schoolSlug, klassSlug)
-  const klass = await fetchKlass(schoolSlug, klassSlug)
+  const [[subjectsRaw, subjectsStatus], [klassRaw, klassStatus]] = await Promise.all([
+    fetchTeachedSubjects(id, schoolSlug, klassSlug),
+    fetchKlass(schoolSlug, klassSlug)
+  ])
+  const subjects = await errorHandler(subjectsRaw, subjectsStatus)
+  const klass = await errorHandler(klassRaw, klassStatus)
   const t = await getTranslations('journal')
 
   if (subjects.length === 1) {
-    return redirect(`/core/journal/teachers/${id}/${schoolSlug}/${klassSlug}/${subjects[0].slug}`)
+    await redirect(`/core/journal/teachers/${id}/${schoolSlug}/${klassSlug}/${subjects[0].slug}`)
   }
 
   return <NavigationContainer segments={[

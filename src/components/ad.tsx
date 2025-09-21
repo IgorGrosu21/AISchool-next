@@ -1,7 +1,7 @@
 'use server'
 
 import { Button, Stack, Typography } from "@mui/material";
-import Link from "next/link";
+import { Link } from '@/i18n';
 import { ReactNode } from "react";
 import { cookies } from "next/headers";
 import { getTranslations } from "next-intl/server";

@@ -1,5 +1,5 @@
 import { KlassLink, NavigationContainer, Title } from "@/components"
-import { fetchSchoolWithKlasses } from "@/utils/api"
+import { errorHandler, fetchSchoolWithKlasses } from "@/utils/api"
 import { IKlassName } from "@/utils/interfaces"
 import { Divider, Stack } from "@mui/material"
 import { getTranslations } from "next-intl/server"
@@ -8,7 +8,8 @@ const grades = Array.from({length: 12}, (_, i) => i + 1)
 
 export default async function Page({ params }: { params: Promise<{schoolSlug: string}> }) {
   const { schoolSlug } = await params
-  const school = await fetchSchoolWithKlasses(schoolSlug)
+  const [schoolRaw, status] = await fetchSchoolWithKlasses(schoolSlug)
+  const school = await errorHandler(schoolRaw, status)
   const t = await getTranslations('klasses');
   const grouped = grades.map(grade => ({
     grade: grade,

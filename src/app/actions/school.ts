@@ -1,62 +1,52 @@
 'use server'
 
-import { deleteSchoolPhoto, deleteSchoolPreview, sendKlass, sendSchool, sendSchoolPhoto, sendSchoolPreview, sendSchoolWithKlasses, sendSchoolWithTimetable } from "@/utils/api"
+import { deleteSchoolPhoto, deleteSchoolPreview, errorHandler, sendKlass, sendSchool, sendSchoolPhoto, sendSchoolPreview, sendSchoolWithKlasses, sendSchoolWithTimetable } from "@/utils/api"
 import { IDetailedKlass, IDetailedSchool, ISchoolWithKlasses, ISchoolWithTimetable } from "@/utils/interfaces"
-import { redirect } from "next/navigation"
+import { EditActionFunction } from "./template"
 
-export async function editKlass(instance: IDetailedKlass) {
+export const editKlass: EditActionFunction<IDetailedKlass> = async (instance) => {
   instance.school.staff = []
   instance.school.timetable = []
-  const data = await sendKlass(instance)
-  if (data) {
-    redirect(`/core/schools/${data.school.slug}/klasses/${data.slug}`)
-  }
-  return data ?? instance
+  return sendKlass(instance)
 }
 
-export async function editSchool(instance: IDetailedSchool) {
-  const data = await sendSchool(instance)
-  if (data) {
-    redirect(`/core/schools/${data.slug}`)
-  }
-  return data ?? instance
+export const editSchool: EditActionFunction<IDetailedSchool> = async (instance) => {
+  return sendSchool(instance)
 }
 
 export async function editSchoolPreview(instance: IDetailedSchool, formData: FormData) {
-  return sendSchoolPreview(instance.slug, formData)
+  const [dataRaw, status] = await sendSchoolPreview(instance.slug, formData)
+  const data = await errorHandler(dataRaw, status)
+  return data
 }
 
 export async function removeSchoolPreview(instance: IDetailedSchool) {
-  return deleteSchoolPreview(instance.slug)
+  const [dataRaw, status] = await deleteSchoolPreview(instance.slug)
+  await errorHandler(dataRaw, status)
 }
 
 export async function editSchoolPhoto(instance: IDetailedSchool, formData: FormData) {
-  return sendSchoolPhoto(instance.slug, formData)
+  const [dataRaw, status] = await sendSchoolPhoto(instance.slug, formData)
+  const data = await errorHandler(dataRaw, status)
+  return data
 }
 
 export async function removeSchoolPhoto(instance: IDetailedSchool, id: string) {
-  return deleteSchoolPhoto(instance.slug, id)
+  const [dataRaw, status] = await deleteSchoolPhoto(instance.slug, id)
+  await errorHandler(dataRaw, status)
 }
 
-export async function editSchoolWithKlasses(instance: ISchoolWithKlasses) {
+export const editSchoolWithKlasses: EditActionFunction<ISchoolWithKlasses> = async (instance) => {
   instance.klasses = instance.klasses.map(k => ({...k, school: instance.id}))
-  const data = await sendSchoolWithKlasses(instance)
-  if (data) {
-    redirect(`/core/schools/${data.slug}/klasses`)
-  }
-  return data ?? instance
+  return sendSchoolWithKlasses(instance)
 }
 
-export async function editSchoolWithTimetable(instance: ISchoolWithTimetable) {
+export const editSchoolWithTimetable: EditActionFunction<ISchoolWithTimetable> = async (instance) => {
   instance.staff = []
   instance.timetable = instance.timetable.filter(lt => lt.starting != '').map(lt => ({
     ...lt,
     school: instance.id,
     lessons: lt.lessons.map(l => ({...l, lessonTime: lt.id}))
   }))
-  const data = await sendSchoolWithTimetable(instance)
-  if (data) {
-    redirect(`/core/schools/${data.slug}/timetable`)
-  }
-  return data ?? instance
+  return sendSchoolWithTimetable(instance)
 }

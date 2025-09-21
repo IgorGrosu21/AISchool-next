@@ -1,6 +1,6 @@
 'use server'
 
-import { redirect } from "next/navigation"
+import { redirect } from '@/i18n'
 
 import { sendAuthUser, createUser, sendLogoutRequest, sendVerificationEmail } from "@/utils/api";
 import { AxiosError } from "axios";
@@ -25,20 +25,22 @@ export async function auth(state: FormState, formData: FormData): Promise<FormSt
   const newState = { email: { value: authUser.email, error: '' }, password: { value: authUser.password, error: '' } }
 
   try {
-    const res = await sendAuthUser(type, authUser)
-    await setTokens(res)
-    formData.delete('email')
-    formData.delete('password')
-    switch (type) {
-      case 'signup': {
-        const user = await createUser(formData)
-        if (user) {
-          redirect(`/core/${user.profileLink}`)
+    const [res] = await sendAuthUser(type, authUser)
+    if (res) {
+      await setTokens(res)
+      formData.delete('email')
+      formData.delete('password')
+      switch (type) {
+        case 'signup': {
+          const [user] = await createUser(formData)
+          if (user) {
+            await redirect(`/core/${user.profileLink}`)
+          }
+          break
         }
-        break
-      }
-      case 'login': {
-        redirect('/core')
+        case 'login': {
+          await redirect('/core')
+        }
       }
     }
   } catch (error: unknown) {
@@ -60,7 +62,7 @@ export async function auth(state: FormState, formData: FormData): Promise<FormSt
 async function logout(all = false) {
   await sendLogoutRequest(all)
   await deleteTokens()
-  redirect('/auth')
+  await redirect('/auth')
 }
 
 export async function logoutThis() {

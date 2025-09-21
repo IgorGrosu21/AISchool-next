@@ -1,12 +1,13 @@
 import { NavigationContainer, TeacherNoteList } from "@/components"
 import { JournalProvider } from "@/providers"
-import { fetchKlass } from "@/utils/api"
+import { errorHandler, fetchKlass } from "@/utils/api"
 import { getTranslations } from "next-intl/server"
 
 export default async function Page({ params }: { params: Promise<{id: string, schoolSlug: string, klassSlug: string, subjectSlug: string, period: string}> }) {
   const { id, schoolSlug, klassSlug, subjectSlug, period } = await params
 
-  const klass = await fetchKlass(schoolSlug, klassSlug)
+  const [klassRaw, status] = await fetchKlass(schoolSlug, klassSlug)
+  const klass = await errorHandler(klassRaw, status)
   const school = klass.school
   const t = await getTranslations('journal')
 

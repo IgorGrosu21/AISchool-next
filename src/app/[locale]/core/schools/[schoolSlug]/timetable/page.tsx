@@ -1,10 +1,11 @@
 import { NavigationContainer, TimetableStepper, Title } from "@/components"
-import { fetchSchoolWithTimetable } from "@/utils/api"
+import { errorHandler, fetchSchoolWithTimetable } from "@/utils/api"
 import { getTranslations } from "next-intl/server"
 
 export default async function Page({ params }: { params: Promise<{schoolSlug: string}> }) {
   const { schoolSlug } = await params
-  const school = await fetchSchoolWithTimetable(schoolSlug)
+  const [schoolRaw, status] = await fetchSchoolWithTimetable(schoolSlug)
+  const school = await errorHandler(schoolRaw, status)
   const t = await getTranslations('schools');
   
   return <NavigationContainer segments={[

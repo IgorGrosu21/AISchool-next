@@ -4,8 +4,8 @@ import { Button, Stack, Typography } from "@mui/material";
 import { useTranslations } from "next-intl";
 import { Download } from "@mui/icons-material";
 import { IDetailedMedia } from "@/utils/interfaces";
-import Link from "next/link";
-import { ClientPanel } from "@/components/panel";
+import { Link } from '@/i18n';
+import { ClientPanel } from "@/components";
 
 interface AttachedFilesProps {
   files?: IDetailedMedia[]

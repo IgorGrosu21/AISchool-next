@@ -1,15 +1,18 @@
 'use server'
 
 import {
+  errorHandler,
   fetchSpecificLessonNames, sendSpecificLesson, deleteSpecificLesson,
   sendSpecificLessonPhoto, deleteSpecificLessonPhoto,
   sendHomework, deleteHomework,
   sendHomeworkPhoto, deleteHomeworkPhoto
 } from "@/utils/api";
 import { IDetailedHomework, IDetailedSpecificLesson } from "@/utils/interfaces"
+import { EditActionFunction } from "./template";
 
 export async function getSpecificLessons(accountType: string, personId: string, startDay: string, endDay: string, schoolSlug?: string) {
-  return fetchSpecificLessonNames(accountType, personId, `${startDay}-${endDay}`, schoolSlug)
+  const [specificLessonNames, status] = await fetchSpecificLessonNames(accountType, personId, `${startDay}-${endDay}`, schoolSlug)
+  return await errorHandler(specificLessonNames, status)
 }
 
 function hasFilesOrLinks(instance: IDetailedSpecificLesson | IDetailedHomework) {
@@ -17,13 +20,13 @@ function hasFilesOrLinks(instance: IDetailedSpecificLesson | IDetailedHomework) 
   return instance.files.length === 0 && instance.links === '' && noFilesData
 }
 
-export async function editSpecificLesson(instance: IDetailedSpecificLesson) {
+export const editSpecificLesson: EditActionFunction<IDetailedSpecificLesson> = async (instance) => {
   const hasContent = instance.title !== '' || instance.desc !== ''
   const isEmpty = !hasContent && hasFilesOrLinks(instance) && instance.notes.length === 0 && instance.homeworks.length === 0
   
   if (!isEmpty) {
     instance.students = []
-    const data = await sendSpecificLesson(instance)
+    const [data, status] = await sendSpecificLesson(instance)
     if (data) {
       await Promise.all(instance.files.filter(f => f.delete === true).map(f => {
         return deleteSpecificLessonPhoto(instance, f.id)
@@ -35,21 +38,21 @@ export async function editSpecificLesson(instance: IDetailedSpecificLesson) {
           formData.append('file', fd);
           return sendSpecificLessonPhoto(instance, formData)
         }))
-        data.files = [...data.files, ...files.filter(f => f !== undefined)]
+        data.files = [...data.files, ...files.map(f => f[0]).filter(f => f !== undefined)]
       }
     }
-    return data ?? instance
+    return [data, status]
   } else if (instance.id !== '' && isEmpty) {
     await deleteSpecificLesson(instance)
   }
-  return instance
+  return [instance, 200]
 }
 
-export async function editHomework(instance: IDetailedHomework) {
+export const editHomework: EditActionFunction<IDetailedHomework> = async (instance) => {
   const isEmpty = hasFilesOrLinks(instance) && instance.note === undefined && instance.comment === ''
 
   if (!isEmpty) {
-    const data = await sendHomework(instance)
+    const [data, status] = await sendHomework(instance)
     if (data) {
       await Promise.all(instance.files.filter(f => f.delete === true).map(f => {
         return deleteHomeworkPhoto(instance, f.id)
@@ -61,12 +64,12 @@ export async function editHomework(instance: IDetailedHomework) {
           formData.append('file', fd);
           return sendHomeworkPhoto(instance, formData)
         }))
-        data.files = [...data.files, ...files.filter(f => f !== undefined)]
+        data.files = [...data.files, ...files.map(f => f[0]).filter(f => f !== undefined)]
       }
-      instance = data
     }
+    return [data, status]
   } else if (instance.id !== '' && isEmpty) {
     await deleteHomework(instance)
   }
-  return instance
+  return [instance, 200]
 }

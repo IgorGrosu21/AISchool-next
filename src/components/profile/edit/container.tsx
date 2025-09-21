@@ -7,7 +7,7 @@ import { Socials } from "./socials";
 import { ImageUploader } from "../../imageUploader";
 import Image from "next/image";
 import { removeAvatar, editAvatar } from "@/app/actions/user";
-import { ClientPanel } from "@/components/panel";
+import { ClientPanel } from "@/components";
 
 interface ContainerProps {
   user: IDetailedUser

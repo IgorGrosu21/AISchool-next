@@ -37,7 +37,7 @@ export function Editor({date}: ContainerProps) {
         <AttachedFilesEditor files={specificLesson.files} filesData={specificLesson.filesData} small={false} />
       </SpecificLessonHeader>
     </AttachedItemsProvider>
-    <Stack direction={{xs: 'column', md: 'row'}} sx={{flex: 1}}>
+    {!specificLesson.isStudent && <Stack direction={{xs: 'column', md: 'row'}} sx={{flex: 1}}>
       {students.length > 0 && <ClientPanel sx={{flex: 'unset', overflowY: 'scroll', height: {xs: 'auto', md: '60vh'}, maxHeight: '60vh', width: {xs: '100%', md: '15vw'}}}>
         {students.map((student, i) => <Button
           key={i}
@@ -70,6 +70,6 @@ export function Editor({date}: ContainerProps) {
         updateNote={updateNote}
         hasNotes={specificLesson.lesson.subject.hasNotes}
       />
-    </Stack>
+    </Stack>}
   </Stack>
 }

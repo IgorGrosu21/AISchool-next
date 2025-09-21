@@ -15,3 +15,5 @@ export {
 } from "./school";
 export { fetchSubjectsNames, fetchTeachedSubjects, fetchStudiedSubjects } from "./subject";
 export { fetchUserRoutes, createUser, sendAvatar, deleteAvatar } from "./user";
+
+export { errorHandler } from "./errorHandler";

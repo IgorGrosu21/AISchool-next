@@ -2,31 +2,19 @@
 
 import { sendParent, sendStudent, sendTeacher } from "@/utils/api"
 import { IDetailedParent, IDetailedStudent, IDetailedTeacher } from "@/utils/interfaces"
-import { redirect } from "next/navigation"
+import { EditActionFunction } from "./template"
 
-export async function editParent(instance: IDetailedParent) {
+export const editParent: EditActionFunction<IDetailedParent> = async (instance) => {
   instance.user.socials = instance.user.socials.map(s => ({...s, user: instance.user.id}))
-  const data = await sendParent(instance)
-  if (data) {
-    redirect(`/core/profile/students/${data.id}`)
-  }
-  return data ?? instance
+  return sendParent(instance)
 }
 
-export async function editStudent(instance: IDetailedStudent) {
+export const editStudent: EditActionFunction<IDetailedStudent> = async (instance) => {
   instance.user.socials = instance.user.socials.map(s => ({...s, user: instance.user.id}))
-  const data = await sendStudent(instance)
-  if (data) {
-    redirect(`/core/profile/students/${data.id}`)
-  }
-  return data ?? instance
+  return sendStudent(instance)
 }
 
-export async function editTeacher(instance: IDetailedTeacher) {
+export const editTeacher: EditActionFunction<IDetailedTeacher> = async (instance) => {
   instance.user.socials = instance.user.socials.map(s => ({...s, user: instance.user.id}))
-  const data = await sendTeacher(instance)
-  if (data) {
-    redirect(`/core/profile/teachers/${data.id}`)
-  }
-  return data ?? instance
+  return sendTeacher(instance)
 }

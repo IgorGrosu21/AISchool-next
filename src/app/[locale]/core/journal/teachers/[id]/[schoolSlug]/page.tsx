@@ -1,12 +1,13 @@
 import { Stack, Typography } from '@mui/material'
-import { fetchTeacherKlasses } from '@/utils/api'
+import { errorHandler, fetchTeacherKlasses } from '@/utils/api'
 import { KlassLink, NavigationContainer, Panel } from '@/components'
 import { getTranslations } from 'next-intl/server'
 import { IKlass } from '@/utils/interfaces'
 
 export default async function TeacherJournalPage({ params }: { params: Promise<{id: string, schoolSlug: string}> }) {
   const { id, schoolSlug } = await params
-  const klasses = await fetchTeacherKlasses(schoolSlug, id)
+  const [klassesRaw, status] = await fetchTeacherKlasses(schoolSlug, id)
+  const klasses = await errorHandler(klassesRaw, status)
   const school = klasses[0].school
   const t = await getTranslations('journal')
 

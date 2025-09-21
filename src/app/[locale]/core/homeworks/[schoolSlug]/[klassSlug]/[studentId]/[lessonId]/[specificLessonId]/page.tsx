@@ -5,7 +5,7 @@ import { format } from "date-fns"
 import { ru } from "date-fns/locale/ru";
 import { getTranslations } from "next-intl/server"
 import { Editor } from "./editor"
-import { fetchHomework } from "@/utils/api"
+import { errorHandler, fetchHomework } from "@/utils/api"
 
 interface Params {
   schoolSlug: string
@@ -18,7 +18,8 @@ interface Params {
 export default async function Page({ params }: { params: Promise<Params> }) {
   const { schoolSlug, klassSlug, lessonId, specificLessonId, studentId } = await params
   
-  const homework = await fetchHomework(schoolSlug, klassSlug, lessonId, specificLessonId, studentId)
+  const [homeworkRaw, status] = await fetchHomework(schoolSlug, klassSlug, lessonId, specificLessonId, studentId)
+  const homework = await errorHandler(homeworkRaw, status)
   const specificLesson = homework.specificLesson
   const date = new Date(specificLesson.date)
   const lesson = specificLesson.lesson

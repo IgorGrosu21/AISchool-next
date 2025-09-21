@@ -130,7 +130,7 @@ export function useTeacherNotes(klass: IDetailedKlass, subjectSlug: string) {
       return
     }
     startTransition(async () => {
-      const updatedNote = await editNote(note)
+      const [updatedNote] = await editNote(note)
       if (!updatedNote) {
         return
       }

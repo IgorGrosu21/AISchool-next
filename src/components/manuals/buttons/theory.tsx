@@ -4,8 +4,8 @@ import { IDetailedTopic, ITheory } from "@/utils/interfaces"
 import { Button, Stack, Typography } from "@mui/material"
 import { useTranslations } from "next-intl"
 import { useTransition, useCallback, useMemo } from "react"
-import { Loader } from "@/components/loader"
-import { useRouter } from "next/navigation"
+import { Loader } from "@/components"
+import { useRouter } from "@/i18n"
 
 interface TheoryButtonsProps {
   topic: IDetailedTopic

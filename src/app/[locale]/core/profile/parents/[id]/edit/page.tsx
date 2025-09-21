@@ -1,4 +1,4 @@
-import { fetchParent } from "@/utils/api";
+import { errorHandler, fetchParent } from "@/utils/api";
 import { Editor } from "./editor";
 import { ParentEditorContext } from "@/providers";
 import { EditorProvider } from "@/providers";
@@ -7,7 +7,8 @@ import { NavigationContainer } from "@/components";
 
 export default async function Page({ params }: { params: Promise<{id: string}> }) {
   const { id } = await params;
-  const parent = await fetchParent(id)
+  const [parentRaw, status] = await fetchParent(id)
+  const parent = await errorHandler(parentRaw, status)
   const segments = [{label: `${parent.user.name} ${parent.user.surname}`, href: `profile/parents/${parent.id}`}]
 
   return <NavigationContainer segments={segments} last='edit'>

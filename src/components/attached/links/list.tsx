@@ -1,9 +1,9 @@
 'use client'
 
-import { ClientPanel } from "@/components/panel";
+import { ClientPanel } from "@/components";
 import { Stack, Typography } from "@mui/material";
 import { useTranslations } from "next-intl";
-import Link from "next/link";
+import { Link } from '@/i18n';
 
 interface AttachedLinksProps {
   links?: string

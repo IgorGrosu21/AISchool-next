@@ -3,7 +3,7 @@
 import { ISchoolName } from "@/utils/interfaces";
 import { Stack, Typography } from "@mui/material";
 import { useTranslations } from "next-intl";
-import Link from "next/link";
+import { Link } from '@/i18n';
 
 interface SchoolLinkProps {
   school: ISchoolName

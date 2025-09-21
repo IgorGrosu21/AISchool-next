@@ -1,6 +1,6 @@
 'use client'
 
-import { PickKlass, KlassesButton } from "@/components/klasses"
+import { PickKlass, KlassesButton } from "@/components"
 import { IKlassName, IKlassNameWithGroups, ISchoolWithTimetable } from "@/utils/interfaces"
 import { Stack, Typography } from "@mui/material"
 import { useTranslations } from "next-intl"
