@@ -1,4 +1,4 @@
-import type { IDetailedParent, IDetailedStudent, IDetailedTeacher } from "../interfaces"
+import type { IDetailedParent, IDetailedStudent, IDetailedTeacher, IPersonHome } from "../interfaces"
 import { request, send } from "./client"
 
 export async function fetchParent(id: string) {
@@ -23,4 +23,8 @@ export async function fetchTeacher(id: string) {
 
 export async function sendTeacher(teacher: IDetailedTeacher) {
   return send<IDetailedTeacher>({url: `api/teachers/${teacher.id}/`, method: 'PUT', data: teacher}, 'replace')
+}
+
+export async function fetchPersonHome() {
+  return request<IPersonHome>({url: `api/home/`})
 }

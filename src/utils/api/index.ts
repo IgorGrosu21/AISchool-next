@@ -7,10 +7,12 @@ export {
   fetchStudentNotes, fetchTeacherNotes, sendNote
 } from "./lesson";
 export { fetchManuals, fetchManual, fetchModule, fetchTopic, sendTask } from "./manual";
-export { fetchParent, sendParent, fetchStudent, sendStudent, fetchTeacher, sendTeacher } from "./person";
+export { fetchParent, sendParent, fetchStudent, sendStudent, fetchTeacher, sendTeacher, fetchPersonHome } from "./person";
 export {
-  fetchSchoolNames, fetchSchools, fetchSchool, sendSchool, fetchSchoolWithKlasses, sendSchoolWithKlasses, fetchSchoolWithTimetable, sendSchoolWithTimetable,
-  sendSchoolPreview, deleteSchoolPreview, sendSchoolPhoto, deleteSchoolPhoto, fetchSchoolLessonTimeNames,
+  fetchSchoolNames, fetchSchools, fetchSchool, sendSchool,
+  fetchSchoolWithKlasses, sendSchoolWithKlasses, fetchSchoolWithTimetable, sendSchoolWithTimetable,
+  sendSchoolPreview, deleteSchoolPreview, sendSchoolPhoto, deleteSchoolPhoto,
+  fetchSchoolLessonTimeNames,
   fetchKlass, sendKlass, fetchTeacherKlasses
 } from "./school";
 export { fetchSubjectsNames, fetchTeachedSubjects, fetchStudiedSubjects } from "./subject";

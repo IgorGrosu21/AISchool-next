@@ -1,15 +1,13 @@
 'use client'
 
 import { motion } from 'framer-motion'
-import { Box, Card, CardContent } from '@mui/material'
-import { FormatQuote } from '@mui/icons-material'
+import { Card, CardContent } from '@mui/material'
 
 interface LandingCardProps extends React.PropsWithChildren {
   index: number
-  hasQuote?: boolean
 }
 
-export function LandingCard({index, hasQuote = false, children}: LandingCardProps) {
+export function LandingCard({index, children}: LandingCardProps) {
   return <motion.div
     style={{height: '100%'}}
     initial={{ opacity: 0, y: 50 }}
@@ -33,19 +31,7 @@ export function LandingCard({index, hasQuote = false, children}: LandingCardProp
         }
       }}
     >
-      {hasQuote && <Box
-        sx={{
-          position: 'absolute',
-          top: 20,
-          right: 20,
-          opacity: 0.1,
-          zIndex: 1
-        }}
-      >
-        <FormatQuote color='primary' sx={{ fontSize: 80 }} />
-      </Box>}
-
-      <CardContent sx={{ p: 4, position: 'relative', zIndex: 2 }}>
+      <CardContent sx={{ height: '100%', p: 4 }}>
         {children}
       </CardContent>
     </Card>

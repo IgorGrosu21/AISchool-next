@@ -1,7 +1,7 @@
 'use client'
 
-import { Animation6, Animation7, Animation8, Animation9 } from './animations'
-import { PlusesSection } from './utils'
+import { Animation6, Animation7, Animation8, Animation9 } from '../animations'
+import { PlusesSection } from './plusesSection'
 
 export function Pluses() {
   return <>

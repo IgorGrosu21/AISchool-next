@@ -1,5 +1,5 @@
 export { useHolidayChecker, useWeekView, useMonthView } from "./calendar";
-export { useGroupedNotes, useNotePicker, useStudentNotes, useStudentWithNotes, useTeacherNotes } from "./notes";
+export { useGroupedNotes, useKlassesPerformance, useNotePicker, useNoteProgress, useStudentNotes, useStudentWithNotes, useTeacherNotes } from "./notes";
 export { useCityPicker } from "./useCityPicker";
 export { useGroupsEditor, useLessonTimeEditor } from "./lesson";
 export { useIsMobile } from "./useIsMobile";

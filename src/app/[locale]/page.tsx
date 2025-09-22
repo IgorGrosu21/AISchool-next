@@ -1,6 +1,6 @@
 'use server'
 
-import { Hero, Pluses, CTA } from '@/components'
+import { Hero, Pluses, CTA } from '@/ui'
 import { Stack } from '@mui/material'
 
 export default async function Page() {

@@ -14,11 +14,9 @@ export default async function AuthLayout({ children }: { children: React.ReactNo
     gap={2} 
     sx={{
       alignItems: 'center', 
-      height: '100%', 
+      minHeight: '100vh',
       width: '100%', 
-      px: { xs: 2, md: 2 }, 
-      pt: { xs: 8, md: 16 },
-      pb: { xs: 4, md: 2 },
+      px: { xs: 2, md: 2 },
       justifyContent: 'center'
     }}
   >

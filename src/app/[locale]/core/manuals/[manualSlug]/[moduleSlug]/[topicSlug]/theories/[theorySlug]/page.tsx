@@ -1,4 +1,4 @@
-import { ModuleHeader, NavigationContainer, TheoryButtons, PdfViewer } from "@/components";
+import { ModuleHeader, NavigationContainer, TheoryButtons/*, PdfViewer */ } from "@/components";
 import { errorHandler, fetchTopic } from "@/utils/api";
 import { getTranslations } from "next-intl/server";
 import { redirect } from '@/i18n';
@@ -27,7 +27,9 @@ export default async function Page({ params }: { params: Promise<{manualSlug: st
     <Stack gap={4}>
       <ModuleHeader title={theory.name} progress={topic.progress} />
       <Stack sx={{alignItems: 'center', bgcolor: 'background.default', p: 2}}>
-        <PdfViewer link={`${process.env.NEXT_PUBLIC_DJANGO_API_URL}/public/theories/${manualSlug}/${moduleSlug}/${topicSlug}/${theorySlug}.pdf`} />
+        {/* <PdfViewer
+          link={`${process.env.NEXT_PUBLIC_DJANGO_API_URL}/public/theories/${manualSlug}/${moduleSlug}/${topicSlug}/${theorySlug}.pdf`}
+        /> */}
       </Stack>
       <TheoryButtons topic={topic} theory={theory} />
     </Stack>

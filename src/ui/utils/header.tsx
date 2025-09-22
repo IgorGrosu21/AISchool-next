@@ -8,7 +8,7 @@ interface SectionHeaderProps {
   onGradient?: boolean
   maxWidth: number
   text1: string
-  text2: string
+  text2?: string
 }
 
 export function SectionHeader({isTitle = false, onGradient = false, maxWidth, text1, text2}: SectionHeaderProps) {
@@ -27,7 +27,7 @@ export function SectionHeader({isTitle = false, onGradient = false, maxWidth, te
       }}>
         {text1}
       </Typography>
-      <Typography variant={isTitle ? "h4" : "h6"} sx={{
+      {text2 && <Typography variant={isTitle ? "h4" : "h6"} sx={{
         fontSize: isTitle ? { xs: '1.2rem', md: '1.8rem' } : { xs: '0.9rem', md: '1.1rem' },
         color: onGradient ? 'background.default' : 'text.secondary',
         opacity: onGradient ? 0.9 : 1,
@@ -36,7 +36,7 @@ export function SectionHeader({isTitle = false, onGradient = false, maxWidth, te
         mx: 'auto'
       }}>
         {text2}
-      </Typography>
+      </Typography>}
     </Stack>
   </motion.div>
 }

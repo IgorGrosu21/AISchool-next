@@ -1,15 +1,22 @@
 'use client'
 
 import { motion } from "framer-motion"
-import { Stack } from "@mui/material"
+import { Stack, Typography, type StackProps } from "@mui/material"
+import SvgIcon from '@mui/material/SvgIcon';
 
-export function StatsPanel({children}: React.PropsWithChildren) {
+interface StatsPanelProps extends StackProps {
+  text: string
+  Icon: typeof SvgIcon
+}
+
+export function StatsPanel({text, Icon, ...props}: StatsPanelProps) {
   return <motion.div
     style={{flex: 1}}
     whileHover={{ scale: 1.05, y: -5 }}
     transition={{ type: "spring", stiffness: 300 }}
   >
-    <Stack gap={2} sx={{
+    <Stack gap={props.gap ?? 2} {...props} sx={{
+      ...props.sx,
       height: '100%',
       p: 3,
       borderRadius: 3,
@@ -20,7 +27,10 @@ export function StatsPanel({children}: React.PropsWithChildren) {
       alignItems: 'center',
       justifyContent: 'center'
     }}>
-      {children}
+      <Icon sx={{ fontSize: 40, color: 'white' }} />
+      <Typography variant="h6" sx={{ color: 'white', fontWeight: 500 }}>
+        {text}
+      </Typography>
     </Stack>
   </motion.div>
 }
