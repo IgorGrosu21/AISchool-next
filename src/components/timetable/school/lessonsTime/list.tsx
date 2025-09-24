@@ -1,6 +1,6 @@
 'use client'
 
-import { ILessonTime } from "@/utils/interfaces"
+import { ILessonTime } from "@/interfaces"
 import { Typography } from "@mui/material"
 import { TimetableContainer } from "../../container"
 

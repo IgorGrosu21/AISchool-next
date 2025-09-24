@@ -1,6 +1,6 @@
 'use client'
 
-import { IKlassNameWithGroups } from "@/utils/interfaces"
+import { IKlassNameWithGroups } from "@/interfaces"
 import { Box, Divider, Stack } from "@mui/material"
 import { useMemo } from "react"
 import Typography from '@mui/material/Typography';

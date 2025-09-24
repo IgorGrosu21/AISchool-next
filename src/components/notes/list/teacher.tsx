@@ -1,6 +1,6 @@
 'use client'
 
-import { IDetailedKlass, INote } from "@/utils/interfaces"
+import { IDetailedKlass, INote } from "@/interfaces"
 import { Button, Stack, Typography, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from "@mui/material"
 import { format, isAfter } from 'date-fns';
 import { useEffect, useRef } from "react"

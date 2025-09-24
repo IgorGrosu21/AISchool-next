@@ -1,8 +1,8 @@
-import { errorHandler, fetchSchoolNames, fetchStudent } from "@/utils/api";
+import { errorHandler, fetchSchoolNames, fetchStudent } from "@/requests";
 import { Editor } from "./editor";
 import { StudentEditorContext } from "@/providers";
 import { EditorProvider } from "@/providers";
-import { editStudent } from "@/app/actions/person";
+import { editStudent } from "@/app/actions";
 import { NavigationContainer } from "@/components";
 
 export default async function Page({ params }: { params: Promise<{id: string}> }) {

@@ -1,6 +1,6 @@
 'use client'
 
-import { ILessonName, ISpecificLessonName } from "@/utils/interfaces";
+import { ILessonName, ISpecificLessonName } from "@/interfaces";
 import { Stack, Typography, Snackbar, Slide, SlideProps, Alert } from "@mui/material";
 import { useCallback, useState } from "react";
 import { useTranslations } from "next-intl";

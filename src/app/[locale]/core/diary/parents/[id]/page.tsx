@@ -1,5 +1,5 @@
 import { NavigationContainer, SmallProfile } from "@/components"
-import { errorHandler, fetchParent } from "@/utils/api"
+import { errorHandler, fetchParent } from "@/requests"
 import { Grid2, Typography } from "@mui/material"
 import { getTranslations } from "next-intl/server"
 import { Link } from '@/i18n'

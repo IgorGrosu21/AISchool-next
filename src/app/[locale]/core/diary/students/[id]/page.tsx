@@ -1,6 +1,6 @@
 import { redirect } from '@/i18n'
 import { format } from "date-fns"
-import { errorHandler, fetchStudent } from "@/utils/api"
+import { errorHandler, fetchStudent } from "@/requests"
 
 export default async function Page({ params }: { params: Promise<{id: string}> }) {
   const { id } = await params

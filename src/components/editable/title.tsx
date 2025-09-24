@@ -3,7 +3,7 @@
 import { Typography, Stack } from "@mui/material"
 import { EditButton } from "./editButton"
 import { ReturnButton } from "./returnButton"
-import { ICanEdit } from "@/utils/interfaces"
+import { ICanEdit } from "@/interfaces"
 
 interface TitleProps {
   label: string

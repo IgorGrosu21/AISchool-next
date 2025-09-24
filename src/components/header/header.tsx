@@ -1,7 +1,7 @@
 'use server'
 
 import { Box, IconButton, Stack, Typography } from "@mui/material";
-import { isLoggedIn } from "@/app/actions/token";
+import { isLoggedIn } from "@/app/actions";
 import Image from "next/image";
 import { Link } from '@/i18n';
 import { Login } from "@mui/icons-material"

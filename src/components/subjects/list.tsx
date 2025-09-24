@@ -1,6 +1,6 @@
 'use client'
 
-import { ISubjectName } from '@/utils/interfaces';
+import { ISubjectName } from '@/interfaces';
 import { Stack, StackProps, Typography } from '@mui/material';
 import { useTranslations } from 'next-intl';
 import Image from 'next/image';

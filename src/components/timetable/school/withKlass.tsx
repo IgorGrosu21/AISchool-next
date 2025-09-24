@@ -1,7 +1,7 @@
 'use client'
 
 import { PickKlass, KlassesButton } from "@/components"
-import { IKlassName, IKlassNameWithGroups, ISchoolWithTimetable } from "@/utils/interfaces"
+import { IKlassName, IKlassNameWithGroups, ISchoolWithTimetable } from "@/interfaces"
 import { Stack, Typography } from "@mui/material"
 import { useTranslations } from "next-intl"
 import { useMemo, useState } from "react"

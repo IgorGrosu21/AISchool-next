@@ -1,6 +1,6 @@
 'use client'
 
-import { INote } from "@/utils/interfaces"
+import { INote } from "@/interfaces"
 import { createContext, Dispatch, SetStateAction, useContext } from "react"
 
 export type Semester = 'frst' | 'scnd' | 'annual'

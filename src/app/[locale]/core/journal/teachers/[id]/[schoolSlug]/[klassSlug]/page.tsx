@@ -1,7 +1,7 @@
 import { Typography } from '@mui/material'
 import { NavigationContainer, Panel, Subjects } from '@/components'
 import { getTranslations } from 'next-intl/server'
-import { errorHandler, fetchKlass, fetchTeachedSubjects } from '@/utils/api'
+import { errorHandler, fetchKlass, fetchTeachedSubjects } from '@/requests'
 import { redirect } from '@/i18n'
 
 export default async function TeacherJournalPage({ params }: { params: Promise<{id: string, schoolSlug: string, klassSlug: string}> }) {

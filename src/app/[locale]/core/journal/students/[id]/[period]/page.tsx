@@ -1,6 +1,6 @@
 import { NavigationContainer, StudentNoteList } from "@/components"
 import { JournalProvider } from "@/providers"
-import { errorHandler, fetchStudiedSubjects } from "@/utils/api"
+import { errorHandler, fetchStudiedSubjects } from "@/requests"
 import { getTranslations } from "next-intl/server"
 
 export default async function Page({ params }: { params: Promise<{id: string, period: string}> }) {

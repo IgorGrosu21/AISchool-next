@@ -1,7 +1,7 @@
 'use client'
 
 import { ClientPanel, PickSchools, SchoolLink, SubjectsEditor } from "@/components"
-import { IDetailedTeacher, IPosition, ISchoolName } from "@/utils/interfaces"
+import { IDetailedTeacher, IPosition, ISchoolName } from "@/interfaces"
 import { Button, Stack, Typography } from "@mui/material"
 import { useTranslations } from "next-intl"
 import { Dispatch, SetStateAction, useCallback, useEffect, useMemo, useState } from "react"

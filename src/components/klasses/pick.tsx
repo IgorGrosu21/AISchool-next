@@ -1,6 +1,6 @@
 'use client'
 
-import { IKlassName } from "@/utils/interfaces";
+import { IKlassName } from "@/interfaces";
 import { Stack, Typography, Divider, RadioGroup, FormControlLabel, Radio } from "@mui/material";
 import { useTranslations } from "next-intl";
 

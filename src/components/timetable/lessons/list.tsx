@@ -1,6 +1,6 @@
 'use client'
 
-import { IGroupName, ILessonName, ILessonTimeName, ISubjectName } from "@/utils/interfaces";
+import { IGroupName, ILessonName, ILessonTimeName, ISubjectName } from "@/interfaces";
 import { Typography, Breadcrumbs } from "@mui/material";
 import { useCallback } from "react";
 import { TimetableContainer } from "../container";

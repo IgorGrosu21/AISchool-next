@@ -1,6 +1,6 @@
 'use client'
 
-import { ISubjectName } from "@/utils/interfaces"
+import { ISubjectName } from "@/interfaces"
 import { Grid2, Stack, Typography } from "@mui/material"
 import { useTranslations } from "next-intl"
 import { Link } from '@/i18n';

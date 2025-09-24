@@ -1,5 +1,5 @@
 import { NavigationContainer, Panel, TeacherPositions } from "@/components"
-import { errorHandler, fetchTeacher } from "@/utils/api"
+import { errorHandler, fetchTeacher } from "@/requests"
 import { Typography } from "@mui/material"
 import { getTranslations } from "next-intl/server"
 import { format } from "date-fns"

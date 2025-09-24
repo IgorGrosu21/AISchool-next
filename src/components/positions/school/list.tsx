@@ -1,7 +1,7 @@
 'use server'
 
 import { Subjects, SmallProfile, Panel } from "@/components";
-import { IDetailedSchool } from "@/utils/interfaces";
+import { IDetailedSchool } from "@/interfaces";
 import { Grid2, Stack, Typography } from "@mui/material";
 import { getTranslations } from "next-intl/server";
 

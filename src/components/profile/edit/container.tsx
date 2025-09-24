@@ -1,12 +1,12 @@
 'use client'
 
-import { IDetailedUser } from "@/utils/interfaces";
+import { IDetailedUser } from "@/interfaces";
 import { Stack } from "@mui/material";
 import { Fields } from "./fields";
 import { Socials } from "./socials";
 import { ImageUploader } from "../../imageUploader";
 import Image from "next/image";
-import { removeAvatar, editAvatar } from "@/app/actions/user";
+import { removeAvatar, editAvatar } from "@/app/actions";
 import { ClientPanel } from "@/components";
 
 interface ContainerProps {

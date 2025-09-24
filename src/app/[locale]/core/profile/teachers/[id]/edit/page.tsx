@@ -1,6 +1,6 @@
-import { errorHandler, fetchSchoolNames, fetchSubjectsNames, fetchTeacher } from "@/utils/api";
+import { errorHandler, fetchSchoolNames, fetchSubjectsNames, fetchTeacher } from "@/requests";
 import { Editor } from "./editor";
-import { editTeacher } from "@/app/actions/person";
+import { editTeacher } from "@/app/actions";
 import { TeacherEditorContext } from "@/providers";
 import { EditorProvider } from "@/providers";
 import { NavigationContainer } from "@/components";

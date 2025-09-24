@@ -1,6 +1,6 @@
 'use client'
 
-import { ICityName, ICountryName, IRegionName } from '@/utils/interfaces'
+import { ICityName, ICountryName, IRegionName } from '@/interfaces'
 import { Stack, Box, Button, Dialog, DialogTitle, DialogContent, DialogActions, Typography } from '@mui/material'
 import Image from 'next/image'
 import { useTranslations } from 'next-intl'

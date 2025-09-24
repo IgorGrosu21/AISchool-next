@@ -1,6 +1,6 @@
 'use server'
 
-import { IBalance } from "@/utils/interfaces";
+import { IBalance } from "@/interfaces";
 import { Stack, Typography } from "@mui/material"
 import Image from "next/image";
 

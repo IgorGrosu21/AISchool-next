@@ -1,7 +1,7 @@
-import { errorHandler, fetchKlass } from '@/utils/api';
+import { errorHandler, fetchKlass } from '@/requests';
 import { Editor } from './editor';
 import { EditorProvider } from '@/providers';
-import { editKlass } from '@/app/actions/school';
+import { editKlass } from '@/app/actions';
 import { KlassEditorContext } from '@/providers';
 import { getTranslations } from 'next-intl/server';
 import { NavigationContainer } from '@/components';

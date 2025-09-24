@@ -1,7 +1,7 @@
 'use server'
 
-import { Greetings, Sections } from '@/ui'
-import { errorHandler, fetchPersonHome } from '@/utils/api'
+import { Greetings, Sections } from '@/components'
+import { errorHandler, fetchPersonHome } from '@/requests'
 import { Stack } from '@mui/material'
 
 export default async function Page() {

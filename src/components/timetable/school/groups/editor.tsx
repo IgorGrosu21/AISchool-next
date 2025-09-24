@@ -1,6 +1,6 @@
 'use client'
 
-import { ISchoolWithTimetable } from "@/utils/interfaces"
+import { ISchoolWithTimetable } from "@/interfaces"
 import { WithKlass } from "../withKlass"
 import { Dispatch, SetStateAction } from "react"
 import { GroupsEditor } from "../../groups"

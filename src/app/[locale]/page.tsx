@@ -1,12 +1,12 @@
 'use server'
 
-import { Hero, Pluses, CTA } from '@/ui'
+import { Welcome, Pluses } from '@/components'
 import { Stack } from '@mui/material'
 
 export default async function Page() {
   return <Stack>
-    <Hero />
+    <Welcome type='hero' />
     <Pluses />
-    <CTA />
+    <Welcome type='cta' />
   </Stack>
 }

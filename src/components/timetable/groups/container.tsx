@@ -4,7 +4,7 @@ import { Accordion, AccordionDetails, AccordionSummary, Stack } from "@mui/mater
 import { ArrowForwardIosSharp } from '@mui/icons-material';
 import Typography from '@mui/material/Typography';
 import { useState } from "react";
-import { IGroupName, IKlassNameWithGroups, ISubjectName } from "@/utils/interfaces";
+import { IGroupName, IKlassNameWithGroups, ISubjectName } from "@/interfaces";
 
 interface GroupsContainerProps {
   klass: IKlassNameWithGroups

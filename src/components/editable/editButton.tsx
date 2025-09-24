@@ -1,6 +1,6 @@
 'use client'
 
-import { ICanEdit } from "@/utils/interfaces";
+import { ICanEdit } from "@/interfaces";
 import { Fab } from "@mui/material";
 import { Edit } from "@mui/icons-material";
 import { Link } from '@/i18n';

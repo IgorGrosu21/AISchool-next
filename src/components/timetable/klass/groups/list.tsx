@@ -1,6 +1,6 @@
 'use client'
 
-import { IDetailedKlass } from "@/utils/interfaces"
+import { IDetailedKlass } from "@/interfaces"
 import { Groups } from "../../groups";
 
 interface KlassGroupsProps {

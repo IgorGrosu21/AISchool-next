@@ -2,8 +2,10 @@ export { AttachedFiles, AttachedFilesEditor, AttachedLinks, AttachedLinksEditor 
 export { Calendar } from "./calendar";
 export { ErrorPage } from "./errors";
 export { Header } from "./header";
+export { Greetings, Sections } from "./home";
 export { Title } from "./editable";
 export { KlassesButton, KlassesRange, KlassLink, PickKlass } from "./klasses";
+export { Welcome, Pluses } from "./landing";
 export { TheoryButtons, Balance, Currency, ModuleHeader, ModuleList } from "./manuals";
 export { Note, StudentNoteList, TeacherNoteList, NotePicker } from "./notes";
 export { Panel, ClientPanel } from "./panel";
@@ -27,7 +29,6 @@ export {
 } from "./timetable";
 
 export { Ad } from "./ad";
-export { AnimatedBackground } from "./animatedBackground";
 export { AuthButton } from "./authButton";
 export { Footer } from "./footer";
 export { ImageUploader } from "./imageUploader";

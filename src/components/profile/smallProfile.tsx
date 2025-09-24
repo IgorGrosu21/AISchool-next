@@ -3,7 +3,7 @@
 import { Stack, Typography } from "@mui/material";
 import { Link } from '@/i18n';
 import Image from "next/image";
-import { IUser } from "@/utils/interfaces";
+import { IUser } from "@/interfaces";
 
 interface SmallProfileProps {
   user: IUser

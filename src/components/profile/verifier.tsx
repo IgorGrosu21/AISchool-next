@@ -1,6 +1,6 @@
 'use client'
 
-import { IUser } from "@/utils/interfaces"
+import { IUser } from "@/interfaces"
 import { Stack, Typography, Checkbox } from "@mui/material"
 import { useTranslations } from "next-intl"
 import { SmallProfile } from "./smallProfile"

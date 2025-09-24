@@ -1,6 +1,6 @@
 'use client'
 
-import { ISchoolName } from "@/utils/interfaces"
+import { ISchoolName } from "@/interfaces"
 import { Typography, Autocomplete, TextField } from "@mui/material"
 import { useTranslations } from "next-intl"
 import { ClientPanel } from "@/components"

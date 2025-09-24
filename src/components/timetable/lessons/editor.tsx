@@ -1,6 +1,6 @@
 'use client'
 
-import { IGroupName, ILessonName, ILessonTimeName, IPositionName, ISubjectName, ITeacherName } from "@/utils/interfaces";
+import { IGroupName, ILessonName, ILessonTimeName, IPositionName, ISubjectName, ITeacherName } from "@/interfaces";
 import { Autocomplete, TextField } from "@mui/material";
 import { useCallback } from "react";
 import { useTranslations } from "next-intl";

@@ -1,6 +1,6 @@
 'use client'
 
-import { IDetailedKlass, IDetailedSchool, ISchoolWithKlasses, ISchoolWithTimetable } from "@/utils/interfaces"
+import { IDetailedKlass, IDetailedSchool, ISchoolWithKlasses, ISchoolWithTimetable } from "@/interfaces"
 import { createContext, useContext } from "react"
 import { EditorContextType } from "./base"
 

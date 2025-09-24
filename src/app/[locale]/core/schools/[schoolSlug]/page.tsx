@@ -1,5 +1,5 @@
 import { Contacts, Photos, KlassesButton, NavigationContainer, SchoolPositions, TimetableButton, Title } from '@/components';
-import { errorHandler, fetchSchool } from '@/utils/api';
+import { errorHandler, fetchSchool } from '@/requests';
 import { Stack, Typography } from '@mui/material';
 import { getTranslations } from 'next-intl/server';
 import Image from 'next/image';

@@ -1,6 +1,6 @@
 import { KlassLink, NavigationContainer, Title } from "@/components"
-import { errorHandler, fetchSchoolWithKlasses } from "@/utils/api"
-import { IKlassName } from "@/utils/interfaces"
+import { errorHandler, fetchSchoolWithKlasses } from "@/requests"
+import { IKlassName } from "@/interfaces"
 import { Divider, Stack } from "@mui/material"
 import { getTranslations } from "next-intl/server"
 

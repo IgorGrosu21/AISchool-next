@@ -7,7 +7,7 @@ import { ClientPanel, Loader, Title } from "@/components";
 import { Stack, Button, Alert, Snackbar, SnackbarCloseReason } from "@mui/material";
 import { Link } from '@/i18n';
 import { EditorContextType } from "./contexts";
-import { ICanEdit } from "@/utils/interfaces";
+import { ICanEdit } from "@/interfaces";
 import { useRouter } from "@/i18n";
 
 interface EditorProviderValue<T> {

@@ -1,6 +1,6 @@
 import { NavigationContainer, Subjects } from "@/components";
-import { errorHandler, fetchManuals } from "@/utils/api";
-import { IManual } from "@/utils/interfaces";
+import { errorHandler, fetchManuals } from "@/requests";
+import { IManual } from "@/interfaces";
 import { Grid2, Stack, Typography } from "@mui/material";
 import { getTranslations } from "next-intl/server";
 

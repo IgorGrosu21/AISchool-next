@@ -1,6 +1,6 @@
 'use client'
 
-import { IPositionName, IDetailedKlass, ILessonTimeName } from "@/utils/interfaces"
+import { IPositionName, IDetailedKlass, ILessonTimeName } from "@/interfaces"
 import { Dispatch, SetStateAction, useCallback } from "react"
 import { LessonsEditor } from "../../lessons"
 

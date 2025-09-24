@@ -2,7 +2,7 @@
 
 import { useSchoolWithKlassesEditorContext } from '@/providers'
 import { useCallback, useEffect, useMemo } from 'react'
-import { IKlassName } from '@/utils/interfaces'
+import { IKlassName } from '@/interfaces'
 
 const letters = ['A', 'B', 'C', 'D', 'E']
 const grades = Array.from({length: 12}, (_, i) => i + 1)

@@ -3,7 +3,7 @@
 import { Fab, Stack, Typography } from '@mui/material'
 import Image from 'next/image';
 import { Link } from '@/i18n'
-import { ISpecificLesson } from '@/utils/interfaces';
+import { ISpecificLesson } from '@/interfaces';
 import { useMemo } from 'react';
 import { useIsMobile } from '@/hooks';
 import { ClientPanel, KlassLink } from '@/components';

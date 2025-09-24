@@ -1,6 +1,6 @@
 'use server'
 
-import { deleteAvatar, errorHandler, sendAvatar } from "@/utils/api"
+import { deleteAvatar, errorHandler, sendAvatar } from "@/requests"
 
 export async function editAvatar(formData: FormData) {
   const [dataRaw, status] = await sendAvatar(formData)

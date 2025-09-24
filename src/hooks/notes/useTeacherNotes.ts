@@ -1,10 +1,10 @@
 'use client'
 
-import { IDetailedKlass, ILessonName, ILessonTimeName, INote, ISpecificLesson } from "@/utils/interfaces"
+import { IDetailedKlass, ILessonName, ILessonTimeName, INote, ISpecificLesson } from "@/interfaces"
 import { format, isAfter, startOfDay } from 'date-fns';
 import { useEffect, useMemo, useTransition, useState, useCallback } from "react"
 import { useJournalContext } from "@/providers";
-import { editNote, getGroupedTeacherNotes } from "@/app/actions/note";
+import { editNote, getGroupedTeacherNotes } from "@/app/actions";
 import { useHolidayChecker } from "../calendar/useHoliday";
 
 type ILesson = Omit<ILessonName, 'lessonTime'> & {lessonTime?: ILessonTimeName}

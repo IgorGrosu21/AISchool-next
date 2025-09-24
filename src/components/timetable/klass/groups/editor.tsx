@@ -1,6 +1,6 @@
 'use client'
 
-import { IDetailedKlass, IPositionName } from "@/utils/interfaces"
+import { IDetailedKlass, IPositionName } from "@/interfaces"
 import { Dispatch, SetStateAction } from "react";
 import { GroupsEditor } from "../../groups";
 

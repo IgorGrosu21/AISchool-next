@@ -2,7 +2,7 @@
 
 import { useCallback } from "react"
 import { isWithinInterval } from "date-fns"
-import { ISchoolNameWithTimetable } from "@/utils/interfaces"
+import { ISchoolNameWithTimetable } from "@/interfaces"
 
 export function useHolidayChecker(holidays: ISchoolNameWithTimetable['holidays']) {
   const isHoliday = useCallback((date: Date) => {

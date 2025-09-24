@@ -1,7 +1,7 @@
 'use client'
 
-import { fetchCountryNames, fetchRegionNames, fetchCityNames } from '@/utils/api'
-import { ICityName, ICountryName, IRegionName } from '@/utils/interfaces'
+import { fetchCountryNames, fetchRegionNames, fetchCityNames } from '@/requests'
+import { ICityName, ICountryName, IRegionName } from '@/interfaces'
 import { useEffect, useState } from 'react'
 import { useRouter } from '@/i18n'
 

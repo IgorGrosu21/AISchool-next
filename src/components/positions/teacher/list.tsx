@@ -5,7 +5,7 @@ import { Panel, SchoolLink, Subjects } from '@/components';
 import { Link } from '@/i18n'
 import Image from 'next/image';
 import { getTranslations } from 'next-intl/server';
-import { IPosition } from '@/utils/interfaces';
+import { IPosition } from '@/interfaces';
 
 interface TeacherPositionsProps {
   positions: IPosition[]

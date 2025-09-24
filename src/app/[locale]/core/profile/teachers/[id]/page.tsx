@@ -1,4 +1,4 @@
-import { errorHandler, fetchTeacher } from '@/utils/api';
+import { errorHandler, fetchTeacher } from '@/requests';
 import { Experience, Profile, Subjects, TeacherPositions } from '@/components';
 
 export default async function Page({ params }: { params: Promise<{id: string}> }) {

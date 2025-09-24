@@ -1,6 +1,6 @@
 'use client'
 
-import { ISchoolWithTimetable, ILessonTime, ILessonTimeName } from "@/utils/interfaces"
+import { ISchoolWithTimetable, ILessonTime, ILessonTimeName } from "@/interfaces"
 import { useEffect, useCallback, useState } from "react"
 
 const weekdays: ILessonTimeName['weekday'][] = ['MO', 'TU', 'WE', 'TH', 'FR', 'SA']

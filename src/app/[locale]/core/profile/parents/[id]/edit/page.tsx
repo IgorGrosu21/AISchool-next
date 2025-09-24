@@ -1,8 +1,8 @@
-import { errorHandler, fetchParent } from "@/utils/api";
+import { errorHandler, fetchParent } from "@/requests";
 import { Editor } from "./editor";
 import { ParentEditorContext } from "@/providers";
 import { EditorProvider } from "@/providers";
-import { editParent } from "@/app/actions/person";
+import { editParent } from "@/app/actions";
 import { NavigationContainer } from "@/components";
 
 export default async function Page({ params }: { params: Promise<{id: string}> }) {

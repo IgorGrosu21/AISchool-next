@@ -1,7 +1,7 @@
 'use client'
 
 import { Dispatch, ProviderProps, SetStateAction } from "react";
-import { IDetailedMedia } from "@/utils/interfaces";
+import { IDetailedMedia } from "@/interfaces";
 import { AttachedFilesProvider } from "./files/provider";
 import { AttachedLinksProvider } from "./links/provider";
 

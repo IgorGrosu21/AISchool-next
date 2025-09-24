@@ -1,9 +1,9 @@
 'use client'
 
-import { INote, ISubjectName } from "@/utils/interfaces"
+import { INote, ISubjectName } from "@/interfaces"
 import { useCallback, useEffect, useTransition } from "react"
 import { useJournalContext } from "@/providers";
-import { getGroupedStudentNotes } from "@/app/actions/note"
+import { getGroupedStudentNotes } from "@/app/actions"
 
 export function useStudentNotes(subjects: ISubjectName[]) {
   const {personId, period, updateGroups} = useJournalContext()

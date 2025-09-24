@@ -1,6 +1,6 @@
 'use server'
 
-import { IBalance } from "@/utils/interfaces"
+import { IBalance } from "@/interfaces"
 import { Box, Stack, StackProps, Typography } from "@mui/material"
 import { getTranslations } from "next-intl/server";
 import { Currency } from "./currency";

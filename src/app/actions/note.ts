@@ -1,7 +1,7 @@
 'use server'
 
-import { errorHandler, fetchStudentNotes, fetchTeacherNotes, sendNote } from "@/utils/api"
-import { IDetailedKlass, INote, ISubjectName } from "@/utils/interfaces"
+import { errorHandler, fetchStudentNotes, fetchTeacherNotes, sendNote } from "@/requests"
+import { IDetailedKlass, INote, ISubjectName } from "@/interfaces"
 import { EditActionFunction } from "./template"
 
 export async function getGroupedStudentNotes(personId: string, period: string, subjects: ISubjectName[]) {

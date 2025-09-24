@@ -1,6 +1,6 @@
 'use client'
 
-import { IPosition } from "@/utils/interfaces";
+import { IPosition } from "@/interfaces";
 import { FormControl, RadioGroup, FormControlLabel, Radio } from "@mui/material";
 import { useTranslations } from "next-intl";
 import { useMemo } from "react";

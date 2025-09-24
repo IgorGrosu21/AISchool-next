@@ -1,6 +1,6 @@
 'use client'
 
-import { IKlass, ISchoolName } from "@/utils/interfaces";
+import { IKlass, ISchoolName } from "@/interfaces";
 import { PickSchool, ProfileContainer as StudentContainer, PickKlass, ClientPanel } from "@/components";
 import { useStudentEditorContext } from "@/providers";
 import { useMemo } from "react";

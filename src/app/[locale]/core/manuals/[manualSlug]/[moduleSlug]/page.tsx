@@ -1,5 +1,5 @@
 import { Balance, ModuleHeader, ModuleList, NavigationContainer } from "@/components";
-import { errorHandler, fetchModule } from "@/utils/api";
+import { errorHandler, fetchModule } from "@/requests";
 import { getTranslations } from "next-intl/server";
 
 export default async function Page({ params }: { params: Promise<{manualSlug: string, moduleSlug: string}> }) {

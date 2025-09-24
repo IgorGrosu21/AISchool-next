@@ -1,6 +1,6 @@
 'use client'
 
-import { ILessonTime, IKlassNameWithGroups, ISchoolWithTimetable } from "@/utils/interfaces";
+import { ILessonTime, IKlassNameWithGroups, ISchoolWithTimetable } from "@/interfaces";
 import { WithKlass } from "../withKlass";
 import { Lessons } from "../../lessons";
 import { useCallback } from "react";

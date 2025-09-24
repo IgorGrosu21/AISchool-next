@@ -1,6 +1,6 @@
 'use client'
 
-import { ILessonTimeName } from "@/utils/interfaces"
+import { ILessonTimeName } from "@/interfaces"
 import { Grid2, Stack, Typography, Divider } from "@mui/material"
 import { useTranslations } from "next-intl"
 import React, { useMemo } from "react"

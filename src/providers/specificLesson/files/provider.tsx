@@ -4,7 +4,7 @@ import { Dispatch, ProviderProps, SetStateAction, useCallback, useEffect, useRef
 import { FilesContext } from "./context";
 import { Backdrop, Stack, Typography } from "@mui/material";
 import { useTranslations } from "next-intl";
-import { IDetailedMedia } from "@/utils/interfaces";
+import { IDetailedMedia } from "@/interfaces";
 import Image from "next/image";
 import { Link } from '@/i18n';
 

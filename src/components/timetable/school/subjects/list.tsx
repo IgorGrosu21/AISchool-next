@@ -1,6 +1,6 @@
 'use client'
 
-import { ISubjectName } from "@/utils/interfaces"
+import { ISubjectName } from "@/interfaces"
 import React from "react"
 import { Subjects as SubjectList } from "@/components"
 

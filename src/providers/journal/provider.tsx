@@ -1,7 +1,7 @@
 'use client'
 
 import { ProviderProps, useCallback, useMemo, useState } from "react"
-import { INote } from "@/utils/interfaces";
+import { INote } from "@/interfaces";
 import { getYear, getMonth } from 'date-fns';
 
 import { JournalContext, Semester, Group } from "./context";

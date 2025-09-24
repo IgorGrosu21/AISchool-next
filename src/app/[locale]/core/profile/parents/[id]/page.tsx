@@ -1,4 +1,4 @@
-import { errorHandler, fetchParent } from "@/utils/api";
+import { errorHandler, fetchParent } from "@/requests";
 import { Profile, Students } from "@/components";
 
 export default async function Page({ params }: { params: Promise<{id: string}> }) {

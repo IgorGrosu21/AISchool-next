@@ -1,6 +1,6 @@
 'use client'
 
-import { ISchoolName } from "@/utils/interfaces";
+import { ISchoolName } from "@/interfaces";
 import { Stack, Typography } from "@mui/material";
 import { useTranslations } from "next-intl";
 import { Link } from '@/i18n';

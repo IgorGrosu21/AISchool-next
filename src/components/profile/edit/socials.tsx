@@ -1,6 +1,6 @@
 'use client'
 
-import { ISocial } from "@/utils/interfaces"
+import { ISocial } from "@/interfaces"
 import { Button, Stack, TextField, Typography } from "@mui/material"
 import { useCallback } from "react"
 import { Instagram, Facebook, QuestionMark, Close, Add } from "@mui/icons-material"

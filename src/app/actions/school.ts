@@ -1,7 +1,7 @@
 'use server'
 
-import { deleteSchoolPhoto, deleteSchoolPreview, errorHandler, sendKlass, sendSchool, sendSchoolPhoto, sendSchoolPreview, sendSchoolWithKlasses, sendSchoolWithTimetable } from "@/utils/api"
-import { IDetailedKlass, IDetailedSchool, ISchoolWithKlasses, ISchoolWithTimetable } from "@/utils/interfaces"
+import { deleteSchoolPhoto, deleteSchoolPreview, errorHandler, sendKlass, sendSchool, sendSchoolPhoto, sendSchoolPreview, sendSchoolWithKlasses, sendSchoolWithTimetable } from "@/requests"
+import { IDetailedKlass, IDetailedSchool, ISchoolWithKlasses, ISchoolWithTimetable } from "@/interfaces"
 import { EditActionFunction } from "./template"
 
 export const editKlass: EditActionFunction<IDetailedKlass> = async (instance) => {

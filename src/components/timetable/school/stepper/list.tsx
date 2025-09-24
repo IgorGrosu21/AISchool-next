@@ -1,6 +1,6 @@
 'use server'
 
-import { ISchoolWithTimetable } from '@/utils/interfaces'
+import { ISchoolWithTimetable } from '@/interfaces'
 import { LessonTime } from '../lessonsTime'
 import { SchoolLessons } from '../lessons'
 import { TimetableStepperContainer } from './container'

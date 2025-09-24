@@ -1,6 +1,6 @@
 'use client'
 
-import { IDetailedSchool } from "@/utils/interfaces"
+import { IDetailedSchool } from "@/interfaces"
 import { Dispatch, SetStateAction } from "react"
 import { Box, Checkbox, Grid2, Stack, Typography } from "@mui/material";
 import { useTranslations } from "next-intl";

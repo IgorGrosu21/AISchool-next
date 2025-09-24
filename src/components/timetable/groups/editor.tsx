@@ -1,6 +1,6 @@
 'use client'
 
-import { IGroupName, IPositionName, ISubjectName, ITeacherName, IKlassNameWithGroups } from "@/utils/interfaces"
+import { IGroupName, IPositionName, ISubjectName, ITeacherName, IKlassNameWithGroups } from "@/interfaces"
 import { useEffect, useMemo, useState } from "react";
 import { SubjectsEditor } from "@/components";
 import { ArrowBack, ArrowForward } from "@mui/icons-material";

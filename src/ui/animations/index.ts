@@ -1,9 +1,0 @@
-export { Animation1 } from "./animation1";
-export { Animation2 } from "./animation2";
-export { Animation3 } from "./animation3";
-export { Animation4 } from "./animation4";
-export { Animation5 } from "./animation5";
-export { Animation6 } from "./animation6";
-export { Animation7 } from "./animation7";
-export { Animation8 } from "./animation8";
-export { Animation9 } from "./animation9";

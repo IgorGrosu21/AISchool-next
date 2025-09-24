@@ -1,11 +1,11 @@
 'use client'
 
 import { ImageUploader } from "@/components";
-import { IDetailedMedia, IDetailedSchool } from "@/utils/interfaces";
+import { IDetailedMedia, IDetailedSchool } from "@/interfaces";
 import { Stack, ImageList, ImageListItem } from "@mui/material";
 import { Dispatch, SetStateAction, useCallback, useEffect, useState } from "react";
 import Image from "next/image";
-import { editSchoolPhoto, removeSchoolPhoto } from "@/app/actions/school";
+import { editSchoolPhoto, removeSchoolPhoto } from "@/app/actions";
 import { AddCircleOutline } from "@mui/icons-material";
 
 interface PhotosEditorProps {

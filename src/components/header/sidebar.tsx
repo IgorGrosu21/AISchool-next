@@ -9,10 +9,9 @@ import { Menu, Close} from "@mui/icons-material"
 import { Stack, Typography, IconButton, Drawer } from "@mui/material"
 import { useTranslations } from "next-intl"
 import { AuthButton } from "@/components"
-import { logoutThis, verify } from "@/app/actions/auth"
+import { logoutThis, verify } from "@/app/actions"
 import { RouteController } from "./routeController"
-import { IUserRoutes } from "@/utils/interfaces/detailed/user"
-import { useIsMobile } from "@/hooks"
+import { IUserRoutes } from "@/interfaces/detailed/user"
 
 type Routes = Array<Array<{
   path: string,
@@ -27,7 +26,6 @@ interface SideBarProps {
 
 export function SideBar({ user, routes }: SideBarProps) {
   const [opened, open] = useState(false)
-  const isMobile = useIsMobile()
   const pathname = usePathname()
   const t = useTranslations('components.sidebar')
 
@@ -57,15 +55,16 @@ export function SideBar({ user, routes }: SideBarProps) {
     >
       <Stack sx={{
         height: '100vh',
-        minWidth: '17.5vw',
-        maxWidth: '20vw',
-        width: isMobile ? '100vw' : 'auto',
+        minWidth: {xs: '100vw', lg: '17.5vw'},
+        maxWidth: {xs: '100vw', lg: '20vw'},
+        width: {xs: '100vw', lg: 'auto'},
         bgcolor: 'background.default'
       }}>
         <Stack direction='row' sx={{p: 2, justifyContent: 'center', bgcolor: 'primary.dark', position: 'relative'}}>
-          {isMobile && <IconButton
+          <IconButton
             onClick={toggleDrawer}
             sx={{
+              display: {xs: 'block', lg: 'none'},
               position: 'absolute',
               right: 8,
               top: '50%',
@@ -74,7 +73,7 @@ export function SideBar({ user, routes }: SideBarProps) {
             }}
           >
             <Close />
-          </IconButton>}
+          </IconButton>
           <Image src='/images/logo-white.png' width={100} height={94} alt='light-logo' priority />
         </Stack>
         <Stack sx={{height: '100%', width: '100%', justifyContent: 'center'}}>

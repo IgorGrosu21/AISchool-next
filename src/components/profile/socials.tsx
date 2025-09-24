@@ -1,6 +1,6 @@
 'use server'
 
-import { IDetailedUser, ISocial } from "@/utils/interfaces";
+import { IDetailedUser, ISocial } from "@/interfaces";
 import { Facebook, Instagram } from "@mui/icons-material";
 import { Stack, Typography, Divider } from "@mui/material";
 import { getTranslations } from "next-intl/server";

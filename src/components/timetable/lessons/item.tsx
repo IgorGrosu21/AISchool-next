@@ -1,6 +1,6 @@
 'use client'
 
-import { ILessonName, ILessonTimeName } from "@/utils/interfaces";
+import { ILessonName, ILessonTimeName } from "@/interfaces";
 import { Stack, Typography, Divider, type StackProps } from "@mui/material";
 import { Link } from '@/i18n';
 

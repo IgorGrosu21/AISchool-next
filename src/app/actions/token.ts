@@ -1,7 +1,7 @@
 'use server'
 
 import { cookies } from 'next/headers'
-import { ITokens } from '@/utils/interfaces';
+import { ITokens } from '@/interfaces';
 
 export async function getToken(type = 'access') {
   const cookieStore = await cookies()
@@ -26,19 +26,15 @@ export async function setToken(type: string, token: string) {
   cookieStore.set(await createToken(type, token))
 }
 
-export async function deleteToken(type: string) {
-  const cookieStore = await cookies()
-  cookieStore.delete(`${type}_token`)
-}
-
 export async function setTokens(tokens: ITokens) {
   await setToken('access', tokens.access)
   await setToken('refresh', tokens.refresh)
 }
 
 export async function deleteTokens() {
-  await deleteToken('access')
-  await deleteToken('refresh')
+  const cookieStore = await cookies()
+  cookieStore.delete(`access_token`)
+  cookieStore.delete(`refresh_token`)
 }
 
 export async function isLoggedIn() {

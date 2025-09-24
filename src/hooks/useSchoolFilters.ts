@@ -1,6 +1,6 @@
 'use client'
 
-import { IDetailedCountry, ISchool } from "@/utils/interfaces"
+import { IDetailedCountry, ISchool } from "@/interfaces"
 import { useCallback, useEffect, useMemo, useState } from "react"
 
 const rowsPerPage = 15

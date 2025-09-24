@@ -1,5 +1,5 @@
 import { NavigationContainer, Calendar } from "@/components"
-import { errorHandler, fetchLessonNames, fetchSchoolLessonTimeNames } from "@/utils/api"
+import { errorHandler, fetchLessonNames, fetchSchoolLessonTimeNames } from "@/requests"
 import { getTranslations } from "next-intl/server"
 import { CalendarProvider, DiaryProvider } from "@/providers"
 

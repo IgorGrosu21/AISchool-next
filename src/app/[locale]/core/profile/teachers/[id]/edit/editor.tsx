@@ -1,6 +1,6 @@
 'use client'
 
-import { IDetailedTeacher, ISchoolName, ISubjectName } from "@/utils/interfaces";
+import { IDetailedTeacher, ISchoolName, ISubjectName } from "@/interfaces";
 import { Stack, Typography } from "@mui/material";
 import { ProfileContainer as TeacherContainer, SubjectsEditor, TeacherPositionsEditor, ExperienceEditor, ClientPanel } from "@/components";
 import { useTeacherEditorContext } from "@/providers";

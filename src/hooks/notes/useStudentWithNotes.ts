@@ -1,7 +1,7 @@
 'use client'
 
 import { useCallback, useEffect, useMemo, useState } from 'react'
-import { INoteName, IStudent } from '@/utils/interfaces'
+import { INoteName, IStudent } from '@/interfaces'
 import { useSpecificLessonEditorContext } from '@/providers'
 
 export function useStudentWithNotes() {

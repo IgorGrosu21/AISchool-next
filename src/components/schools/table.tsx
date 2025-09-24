@@ -3,7 +3,7 @@
 import { Checkbox, Grid2, Stack, Table, TableBody, TableCell, TableHead, TableRow, Typography } from "@mui/material"
 import { Link } from '@/i18n';
 import Image from "next/image";
-import { ISchool, IDetailedCountry } from "@/utils/interfaces";
+import { ISchool, IDetailedCountry } from "@/interfaces";
 import { useTranslations } from "next-intl";
 import { useIsMobile, useSchoolFilters } from "@/hooks";
 import { ClientPanel, KlassesRange } from "@/components";

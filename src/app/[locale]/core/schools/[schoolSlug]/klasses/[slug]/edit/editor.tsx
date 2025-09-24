@@ -1,7 +1,7 @@
 'use client'
 
 import { useMemo } from 'react'
-import { IDetailedKlass } from '@/utils/interfaces'
+import { IDetailedKlass } from '@/interfaces'
 import { Autocomplete, FormControl, FormControlLabel, Radio, RadioGroup, Stack, TextField, Typography } from '@mui/material'
 import { ClientPanel, KlassGroupsEditor, KlassLessonsEditor, StudentsEditor } from '@/components'
 import { useTranslations } from 'next-intl'

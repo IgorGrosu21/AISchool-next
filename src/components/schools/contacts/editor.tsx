@@ -1,7 +1,7 @@
 'use client'
 
 import { ClientPanel } from '@/components';
-import { IDetailedSchool } from '@/utils/interfaces';
+import { IDetailedSchool } from '@/interfaces';
 import { Grid2, TextField, Typography } from '@mui/material'
 import { useTranslations } from 'next-intl'
 import { Dispatch, SetStateAction, useCallback, useMemo } from 'react';

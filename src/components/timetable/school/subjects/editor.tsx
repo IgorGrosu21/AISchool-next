@@ -2,7 +2,7 @@
 
 import React, { Dispatch, SetStateAction } from "react"
 import { SubjectsEditor as SubjectListEditor } from "@/components"
-import { ISchoolWithTimetable, ISubjectName } from "@/utils/interfaces"
+import { ISchoolWithTimetable, ISubjectName } from "@/interfaces"
 import { Stack, Typography } from "@mui/material"
 import { useTranslations } from "next-intl"
 

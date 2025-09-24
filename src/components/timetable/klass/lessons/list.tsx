@@ -1,6 +1,6 @@
 'use client'
 
-import { IGroupName, ILessonName, ILessonTimeName } from "@/utils/interfaces";
+import { IGroupName, ILessonName, ILessonTimeName } from "@/interfaces";
 import { Lessons } from "../../lessons";
 
 interface KlassLessonsProps {

@@ -1,8 +1,8 @@
 'use client'
 
-import { getSpecificLessons } from '@/app/actions/lesson';
+import { getSpecificLessons } from '@/app/actions';
 import { useCalendarContext, useDiaryContext } from '@/providers';
-import { ISpecificLessonName } from '@/utils/interfaces';
+import { ISpecificLessonName } from '@/interfaces';
 import { addDays, compareAsc, compareDesc, format, isSameWeek, subDays } from 'date-fns';
 import { useCallback, useEffect, useMemo, useState, useTransition } from 'react';
 

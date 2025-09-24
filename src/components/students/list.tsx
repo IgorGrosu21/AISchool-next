@@ -1,7 +1,7 @@
 'use server'
 
 import { Balance, SmallProfile } from "@/components";
-import { IStudent } from "@/utils/interfaces";
+import { IStudent } from "@/interfaces";
 import { Stack, Typography, Checkbox, Grid2 } from "@mui/material";
 import { getTranslations } from "next-intl/server";
 

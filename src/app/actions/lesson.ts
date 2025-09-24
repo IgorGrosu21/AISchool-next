@@ -6,8 +6,8 @@ import {
   sendSpecificLessonPhoto, deleteSpecificLessonPhoto,
   sendHomework, deleteHomework,
   sendHomeworkPhoto, deleteHomeworkPhoto
-} from "@/utils/api";
-import { IDetailedHomework, IDetailedSpecificLesson } from "@/utils/interfaces"
+} from "@/requests";
+import { IDetailedHomework, IDetailedSpecificLesson } from "@/interfaces"
 import { EditActionFunction } from "./template";
 
 export async function getSpecificLessons(accountType: string, personId: string, startDay: string, endDay: string, schoolSlug?: string) {

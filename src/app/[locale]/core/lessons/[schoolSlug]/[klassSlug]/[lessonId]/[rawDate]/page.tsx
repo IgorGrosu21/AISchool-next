@@ -1,7 +1,7 @@
-import { editSpecificLesson } from "@/app/actions/lesson"
+import { editSpecificLesson } from "@/app/actions"
 import { NavigationContainer } from "@/components"
 import { EditorProvider, SpecificLessonEditorContext } from "@/providers"
-import { errorHandler, fetchSpecificLesson } from "@/utils/api"
+import { errorHandler, fetchSpecificLesson } from "@/requests"
 import { format } from "date-fns"
 import { ru } from "date-fns/locale/ru";
 import { getTranslations } from "next-intl/server"

@@ -1,5 +1,5 @@
 import { NavigationContainer, TimetableStepper, Title } from "@/components"
-import { errorHandler, fetchSchoolWithTimetable } from "@/utils/api"
+import { errorHandler, fetchSchoolWithTimetable } from "@/requests"
 import { getTranslations } from "next-intl/server"
 
 export default async function Page({ params }: { params: Promise<{schoolSlug: string}> }) {

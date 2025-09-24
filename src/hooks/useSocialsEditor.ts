@@ -1,6 +1,6 @@
 'use client'
 
-import { ISocial } from "@/utils/interfaces"
+import { ISocial } from "@/interfaces"
 import { useCallback, useEffect, useMemo, useState } from "react"
 
 const dummySocial = {

@@ -1,11 +1,11 @@
-import { editHomework } from "@/app/actions/lesson"
+import { editHomework } from "@/app/actions"
 import { NavigationContainer } from "@/components"
 import { EditorProvider, HomeworkEditorContext } from "@/providers"
 import { format } from "date-fns"
 import { ru } from "date-fns/locale/ru";
 import { getTranslations } from "next-intl/server"
 import { Editor } from "./editor"
-import { errorHandler, fetchHomework } from "@/utils/api"
+import { errorHandler, fetchHomework } from "@/requests"
 
 interface Params {
   schoolSlug: string

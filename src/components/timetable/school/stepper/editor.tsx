@@ -6,7 +6,7 @@ import { SchoolLessonsEditor } from '../lessons'
 import { TimetableStepperContainer } from './container'
 import { SchoolGroupsEditor } from '../groups'
 import { SubjectsEditor } from '../subjects'
-import { ISubjectName } from '@/utils/interfaces'
+import { ISubjectName } from '@/interfaces'
 
 export function TimetableStepperEditor({subjects}: {subjects: ISubjectName[]}) {
   const { instance: school, setInstance: setSchool } = useSchoolWithTimetableEditorContext()

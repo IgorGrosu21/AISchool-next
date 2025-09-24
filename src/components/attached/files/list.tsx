@@ -3,7 +3,7 @@
 import { Button, Stack, Typography } from "@mui/material";
 import { useTranslations } from "next-intl";
 import { Download } from "@mui/icons-material";
-import { IDetailedMedia } from "@/utils/interfaces";
+import { IDetailedMedia } from "@/interfaces";
 import { Link } from '@/i18n';
 import { ClientPanel } from "@/components";
 

@@ -2,7 +2,7 @@
 
 import { Backdrop, Stack, Button, TextField, Link, Box } from "@mui/material"
 import { useTranslations } from "next-intl"
-import { INoteName } from "@/utils/interfaces"
+import { INoteName } from "@/interfaces"
 import { useNotePicker } from "@/hooks"
 import { Note } from "./item"
 import { ClientPanel } from "@/components"

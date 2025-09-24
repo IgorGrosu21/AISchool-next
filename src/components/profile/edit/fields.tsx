@@ -1,7 +1,7 @@
 'use client'
 
 import { Stack, Typography, TextField } from "@mui/material";
-import { IDetailedUser } from "@/utils/interfaces";
+import { IDetailedUser } from "@/interfaces";
 import { useTranslations } from "next-intl";
 import { ClientPanel } from "@/components";
 

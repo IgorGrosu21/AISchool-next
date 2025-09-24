@@ -1,6 +1,6 @@
 'use server'
 
-import { errorHandler, fetchUserRoutes } from "@/utils/api";
+import { errorHandler, fetchUserRoutes } from "@/requests";
 import { getTranslations } from "next-intl/server";
 import {
   HomeOutlined, AccountCircleOutlined, Group, School, 

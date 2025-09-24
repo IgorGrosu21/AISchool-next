@@ -1,6 +1,6 @@
 'use client'
 
-import { IDetailedMedia } from "@/utils/interfaces"
+import { IDetailedMedia } from "@/interfaces"
 import { createContext, Dispatch, SetStateAction, useContext } from "react"
 
 type FileContextType = {

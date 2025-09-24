@@ -1,6 +1,6 @@
 'use client'
 
-import { ISubjectName } from "@/utils/interfaces";
+import { ISubjectName } from "@/interfaces";
 import { Stack, Autocomplete, TextField, Checkbox, Box } from "@mui/material";
 import { CheckBox, CheckBoxOutlineBlank } from "@mui/icons-material";
 import { useMemo } from "react";

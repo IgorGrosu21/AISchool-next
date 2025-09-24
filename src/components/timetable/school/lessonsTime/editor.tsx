@@ -1,6 +1,6 @@
 'use client'
 
-import { ILessonTime, ISchoolWithTimetable } from "@/utils/interfaces";
+import { ILessonTime, ISchoolWithTimetable } from "@/interfaces";
 import { Stack, Typography, TextField } from "@mui/material";
 import { useTranslations } from "next-intl";
 import { TimetableContainer } from "../../container";

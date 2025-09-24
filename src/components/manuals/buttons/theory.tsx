@@ -1,6 +1,6 @@
 'use client'
 
-import { IDetailedTopic, ITheory } from "@/utils/interfaces"
+import { IDetailedTopic, ITheory } from "@/interfaces"
 import { Button, Stack, Typography } from "@mui/material"
 import { useTranslations } from "next-intl"
 import { useTransition, useCallback, useMemo } from "react"

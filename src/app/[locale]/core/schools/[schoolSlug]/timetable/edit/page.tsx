@@ -1,5 +1,5 @@
-import { errorHandler, fetchSchoolWithTimetable, fetchSubjectsNames } from "@/utils/api"
-import { editSchoolWithTimetable } from '@/app/actions/school';
+import { errorHandler, fetchSchoolWithTimetable, fetchSubjectsNames } from "@/requests"
+import { editSchoolWithTimetable } from '@/app/actions';
 import { SchoolWithTimetableEditorContext } from '@/providers';
 import { EditorProvider } from '@/providers';
 import { getTranslations } from 'next-intl/server';

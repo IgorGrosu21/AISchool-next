@@ -1,6 +1,6 @@
 'use client'
 
-import { ILessonTimeName, ILessonName } from "@/utils/interfaces"
+import { ILessonTimeName, ILessonName } from "@/interfaces"
 import { createContext, useContext } from "react"
 
 export type DiaryContextType = {

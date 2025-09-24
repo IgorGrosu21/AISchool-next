@@ -1,6 +1,6 @@
 'use client'
 
-import { IDetailedHomework, IDetailedSpecificLesson } from "@/utils/interfaces"
+import { IDetailedHomework, IDetailedSpecificLesson } from "@/interfaces"
 import { createContext, useContext } from "react"
 import { EditorContextType } from "./base"
 

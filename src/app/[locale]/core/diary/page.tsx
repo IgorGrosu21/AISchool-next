@@ -1,4 +1,4 @@
-import { errorHandler, fetchUserRoutes } from "@/utils/api";
+import { errorHandler, fetchUserRoutes } from "@/requests";
 import { redirect } from '@/i18n';
 
 export default async function Page() {

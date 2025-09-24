@@ -4,7 +4,7 @@ import { Stack, Typography } from '@mui/material'
 import Image from 'next/image';
 import { getTranslations } from 'next-intl/server';
 import { Socials } from './socials';
-import { IDetailedUser } from '@/utils/interfaces';
+import { IDetailedUser } from '@/interfaces';
 import { NavigationContainer } from '../navigationContainer';
 import { Panel } from '../panel';
 import { Title } from '../editable';

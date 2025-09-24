@@ -1,5 +1,5 @@
 import { ModuleHeader, NavigationContainer, TheoryButtons/*, PdfViewer */ } from "@/components";
-import { errorHandler, fetchTopic } from "@/utils/api";
+import { errorHandler, fetchTopic } from "@/requests";
 import { getTranslations } from "next-intl/server";
 import { redirect } from '@/i18n';
 import { Stack } from "@mui/material";

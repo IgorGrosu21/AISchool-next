@@ -1,7 +1,7 @@
 'use client'
 
 import { ProviderProps } from "react"
-import { ILessonTimeName, ILessonName } from "@/utils/interfaces";
+import { ILessonTimeName, ILessonName } from "@/interfaces";
 
 import { DiaryContext } from "./context";
 

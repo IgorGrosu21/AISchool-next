@@ -1,7 +1,7 @@
 'use server'
 
-import { sendParent, sendStudent, sendTeacher } from "@/utils/api"
-import { IDetailedParent, IDetailedStudent, IDetailedTeacher } from "@/utils/interfaces"
+import { sendParent, sendStudent, sendTeacher } from "@/requests"
+import { IDetailedParent, IDetailedStudent, IDetailedTeacher } from "@/interfaces"
 import { EditActionFunction } from "./template"
 
 export const editParent: EditActionFunction<IDetailedParent> = async (instance) => {

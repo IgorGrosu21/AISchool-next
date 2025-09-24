@@ -1,6 +1,6 @@
 'use client'
 
-import { IKlassNameWithGroups, ILessonTime, ISchoolWithTimetable } from "@/utils/interfaces";
+import { IKlassNameWithGroups, ILessonTime, ISchoolWithTimetable } from "@/interfaces";
 import { Dispatch, SetStateAction, useCallback } from "react";
 import { WithKlass } from "../withKlass";
 import { LessonsEditor } from "../../lessons";

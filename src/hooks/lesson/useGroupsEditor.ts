@@ -1,6 +1,6 @@
 'use client'
 
-import { IGroupName, IStudentName, ISubjectName, ITeacherName, IKlassNameWithGroups } from "@/utils/interfaces"
+import { IGroupName, IStudentName, ISubjectName, ITeacherName, IKlassNameWithGroups } from "@/interfaces"
 import { useCallback, useMemo } from "react";
 
 export function useGroupsEditor(klass: IKlassNameWithGroups, updateGroups: (groups: IGroupName[]) => void) {

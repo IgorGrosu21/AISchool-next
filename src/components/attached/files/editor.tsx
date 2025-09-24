@@ -4,7 +4,7 @@ import { Button, Stack, Typography } from "@mui/material";
 import { useTranslations } from "next-intl";
 import { Close, Restore, Upload, Visibility } from "@mui/icons-material";
 import { useAttachedFilesContext } from "@/providers";
-import { IDetailedMedia } from "@/utils/interfaces";
+import { IDetailedMedia } from "@/interfaces";
 import { ClientPanel } from "@/components";
 
 interface AttachedFilesEditorProps {

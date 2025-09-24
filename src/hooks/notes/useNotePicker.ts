@@ -1,6 +1,6 @@
 'use client'
 
-import { INoteName } from "@/utils/interfaces"
+import { INoteName } from "@/interfaces"
 import { useCallback, useEffect, useState } from "react"
 
 type Note = Omit<INoteName, 'specificLesson' | 'student'>

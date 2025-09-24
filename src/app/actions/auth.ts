@@ -2,10 +2,10 @@
 
 import { redirect } from '@/i18n'
 
-import { sendAuthUser, createUser, sendLogoutRequest, sendVerificationEmail } from "@/utils/api";
+import { sendAuthUser, createUser, sendLogoutRequest, sendVerificationEmail } from "@/requests";
 import { AxiosError } from "axios";
 import { deleteTokens, setTokens } from "./token";
-import { IError } from "@/utils/interfaces";
+import { IError } from "@/interfaces";
 
 export type FormState = {
   email: {

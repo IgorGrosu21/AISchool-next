@@ -1,4 +1,4 @@
-import { errorHandler, fetchKlass } from "@/utils/api"
+import { errorHandler, fetchKlass } from "@/requests"
 import { Typography } from "@mui/material"
 import { getTranslations } from "next-intl/server"
 import { NavigationContainer, Students, KlassLessons, KlassGroups, Title } from "@/components"

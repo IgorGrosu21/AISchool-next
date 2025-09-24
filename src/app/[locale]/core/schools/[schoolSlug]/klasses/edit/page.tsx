@@ -1,6 +1,6 @@
-import { errorHandler, fetchSchoolWithKlasses } from '@/utils/api';
+import { errorHandler, fetchSchoolWithKlasses } from '@/requests';
 import { Editor } from './editor';
-import { editSchoolWithKlasses } from '@/app/actions/school';
+import { editSchoolWithKlasses } from '@/app/actions';
 import { SchoolWithKlassesEditorContext } from '@/providers';
 import { EditorProvider } from '@/providers';
 import { getTranslations } from 'next-intl/server';

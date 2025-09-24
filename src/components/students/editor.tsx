@@ -1,6 +1,6 @@
 'use client'
 
-import { IStudent } from '@/utils/interfaces';
+import { IStudent } from '@/interfaces';
 import { Stack, Typography, Checkbox, Grid2 } from '@mui/material';
 import { useTranslations } from 'next-intl';
 import { UserVerifier } from '../profile';
