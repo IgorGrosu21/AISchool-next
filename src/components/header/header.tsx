@@ -27,7 +27,7 @@ export async function Header() {
     top: 0,
     py: 2,
     px: { xs: 2, sm: 4, md: 8, lg: 16 },
-    bgcolor: {xs: 'rgba(233, 242, 247, 0.8)', md: 'background.paper'},
+    bgcolor: 'background.paper',
     boxShadow: '0 0 10px 0 rgba(0, 0, 0, 0.1)',
     alignItems: 'center',
   }}>

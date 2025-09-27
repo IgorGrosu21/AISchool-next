@@ -28,8 +28,11 @@ export function LatestHomeworks({latestHomeworks}: LatestHomeworksProps) {
       <Card index={index}>
         <Link href={getLink(homework)} style={{display: 'block', height: '100%'}}>
           <Stack gap={2} sx={{height: '100%'}}>
-            <Stack direction="row" gap={2} sx={{justifyContent: 'space-between', alignItems: 'flex-start'}}>
-              <Stack gap={1} sx={{alignItems: 'flex-start'}}>
+            <Stack direction={{xs: 'column', md: 'row'}} gap={2} sx={{
+              justifyContent: 'space-between',
+              alignItems: {xs: 'center', md: 'flex-start'}
+            }}>
+              <Stack gap={1} sx={{alignItems: {xs: 'center', md: 'flex-start'}}}>
                 <Typography variant="h6" color='primary'>
                   {homework.specificLesson.title}
                 </Typography>
@@ -42,7 +45,7 @@ export function LatestHomeworks({latestHomeworks}: LatestHomeworksProps) {
               </Typography>
             </Stack>
             <Box sx={{flex: 1}} />
-            <Stack direction="row" gap={2} sx={{justifyContent: 'space-between', alignItems: 'center'}}>
+            <Stack direction={{xs: 'column', md: 'row'}} gap={2} sx={{justifyContent: 'space-between', alignItems: 'center'}}>
               <SmallProfile user={homework.student.user} disableLink />
               <Note big={true} value={homework.note?.value} />
             </Stack>

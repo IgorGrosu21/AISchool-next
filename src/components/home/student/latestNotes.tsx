@@ -27,8 +27,11 @@ export function LatestNotes({latestNotes}: LatestNotesProps) {
       <Card index={index}>
         <Link href={getLink(note)} style={{display: 'block', height: '100%'}}>
           <Stack gap={2} sx={{height: '100%'}}>
-            <Stack direction="row" gap={2} sx={{justifyContent: 'space-between', alignItems: 'flex-start'}}>
-              <Stack gap={1} sx={{alignItems: 'flex-start'}}>
+            <Stack direction={{xs: 'column', md: 'row'}} gap={2} sx={{
+              justifyContent: 'space-between',
+              alignItems: {xs: 'center', md: 'flex-start'}
+            }}>
+              <Stack gap={1} sx={{alignItems: {xs: 'center', md: 'flex-start'}}}>
                 <Typography variant="h6" color='primary'>
                   {note.specificLesson.title}
                 </Typography>
@@ -41,7 +44,7 @@ export function LatestNotes({latestNotes}: LatestNotesProps) {
               </Typography>
             </Stack>
             <Box sx={{flex: 1}} />
-            <Stack direction="row" gap={2} sx={{justifyContent: 'space-between', alignItems: 'center'}}>
+            <Stack direction={{xs: 'column', md: 'row'}} gap={2} sx={{justifyContent: 'space-between', alignItems: 'center'}}>
               <Box>
                 {note.specificLesson.lesson.teacher?.user && <SmallProfile
                   user={note.specificLesson.lesson.teacher.user}
