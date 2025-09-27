@@ -1,6 +1,6 @@
 'use client'
 
-import { Box, keyframes, useColorScheme } from '@mui/material'
+import { Box, keyframes, useTheme } from '@mui/material'
 import { useMemo } from 'react'
 
 const float = keyframes`
@@ -39,8 +39,8 @@ const pulse = keyframes`
 `
 
 export function AnimatedBackground() {
-  const { mode } = useColorScheme()
-  const isDark = useMemo(() => mode === 'dark', [mode])
+  const theme = useTheme()
+  const isDark = useMemo(() => theme.palette.mode === 'dark', [theme.palette.mode])
 
   return <Box
     sx={{

@@ -1,6 +1,6 @@
 'use client'
 
-import { useColorScheme, Box } from '@mui/material'
+import { Box, useTheme } from '@mui/material'
 import Image, { ImageProps } from 'next/image'
  
 type Props = Omit<ImageProps, 'src' | 'priority' | 'loading'> & {
@@ -9,7 +9,7 @@ type Props = Omit<ImageProps, 'src' | 'priority' | 'loading'> & {
 }
  
 export function ThemeImage(props: Props) {
-  const { mode } = useColorScheme()
+  const theme = useTheme()
   const { srcLight, srcDark, alt, ...rest } = props
  
   return <Box sx={{
@@ -21,13 +21,13 @@ export function ThemeImage(props: Props) {
       {...rest}
       src={srcLight}
       alt={alt + ' light'}
-      style={{display: mode === 'light' ? 'block' : 'none'}}
+      style={{display: theme.palette.mode === 'light' ? 'block' : 'none'}}
     />
     <Image
       {...rest}
       src={srcDark}
       alt={alt + ' dark'}
-      style={{display: mode === 'dark' ? 'block' : 'none'}}
+      style={{display: theme.palette.mode === 'dark' ? 'block' : 'none'}}
     />
   </Box>
 }
