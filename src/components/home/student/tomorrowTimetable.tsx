@@ -8,11 +8,11 @@ import { Stack, Typography } from "@mui/material"
 
 interface TomorrowTimetableProps {
   id: string
-  tomorrowTimetable: (IPersonHome & { profileType: 'teacher' })['tomorrowTimetable']
+  tomorrowTimetable: (IPersonHome & { profileType: 'student' })['tomorrowTimetable']
 }
 
 export function TomorrowTimetable({id, tomorrowTimetable}: TomorrowTimetableProps) {
-  return <Link style={{display: 'block', width: '50%'}} href={`/core/diary/teachers/${id}/${tomorrowTimetable[0].school}/`}>
+  return <Link style={{display: 'block', width: '50%'}} href={`/core/diary/students/${id}`}>
     <Card index={0}>
       <Stack gap={2} sx={{flex: 1}}>
         {tomorrowTimetable.map((lessonTime, i) => <Lesson
@@ -22,8 +22,8 @@ export function TomorrowTimetable({id, tomorrowTimetable}: TomorrowTimetableProp
           disableLink
         >
           <Stack gap={1} sx={{flex: 1, alignItems: 'flex-start'}}>
-            {lessonTime.lesson?.klassSlug && <Typography color='secondary'>
-              {lessonTime.lesson.klassSlug}
+            {lessonTime.lesson?.teacher && <Typography color='secondary'>
+              {lessonTime.lesson.teacher.user.surname ?? ''} {lessonTime.lesson.teacher.user.name ?? ''}
             </Typography>}
             {lessonTime.specificLesson && <Typography>{lessonTime.specificLesson?.title}</Typography>}
           </Stack>

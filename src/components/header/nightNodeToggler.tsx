@@ -3,7 +3,7 @@
 import { DarkModeOutlined, LightModeOutlined } from "@mui/icons-material"
 import { IconButton } from "@mui/material"
 import { useColorScheme, useTheme } from "@mui/material/styles";
-import { useCallback, useEffect } from "react";
+import { useCallback } from "react";
 
 export function NightNodeToggler() {
   const { setMode } = useColorScheme();
@@ -12,10 +12,6 @@ export function NightNodeToggler() {
   const toggleMode = useCallback(() => {
     setMode(theme.palette.mode === 'dark' ? 'light' : 'dark');
   }, [theme.palette.mode, setMode])
-
-  useEffect(() => {
-    console.log(theme.palette.mode)
-  }, [theme.palette.mode])
 
   return <IconButton onClick={toggleMode} color='primary'>
     <DarkModeOutlined sx={{display: theme.palette.mode === 'dark' ? 'block' : 'none'}} />

@@ -63,7 +63,11 @@ export function SpecificLessons({specificLessons, dates}: SpecificLessonsProps) 
       >
         <Stack direction='row' gap={2}>
           <Stack gap={1} sx={{flex: 1}}>
-            <Typography color='secondary'>{lesson?.teacher?.user.surname ?? ''} {lesson?.teacher?.user.name ?? ''}</Typography>
+            {accountType == 'student' ? <Typography color='secondary'>
+              {lesson?.teacher?.user.surname ?? ''} {lesson?.teacher?.user.name ?? ''}
+            </Typography> : <Typography color='secondary'>
+              {lesson?.klassSlug}
+            </Typography>}
             {specificLesson && <Typography>{specificLesson?.title}</Typography>}
           </Stack>
           {specificLesson?.note && <Note value={specificLesson.note} big />}

@@ -1,5 +1,5 @@
-import type { IStudent, IKlass, ITeacher, IPosition, IParent, IStudentWithKlass, IUser, INote, ISpecificLesson, ILessonTime } from '../listed'
-import type { ISchoolName, ISubjectName } from '../name'
+import type { IStudent, IKlass, ITeacher, IPosition, IParent, IStudentWithKlass, IUser, INote, ILessonTime } from '../listed'
+import type { ILessonName, ISchoolName, ISpecificLessonName, ISubjectName } from '../name'
 import type { IDetailedUser } from './user'
 import type { ICanEdit } from './canEdit'
 import type { IDetailedHomework } from './lesson'
@@ -37,8 +37,8 @@ export type IPersonHome = {
 })
 
 type IStudentHome = {
+  tomorrowTimetable: Array<Omit<ILessonTime, 'lessons'> & {lesson?: ILessonName, specificLesson?: ISpecificLessonName}>
   latestNotes: INote[]
-  latestSpecificLessons: ISpecificLesson[]
   analytics: Array<{
     subject: ISubjectName
     points: Array<{
@@ -49,8 +49,8 @@ type IStudentHome = {
 }
 
 type ITeacherHome = {
+  tomorrowTimetable: Array<Omit<ILessonTime, 'lessons'> & {lesson?: ILessonName, specificLesson?: ISpecificLessonName}>
   latestHomeworks: IDetailedHomework[]
-  tomorrowTimetable: ILessonTime[]
   analytics: Array<{
     school: ISchoolName
     subjects: Array<{
