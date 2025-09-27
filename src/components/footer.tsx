@@ -36,7 +36,7 @@ export async function Footer() {
             {t('news')}
           </Typography>
         </Link>
-        <Link href='/help/privacy_policy'>
+        <Link href='/help/privacy-policy'>
           <Typography color='textSecondary' sx={{textAlign: {xs: 'center', md: 'start'}}}>
             {t('privacy_policy')}
           </Typography>
@@ -48,7 +48,7 @@ export async function Footer() {
         {t('support')}
       </Typography>
       <Stack gap={1}>
-        <Link href='/help/user_agreement'>
+        <Link href='/help/user-agreement'>
           <Typography color='textSecondary' sx={{textAlign: {xs: 'center', md: 'start'}}}>
             {t('user_agreement')}
           </Typography>
