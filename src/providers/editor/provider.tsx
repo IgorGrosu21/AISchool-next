@@ -3,7 +3,8 @@
 import { Context, ProviderProps, useCallback, useMemo, useState, useTransition } from "react"
 
 import { useTranslations } from "next-intl";
-import { ClientPanel, Loader, Title } from "@/components";
+import { Loader, Title } from "@/components";
+import { Panel } from "@/ui";
 import { Stack, Button, Alert, Snackbar, SnackbarCloseReason } from "@mui/material";
 import { Link } from '@/i18n';
 import { EditorContextType } from "./contexts";
@@ -53,7 +54,7 @@ export function EditorProvider<T extends ICanEdit>({children, value: {Context, i
       }
     })
   }, [action, instance, router])
-
+  
   if (!initial.canEdit) {
     router.push('/forbidden')
   }
@@ -61,7 +62,7 @@ export function EditorProvider<T extends ICanEdit>({children, value: {Context, i
   return <Context.Provider value={{instance, setInstance}}>
     {returnLabel !== '' && <Title label={returnLabel} link={returnLink} type='back' />}
     {children}
-    <ClientPanel direction='row' sx={{justifyContent: 'space-between'}}>
+    <Panel direction='row' sx={{justifyContent: 'space-between'}}>
       <Link href={returnLink}>
         <Button variant='outlined'>{t('return')}</Button>
       </Link>
@@ -69,7 +70,7 @@ export function EditorProvider<T extends ICanEdit>({children, value: {Context, i
         <Button variant='outlined' onClick={discard}>{t('discard')}</Button>
         <Button variant='contained' onClick={save}>{t('save')}</Button>
       </Stack>
-    </ClientPanel>
+    </Panel>
     <Loader open={pending} />
     <Snackbar open={status !== undefined} autoHideDuration={6000} onClose={handleClose}>
       <Alert

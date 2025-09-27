@@ -34,7 +34,7 @@ export function LatestHomeworks({latestHomeworks}: LatestHomeworksProps) {
                   {homework.specificLesson.title}
                 </Typography>
                 <Typography variant="h6" sx={{color: 'text.primary'}}>
-                  {homework.specificLesson.desc}
+                  {homework.comment}
                 </Typography>
               </Stack>
               <Typography variant="h6" sx={{color: 'text.secondary'}}>

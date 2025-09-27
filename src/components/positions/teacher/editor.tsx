@@ -1,6 +1,7 @@
 'use client'
 
-import { ClientPanel, PickSchools, SchoolLink, SubjectsEditor } from "@/components"
+import { PickSchools, SchoolLink, SubjectsEditor } from "@/components"
+import { Panel } from "@/ui"
 import { IDetailedTeacher, IPosition, ISchoolName } from "@/interfaces"
 import { Button, Stack, Typography } from "@mui/material"
 import { useTranslations } from "next-intl"
@@ -55,7 +56,7 @@ export function TeacherPositionsEditor({teacher, setTeacher, schoolNames}: Teach
     <PickSchools value={schools} setValue={setSchools} options={schoolNames} />
     <Stack gap={2}>
       {positions.map((position, i) => <Stack key={i} gap={2} direction='row'>
-        <ClientPanel gap={4} sx={{width: '100%'}}>
+        <Panel gap={4} sx={{width: '100%'}}>
           <SchoolLink school={position.school} />
           <Stack direction={{xs: 'column', md: 'row'}} gap={2} sx={{alignItems: 'center'}}>
             <Typography variant='h6'>{t('singular')}:</Typography>
@@ -70,11 +71,17 @@ export function TeacherPositionsEditor({teacher, setTeacher, schoolNames}: Teach
             setInstance={instance => setPositions(ps => ps.map((p, j) => j === i ? instance : p))}
             subjects={teacher.subjects}
             small
+            sx={{
+              background: 'unset',
+              boxShadow: 'unset',
+              backdropFilter: 'unset',
+              border: 'unset',
+            }}
           />
           <Stack direction='row' sx={{justifyContent: 'flex-end'}}>
             <Button variant='contained' onClick={() => deletePosition(i)}>{t('delete')}</Button>
           </Stack>
-        </ClientPanel>
+        </Panel>
       </Stack>)}
     </Stack>
   </Stack>

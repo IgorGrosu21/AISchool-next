@@ -33,12 +33,13 @@ export function LandingButtons({buttons}: LandingButtonsProps) {
           fontSize: '1.1rem',
           fontWeight: 600,
           borderRadius: 3,
+          color: 'background.default',
           '&:hover': {
             transform: 'translateY(-2px)',
             ...(button.variant === 'contained' ? {
               boxShadow: '0 12px 40px rgba(0,0,0,0.4)',
             } : {
-              borderColor: 'white',
+              borderColor: 'background.default',
               backgroundColor: 'rgba(255, 255, 255, 0.1)',
             })
           },
@@ -47,8 +48,7 @@ export function LandingButtons({buttons}: LandingButtonsProps) {
             backgroundColor: 'rgba(255, 255, 255, 0.1)',
             boxShadow: '0 8px 32px rgba(0,0,0,0.3)'
           } : {
-            borderColor: 'white',
-            color: 'white',
+            borderColor: 'background.default',
           })
         }}
       >

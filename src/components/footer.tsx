@@ -2,7 +2,7 @@
 
 import { Facebook, Instagram } from "@mui/icons-material"
 import { Box, Stack, Typography } from "@mui/material"
-import Image from "next/image"
+import { ThemeImage } from "./themeImage"
 import { Link } from '@/i18n'
 import { getTranslations } from "next-intl/server";
 
@@ -18,7 +18,7 @@ export async function Footer() {
   }}>
     <Box sx={{display: {xs: 'none', md: 'block'}}}>
       <Link href='/'>
-        <Image priority src='/images/logo-blue.png' alt='logo' width={100} height={94} />
+        <ThemeImage srcDark='/images/logo-blue-dark.png' srcLight='/images/logo-blue-light.png' alt='logo' width={100} height={94} />
       </Link>
     </Box>
     <Stack gap={2}>

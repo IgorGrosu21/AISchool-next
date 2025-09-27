@@ -1,6 +1,5 @@
 'use client'
 
-import Image from "next/image"
 import { Link } from '@/i18n'
 import { useState, useEffect, useCallback } from "react"
 import { usePathname } from "@/i18n"
@@ -8,10 +7,10 @@ import { usePathname } from "@/i18n"
 import { Menu, Close} from "@mui/icons-material"
 import { Stack, Typography, IconButton, Drawer } from "@mui/material"
 import { useTranslations } from "next-intl"
-import { AuthButton } from "@/components"
+import { AuthButton, ThemeImage } from "@/components"
 import { logoutThis, verify } from "@/app/actions"
 import { RouteController } from "./routeController"
-import { IUserRoutes } from "@/interfaces/detailed/user"
+import { IUserRoutes } from "@/interfaces"
 
 type Routes = Array<Array<{
   path: string,
@@ -55,16 +54,17 @@ export function SideBar({ user, routes }: SideBarProps) {
     >
       <Stack sx={{
         height: '100vh',
-        minWidth: {xs: '100vw', lg: '17.5vw'},
-        maxWidth: {xs: '100vw', lg: '20vw'},
-        width: {xs: '100vw', lg: 'auto'},
-        bgcolor: 'background.default'
+        minWidth: {xs: '100vw', md: '25vw', lg: '17.5vw'},
+        maxWidth: {xs: '100vw', md: '33vw', lg: '20vw'},
+        width: {xs: '100vw', md: 'auto'},
+        bgcolor: 'background.default',
+        transition: '0.5s'
       }}>
         <Stack direction='row' sx={{p: 2, justifyContent: 'center', bgcolor: 'primary.dark', position: 'relative'}}>
           <IconButton
             onClick={toggleDrawer}
             sx={{
-              display: {xs: 'block', lg: 'none'},
+              display: {xs: 'block', md: 'none'},
               position: 'absolute',
               right: 8,
               top: '50%',
@@ -74,18 +74,24 @@ export function SideBar({ user, routes }: SideBarProps) {
           >
             <Close />
           </IconButton>
-          <Image src='/images/logo-white.png' width={100} height={94} alt='light-logo' priority />
+          <ThemeImage
+            srcDark='/images/logo-transparent-dark.png'
+            srcLight='/images/logo-transparent-light.png'
+            alt='logo'
+            width={100}
+            height={94}
+          />
         </Stack>
         <Stack sx={{height: '100%', width: '100%', justifyContent: 'center'}}>
           <Stack gap={2} direction='row' sx={{p: 2, bgcolor: 'primary.main', alignItems: 'center'}}>
             <Link href={user.profileLink ?? '/core'} style={{display: 'flex', alignItems: 'center', pointerEvents: user.profileLink ? 'unset' : 'none'}}>
-              <Image
-                src={user.avatar ? `${user.avatar}` : '/images/default-avatar.png'}
-                width={100}
-                height={100}
+              <ThemeImage
+                srcDark={user.avatar ? user.avatar : '/images/default-avatar-dark.png'}
+                srcLight={user.avatar ? user.avatar : '/images/default-avatar-light.png'}
                 style={{borderRadius: '50%'}}
                 alt='avatar'
-                priority
+                width={100}
+                height={100}
               />
             </Link>
             <Stack sx={{flex: 1}}>

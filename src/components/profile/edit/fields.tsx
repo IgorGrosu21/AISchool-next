@@ -3,7 +3,7 @@
 import { Stack, Typography, TextField } from "@mui/material";
 import { IDetailedUser } from "@/interfaces";
 import { useTranslations } from "next-intl";
-import { ClientPanel } from "@/components";
+import { Panel } from "@/ui";
 
 interface FieldsProps {
   user: IDetailedUser,
@@ -13,7 +13,7 @@ interface FieldsProps {
 export function Fields({user, setUser}: FieldsProps) {
   const t = useTranslations('profile')
 
-  return <ClientPanel gap={4} sx={{justifyContent: 'center'}}>
+  return <Panel gap={4} sx={{justifyContent: 'center'}}>
     <Stack gap={2} sx={{alignItems: 'flex-start'}}>
       <Typography>{t('name')}:</Typography>
       <TextField
@@ -32,5 +32,5 @@ export function Fields({user, setUser}: FieldsProps) {
         sx={{width: {xs: '100%', md: 'auto'}}}
       />
     </Stack>
-  </ClientPanel>
+  </Panel>
 }

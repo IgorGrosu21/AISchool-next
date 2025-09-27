@@ -1,6 +1,5 @@
 'use server'
 
-import { errorHandler, fetchUserRoutes } from "@/requests";
 import { getTranslations } from "next-intl/server";
 import {
   HomeOutlined, AccountCircleOutlined, Group, School, 
@@ -8,11 +7,9 @@ import {
   //VideocamOutlined, EmojiEvents, SchoolOutlined,SellOutlined,
 } from "@mui/icons-material"
 import { SideBar } from "./sidebar";
+import { IUserRoutes } from "@/interfaces";
 
-export async function SideBarWrapper() {
-  const [userRoutesRaw, status] = await fetchUserRoutes()
-  const userRoutes = await errorHandler(userRoutesRaw, status)
-
+export async function SideBarWrapper({ userRoutes }: { userRoutes: IUserRoutes }) {
   const t = await getTranslations('components.sidebar')
 
   const routes = [

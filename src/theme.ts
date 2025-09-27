@@ -26,28 +26,71 @@ declare module '@mui/material/SvgIcon' {
 }
 
 const theme = createTheme({
-  palette: {
-    background: {
-      default: '#fff',
-      paper: '#e9f2f7'
+  cssVariables: {
+    colorSchemeSelector: 'data',
+  },
+  colorSchemes: {
+    dark: {
+      palette: {
+        background: {
+          default: '#000',
+          paper: '#080816'
+        },
+        primary: {
+          light: '#64b5f6',
+          main: '#2196f3',
+          dark: '#1976d2',
+          contrastText: '#000',
+        },
+        secondary: {
+          light: '#4db6ac',
+          main: '#26a69a',
+          dark: '#00695c',
+          contrastText: '#000',
+        },
+        tertiary: {
+          light: '#ba68c8',
+          main: '#9c27b0',
+          dark: '#7b1fa2',
+          contrastText: '#000'
+        },
+        text: {
+          primary: 'rgba(255, 255, 255, 0.87)',
+          secondary: 'rgba(255, 255, 255, 0.6)',
+          disabled: 'rgba(255, 255, 255, 0.38)'
+        }
+      }
     },
-    primary: {
-      light: '#438bce',
-      main: '#146FC2',
-      dark: '#0e4d87',
-      contrastText: '#fff',
-    },
-    secondary: {
-      light: '#8bce43',
-      main: '#00877e',
-      dark: '#4d870e',
-      contrastText: '#fff',
-    },
-    tertiary: {
-      light: '#8845d1',
-      main: '#6814c2',
-      dark: '#4c00b3',
-      contrastText: '#fff'
+    light: {
+      palette: {
+        background: {
+          default: '#fff',
+          paper: '#e9f2f7'
+        },
+        primary: {
+          light: '#438bce',
+          main: '#146fc2',
+          dark: '#0e4d87',
+          contrastText: '#fff',
+        },
+        secondary: {
+          light: '#8bce43',
+          main: '#00877e',
+          dark: '#4d870e',
+          contrastText: '#fff',
+        },
+        tertiary: {
+          light: '#8845d1',
+          main: '#6814c2',
+          dark: '#4c00b3',
+          contrastText: '#fff'
+        },
+        text: {
+          primary: 'rgba(0, 0, 0, 0.87)',
+          secondary: 'rgba(0, 0, 0, 0.6)',
+          disabled: 'rgba(0, 0, 0, 0.38)'
+        }
+      },
     }
   },
   typography: {

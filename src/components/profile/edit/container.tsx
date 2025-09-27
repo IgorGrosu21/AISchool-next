@@ -5,20 +5,19 @@ import { Stack } from "@mui/material";
 import { Fields } from "./fields";
 import { Socials } from "./socials";
 import { ImageUploader } from "../../imageUploader";
-import Image from "next/image";
 import { removeAvatar, editAvatar } from "@/app/actions";
-import { ClientPanel } from "@/components";
+import { Panel } from "@/ui";
+import { ThemeImage } from "../../themeImage";
 
-interface ContainerProps {
+interface ContainerProps extends React.PropsWithChildren {
   user: IDetailedUser
   setUser: (user: IDetailedUser) => void
-  children: React.ReactNode | React.ReactNode[]
 }
 
 export function ProfileContainer({user, setUser, children}: ContainerProps) {
   return <>
-    <Stack gap={4} direction={{ xs: 'column', md: 'row' }}>
-      <ClientPanel sx={{flexGrow: 0, height: '100%', alignItems: 'center'}}>
+    <Stack gap={4} direction={{ xs: 'column', md: 'row' }} sx={{alignItems: 'center'}}>
+      <Panel sx={{flexGrow: 0, height: '100%', alignItems: 'center'}}>
         <ImageUploader
           existing={user.avatar}
           setExisting={val => setUser({...user, avatar: val})}
@@ -34,28 +33,28 @@ export function ProfileContainer({user, setUser, children}: ContainerProps) {
             alignItems: 'center',
             alignSelf: { xs: 'center', md: 'flex-start' }
           }}>
-            <Image 
-              src={src ?? '/images/default-avatar.png'} 
-              width={200} 
-              height={200} 
+            <ThemeImage
+              srcDark={src ? src : '/images/default-avatar-dark.png'}
+              srcLight={src ? src : '/images/default-avatar-light.png'}
+              alt='avatar'
+              width={200}
+              height={200}
               style={{
                 borderRadius: '50%',
                 width: '100%',
                 height: '100%',
                 objectFit: 'cover'
               }} 
-              alt='avatar' 
-              priority 
             />
           </Stack>}
         />
-      </ClientPanel>
+      </Panel>
       <Fields user={user} setUser={setUser} />
     </Stack>
     <Stack gap={{ xs: 6, md: 8 }}>
-      <ClientPanel>
+      <Panel>
         <Socials socials={user.socials} setSocials={socials => setUser({...user, socials})} />
-      </ClientPanel>
+      </Panel>
       {children}
     </Stack>
   </>

@@ -1,4 +1,5 @@
-import { NavigationContainer, Panel, TeacherPositions } from "@/components"
+import { NavigationContainer, TeacherPositions } from "@/components"
+import { Panel } from "@/ui"
 import { errorHandler, fetchTeacher } from "@/requests"
 import { Typography } from "@mui/material"
 import { getTranslations } from "next-intl/server"

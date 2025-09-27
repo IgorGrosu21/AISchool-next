@@ -1,10 +1,11 @@
 'use client'
 
 import { AttachedItemsProvider, useHomeworkEditorContext } from '@/providers'
-import { Stack, TextField, Typography } from '@mui/material'
+import { Box, Grid2, Stack, TextField, Typography } from '@mui/material'
 import { useCallback, useMemo } from 'react'
 import { useTranslations } from 'next-intl'
-import { SmallProfile, Note, AttachedLinksEditor, AttachedFilesEditor, AttachedLinks, AttachedFiles, SpecificLessonHeader, ClientPanel } from '@/components'
+import { SmallProfile, Note, AttachedLinksEditor, AttachedFilesEditor, AttachedLinks, AttachedFiles, SpecificLessonHeader } from '@/components'
+import { Panel } from '@/ui'
 
 interface ContainerProps {
   date: string
@@ -24,42 +25,54 @@ export function Editor({date}: ContainerProps) {
 
   return <Stack gap={8}>
     <SpecificLessonHeader specificLesson={specificLesson} date={date} editable={homework.student.isManager}>
-      <Stack gap={2}>
-        <ClientPanel gap={2}>
-          <Typography variant='h5'>{t('title')}</Typography>
-          <Typography variant='h6'>{specificLesson.title}</Typography>
-        </ClientPanel>
-        <ClientPanel gap={2}>
-          <Typography variant='h5'>{t('desc')}</Typography>
-          <Typography variant='h6'>{specificLesson.desc}</Typography>
-        </ClientPanel>
-      </Stack>
-      <AttachedLinks links={specificLesson.links} />
-      <AttachedFiles files={specificLesson.files} />
+      <Grid2 container spacing={2} columns={{xs: 1, md: 2}}>
+        <Grid2 size={1}>
+          <Panel gap={2}>
+            <Typography variant='h5'>{t('title')}</Typography>
+            <Typography variant='h6'>{specificLesson.title}</Typography>
+          </Panel>
+        </Grid2>
+        <Grid2 size={1}>
+          <AttachedLinks links={specificLesson.links} />
+        </Grid2>
+        <Grid2 size={1}>
+          <Panel gap={2}>
+            <Typography variant='h5'>{t('desc')}</Typography>
+            <Typography variant='h6'>{specificLesson.desc}</Typography>
+          </Panel>
+        </Grid2>
+        <Grid2 size={1}>
+          <AttachedFiles files={specificLesson.files} />
+        </Grid2>
+      </Grid2>
     </SpecificLessonHeader>
     <AttachedItemsProvider value={{ setInstance: setHomework }}>
       <Stack gap={4}>
-        <Stack direction='row' gap={4}>
-          <ClientPanel sx={{flexGrow: 0}}>
-            {lesson.teacher && <SmallProfile user={lesson.teacher.user} disableLink extraSmall />}
-          </ClientPanel>
-          <ClientPanel sx={{justifyContent: 'center'}}>
-            <Typography variant='h5'>{t('comment')}:</Typography>
-            <Typography variant='h6'>{note?.comment}</Typography>
-          </ClientPanel>
-          <ClientPanel sx={{justifyContent: 'center'}}>
-            <Typography variant='h5'>{t('last_modified')}:</Typography>
-            <Typography variant='h6'>{note?.lastModified}</Typography>
-          </ClientPanel>
-          <ClientPanel sx={{flexGrow: 0, justifyContent: 'center', alignItems: 'center'}}>
-            <Note value={note?.value} big />
-          </ClientPanel>
-        </Stack>
-        <AttachedLinksEditor links={homework?.links} />
-        <AttachedFilesEditor files={homework.files} filesData={homework.filesData} />
-        <ClientPanel>
-          <TextField label={t('comment')} value={homework?.comment ?? ''} onChange={e => updateComment(e.target.value)} />
-        </ClientPanel>
+        <Panel>
+          {lesson.teacher && <SmallProfile user={lesson.teacher.user} disableLink extraSmall />}
+          <Box sx={{flex: 1}} />
+          <Note value={note?.value} big />
+        </Panel>
+        <Grid2 container spacing={2} columns={{xs: 1, md: 2}}>
+          <Grid2 size={1}>
+            <Panel gap={2} sx={{height: '100%'}}>
+              <Typography variant='h5'>{t('student_comment')}:</Typography>
+              <TextField value={homework?.comment ?? ''} onChange={e => updateComment(e.target.value)} />
+            </Panel>
+          </Grid2>
+          <Grid2 size={1}>
+            <AttachedLinksEditor links={homework?.links} />
+          </Grid2>
+          <Grid2 size={1}>
+            <Panel sx={{justifyContent: 'center'}}>
+              <Typography variant='h5'>{t('teacher_comment')}:</Typography>
+              <Typography variant='h6'>{note?.comment}</Typography>
+            </Panel>
+          </Grid2>
+          <Grid2 size={1}>
+            <AttachedFilesEditor files={homework.files} filesData={homework.filesData} />
+          </Grid2>
+        </Grid2>
       </Stack>
     </AttachedItemsProvider>
   </Stack>

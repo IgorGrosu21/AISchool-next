@@ -3,7 +3,8 @@
 import { useMemo } from 'react'
 import { IDetailedKlass } from '@/interfaces'
 import { Autocomplete, FormControl, FormControlLabel, Radio, RadioGroup, Stack, TextField, Typography } from '@mui/material'
-import { ClientPanel, KlassGroupsEditor, KlassLessonsEditor, StudentsEditor } from '@/components'
+import { KlassGroupsEditor, KlassLessonsEditor, StudentsEditor } from '@/components'
+import { Panel } from '@/ui'
 import { useTranslations } from 'next-intl'
 import { useKlassEditorContext } from '@/providers'
 
@@ -15,7 +16,7 @@ export function Editor() {
 
   return <>
     <Stack gap={4}>
-      <ClientPanel direction='row' gap={2} sx={{alignItems: 'center'}}>
+      <Panel direction='row' gap={2} sx={{alignItems: 'center'}}>
         <Typography variant='h6'>{t(`profiles.title`)}:</Typography>
         <FormControl>
           <RadioGroup row value={klass.profile} onChange={e => setKlass({...klass, profile: e.target.value as IDetailedKlass['profile']})}>
@@ -24,8 +25,8 @@ export function Editor() {
             )}
           </RadioGroup>
         </FormControl>
-      </ClientPanel>
-      <ClientPanel>
+      </Panel>
+      <Panel>
         <Autocomplete
           isOptionEqualToValue={(option, value) => option.id === value.id}
           value={klass.teacher}
@@ -34,7 +35,7 @@ export function Editor() {
           getOptionLabel={(option) => `${option.user.surname} ${option.user.name}`}
           renderInput={(params) => <TextField {...params} label={t('teacher')} />}
         />
-      </ClientPanel>
+      </Panel>
     </Stack>
     <StudentsEditor students={klass.students} setStudents={students => setKlass(k => ({...k, students: students}))} />
     <KlassLessonsEditor staff={klass.school.staff} timetable={klass.school.timetable} klass={klass} setKlass={setKlass} />

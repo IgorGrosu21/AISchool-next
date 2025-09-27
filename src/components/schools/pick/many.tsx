@@ -3,7 +3,7 @@
 import { ISchoolName } from "@/interfaces"
 import { Typography, Autocomplete, TextField } from "@mui/material"
 import { useTranslations } from "next-intl"
-import { ClientPanel } from "@/components"
+import { Panel } from "@/ui"
 
 interface PickSchoolsProps {
   value: ISchoolName[]
@@ -14,7 +14,7 @@ interface PickSchoolsProps {
 export function PickSchools({value, setValue, options}: PickSchoolsProps) {
   const t = useTranslations('schools')
 
-  return <ClientPanel gap={2}>
+  return <Panel gap={2}>
     <Typography variant='h5'>{t('pick_many')}</Typography>
     <Autocomplete
       multiple
@@ -25,5 +25,5 @@ export function PickSchools({value, setValue, options}: PickSchoolsProps) {
       getOptionLabel={(option) => `${option.name}`}
       renderInput={(params) => <TextField {...params} label={t('singular')} />}
     />
-  </ClientPanel>
+  </Panel>
 }

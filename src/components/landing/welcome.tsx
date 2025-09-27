@@ -9,7 +9,7 @@ const heroFeatures = [School, TrendingUp, People].map(Icon => ({ icon: Icon }))
 const ctaFeatures = [School, TrendingUp, ArrowForward].map(Icon => ({ icon: Icon }))
 
 export function Welcome({type}: {type: 'hero' | 'cta'}) {
-  const t = useTranslations(`pages.landing.${type}`);
+  const t = useTranslations(`components.landing.${type}`);
 
   return <Section
     color='primary'

@@ -5,7 +5,7 @@ import { useTranslations } from "next-intl";
 import { Close, Restore, Upload, Visibility } from "@mui/icons-material";
 import { useAttachedFilesContext } from "@/providers";
 import { IDetailedMedia } from "@/interfaces";
-import { ClientPanel } from "@/components";
+import { Panel } from "@/ui";
 
 interface AttachedFilesEditorProps {
   files: IDetailedMedia[]
@@ -17,7 +17,7 @@ export function AttachedFilesEditor({files, filesData, small = true}: AttachedFi
   const { openFilePicker, setActiveFile, setActiveFileData, restoreFile, deleteFile } = useAttachedFilesContext()
   const t = useTranslations('timetable.specific_lessons')
   
-  return <ClientPanel gap={2}>
+  return <Panel gap={2} sx={{height: '100%'}}>
     <Stack direction='row' sx={{justifyContent: 'space-between', alignItems: 'center'}}>
       <Typography variant={small ? 'h6' : 'h5'}>{t('files.plural')}:</Typography>
       <Upload onClick={openFilePicker} color='primary' />
@@ -34,5 +34,5 @@ export function AttachedFilesEditor({files, filesData, small = true}: AttachedFi
         <Close onClick={() => deleteFile(i, 'fileData')} />
       </Button>)}
     </Stack>
-  </ClientPanel>
+  </Panel>
 }

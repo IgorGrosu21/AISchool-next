@@ -6,7 +6,8 @@ import Image from "next/image";
 import { ISchool, IDetailedCountry } from "@/interfaces";
 import { useTranslations } from "next-intl";
 import { useIsMobile, useSchoolFilters } from "@/hooks";
-import { ClientPanel, KlassesRange } from "@/components";
+import { KlassesRange } from "@/components";
+import { Panel } from "@/ui";
 import { ChevronLeft, ChevronRight } from "@mui/icons-material";
 
 interface SchoolTableProps {
@@ -30,7 +31,7 @@ export function SchoolTable({schools, country}: SchoolTableProps) {
     <Stack gap={4}>
       <Grid2 container spacing={2}>
         {structuredParams.map((param, i) => <Grid2 key={i} size={isMobile ? 12 : param.size}>
-          <ClientPanel gap={2} sx={{height: '100%'}}>
+          <Panel gap={2} sx={{height: '100%'}}>
             <Typography variant='h6'>{tFilters(`${param.name}.title`)}:</Typography>
             <Stack direction='row' gap={4} sx={{flexWrap: 'wrap'}}>
               {param.schoolList.map((val, k) => <Stack key={k} direction='row' sx={{alignItems: 'center'}} gap={2}>
@@ -38,7 +39,7 @@ export function SchoolTable({schools, country}: SchoolTableProps) {
                 <Typography>{param.name === 'langs' ? val : tFilters(`${param.name}.${val}`)}</Typography>
               </Stack>)}
             </Stack>
-          </ClientPanel>
+          </Panel>
         </Grid2>)}
         <Grid2 size={isMobile ? 12 : 4}>
           <KlassesRange
@@ -50,10 +51,10 @@ export function SchoolTable({schools, country}: SchoolTableProps) {
       </Grid2>
     </Stack>
     <Stack gap={4}>
-      <ClientPanel>
+      <Panel>
         <Typography variant='h5'>{tDetails('found')} {filteredSchools.length}</Typography>
-      </ClientPanel>
-      <ClientPanel>
+      </Panel>
+      <Panel>
         <Table aria-label="schools">
           <TableHead>
             <TableRow>
@@ -109,7 +110,7 @@ export function SchoolTable({schools, country}: SchoolTableProps) {
             </TableRow>
           </TableBody>
         </Table>
-      </ClientPanel>
+      </Panel>
     </Stack>
   </Stack>
 }

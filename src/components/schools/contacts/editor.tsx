@@ -1,6 +1,6 @@
 'use client'
 
-import { ClientPanel } from '@/components';
+import { Panel } from '@/ui';
 import { IDetailedSchool } from '@/interfaces';
 import { Grid2, TextField, Typography } from '@mui/material'
 import { useTranslations } from 'next-intl'
@@ -39,34 +39,34 @@ export function ContactsEditor({school, setSchool}: ContactsEditorProps) {
 
   return <Grid2 container columns={12} spacing={2}>
     <Grid2 size={12}>
-      <ClientPanel>
+      <Panel>
         <Typography variant='h5' sx={{textAlign: 'center'}}>{t('contacts')}</Typography>
-      </ClientPanel>
+      </Panel>
     </Grid2>
     {[0, 1, 2].map((i) => <Grid2 key={i} size={{xs: 12, md: 4}}>
-      <ClientPanel>
+      <Panel>
         <TextField sx={{width: '100%'}} label={t('phone') + (i + 1)} value={phones[i] ?? ''} onChange={e => editPhone(i, e.target.value)} />
-      </ClientPanel>
+      </Panel>
     </Grid2>)}
     {[0, 1, 2].map((i) => <Grid2 key={i} size={{xs: 12, md: 4}}>
-      <ClientPanel>
+      <Panel>
         <TextField sx={{width: '100%'}} label={t('email') + (i + 1)} value={emails[i] ?? ''} onChange={e => editEmail(i, e.target.value)} />
-      </ClientPanel>
+      </Panel>
     </Grid2>)}
     <Grid2 size={{xs: 12, md: 6}}>
-      <ClientPanel>
+      <Panel>
         <TextField sx={{width: '100%'}} label={t('address')} value={school.address} onChange={e => setSchool({...school, address: e.target.value})} />
-      </ClientPanel>
+      </Panel>
     </Grid2>
     <Grid2 size={{xs: 12, md: 3}}>
-      <ClientPanel>
+      <Panel>
         <TextField sx={{width: '100%'}} label={t('website')} value={school.website} onChange={e => setSchool({...school, website: e.target.value})} />
-      </ClientPanel>
+      </Panel>
     </Grid2>
     <Grid2 size={{xs: 12, md: 3}}>
-      <ClientPanel>
+      <Panel>
         <TextField sx={{width: '100%'}} label={t('work_hours')} value={school.workHours} onChange={e => setSchool({...school, workHours: e.target.value})} />
-      </ClientPanel>
+      </Panel>
     </Grid2>
   </Grid2>
 }

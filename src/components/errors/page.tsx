@@ -42,7 +42,7 @@ export async function ErrorPage({code}: ErrorPageProps) {
     <Typography variant="h4" sx={{fontWeight: 600, color: 'text.primary', fontSize: { xs: '1.5rem', md: '2rem' }}}>
       {t(`${code}.title`)}
     </Typography>
-    <Typography variant="body1" sx={{color: 'text.secondary', maxWidth: '500px', fontSize: { xs: '1rem', md: '1.125rem' }}}>
+    <Typography variant="body1" sx={{color: 'text.secondary', maxWidth: 'sm', fontSize: { xs: '1rem', md: '1.125rem' }}}>
       {t(`${code}.desc`)}
     </Typography>
     <ErrorButtons />

@@ -19,7 +19,7 @@ export function Section({children, animationGroup, color, ...props}: SectionProp
     ...props.sx,
   }}>
     {animationGroup}
-    <Box sx={{width: '100%', maxWidth: 1200, mx: 'auto', px: 4, position: 'relative', zIndex: 2}}>
+    <Box sx={{width: '100%', maxWidth: 'lg', mx: 'auto', px: 4, position: 'relative', zIndex: 2}}>
       <motion.div
         initial={{ opacity: 0, y: 50 }}
         whileInView={{ opacity: 1, y: 0 }}

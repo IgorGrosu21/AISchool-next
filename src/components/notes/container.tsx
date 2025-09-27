@@ -5,16 +5,15 @@ import { useTranslations } from "next-intl"
 import { useJournalContext } from "@/providers"
 import { AnnualNoteList } from "./list"
 import { useGroupedNotes } from "@/hooks"
-import { ClientPanel } from "../panel"
+import { Panel } from "@/ui"
 
-interface NotesContainerProps {
-  children: React.ReactNode | React.ReactNode[]
+interface NotesContainerProps extends React.PropsWithChildren {
   loading: boolean
 }
 
 const semesters: Array<'frst' | 'scnd' | 'annual'> = ['frst', 'scnd', 'annual']
 
-export function NotesContainer({children, loading}: NotesContainerProps) {
+export function NotesContainer({loading, children}: NotesContainerProps) {
   const t = useTranslations('journal')
   const {semester, setSemester} = useJournalContext()
   const {performance, absences, annualGroups, isFirstSemester} = useGroupedNotes()
@@ -39,10 +38,10 @@ export function NotesContainer({children, loading}: NotesContainerProps) {
       <Stack gap={8} sx={{opacity: loading ? 0.2 : 1, transition: '0.35s'}}>
         {semester === 'annual' ? <AnnualNoteList groups={annualGroups!} /> : children}
         <Stack direction={{xs: 'column', md: 'row'}} gap={4}>
-          {absences.map((absence, i) => <ClientPanel key={i} direction='row' gap={2} sx={{justifyContent: 'space-between'}}>
+          {absences.map((absence, i) => <Panel key={i} direction='row' gap={2} sx={{justifyContent: 'space-between'}}>
             <Typography variant='h6' color='primary'>{t(`absences.${absence.name}`)}:</Typography>
             <Typography variant='h6' color='secondary'>{absence.value}</Typography>
-          </ClientPanel>)}
+          </Panel>)}
         </Stack>
       </Stack>
       <Stack direction='row' sx={{

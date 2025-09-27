@@ -3,7 +3,7 @@
 import { Stack, Grid2, Typography } from "@mui/material"
 import { Group } from "@/providers/journal/context"
 import { useTranslations } from "next-intl"
-import { ClientPanel } from "@/components"
+import { Panel } from "@/ui"
 
 interface AnnualNoteListProps {
   groups: Array<Omit<Group, 'notes' | 'extraNotes'> & {notes: string[]}>
@@ -13,7 +13,7 @@ export function AnnualNoteList({groups}: AnnualNoteListProps) {
   const t = useTranslations('journal')
 
   return <Stack gap={4}>
-    {groups.map((group, i) => <ClientPanel key={i} direction='row' gap={2}>
+    {groups.map((group, i) => <Panel key={i} direction='row' gap={2}>
       <Grid2 container spacing={2} sx={{flex: 1}}>
         <Grid2 size={{xs: 12, md: 2}}>
           <Typography variant='h5' color='primary'>{group.name}</Typography>
@@ -34,6 +34,6 @@ export function AnnualNoteList({groups}: AnnualNoteListProps) {
           </Stack>
         </Grid2>
       </Grid2>
-    </ClientPanel>)}
+    </Panel>)}
   </Stack>
 }

@@ -20,7 +20,7 @@ interface PlusesSectionProps {
 export function PlusesSection({ userType, animationGroup }: PlusesSectionProps) {
   const gradient = useMemo(() => animationGroup !== undefined, [animationGroup])
   const pluses = usePluses(userType, gradient)
-  const t = useTranslations('pages.landing.pluses')
+  const t = useTranslations('components.landing.pluses')
   
   const getIconAndColor = (index: number) => {
     const iconSets = {
@@ -49,13 +49,14 @@ export function PlusesSection({ userType, animationGroup }: PlusesSectionProps) 
   return <Section
     animationGroup={animationGroup}
     color={gradient ? (userType === 'teacher' ? 'tertiary' : 'secondary') : undefined}
+    id={gradient ? undefined : `${userType}_pluses`}
   >
     <SectionHeader 
       onGradient={gradient}
       text1={t('title', { userType, paid: gradient ? 1 : 0 })} 
       text2={t(`desc.${userType}_${gradient ? 'paid' : 'free'}`)} 
     />
-    <Grid2 container spacing={4} sx={{ maxWidth: 800 }}>
+    <Grid2 container spacing={4} sx={{ maxWidth: 'md' }}>
       {pluses.map((plus, index) => {
         const { icon: Icon, color } = getIconAndColor(index)
         return <Grid2 size={{ xs: 12, sm: 6 }} key={index}>
@@ -73,13 +74,13 @@ export function PlusesSection({ userType, animationGroup }: PlusesSectionProps) 
                 mb: 3,
                 boxShadow: `0 8px 32px ${color}40`
               }}>
-                <Icon sx={{ fontSize: 40, color: 'white' }} />
+                <Icon sx={{ fontSize: 40, color: 'background.default' }} />
               </Box>
             </motion.div>
             <Typography variant="h6" sx={{ 
               fontWeight: 600, 
               mb: 2, 
-              color: gradient ? 'white' : 'text.primary',
+              color: gradient ? 'background.default' : 'text.primary',
               textAlign: 'center'
             }}>
               {plus}

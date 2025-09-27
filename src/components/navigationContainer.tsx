@@ -4,15 +4,14 @@ import { Home } from "@mui/icons-material"
 import { Breadcrumbs, Stack, Typography } from "@mui/material"
 import { getTranslations } from "next-intl/server"
 import { Link } from '@/i18n'
-import { Panel } from "./panel"
+import { Panel } from "@/ui"
 
-interface NavigationContainerProps {
+interface NavigationContainerProps extends React.PropsWithChildren {
   segments: Array<{
     label: string
     href: string
   }>
   last: string
-  children: React.ReactNode | React.ReactNode[]
 }
 
 export async function NavigationContainer({segments, last, children}: NavigationContainerProps) {
@@ -65,7 +64,7 @@ export async function NavigationContainer({segments, last, children}: Navigation
         </Typography>}
       </Breadcrumbs>
     </Panel>
-    <Stack gap={{ xs: 4, md: 8 }} sx={{height: '100%', width: '100%'}}>
+    <Stack gap={{ xs: 4, md: 8 }} sx={{height: '100%', width: '100%', minHeight: '90vh'}}>
       {children}
     </Stack>
   </Stack>

@@ -8,7 +8,6 @@ export { KlassesButton, KlassesRange, KlassLink, PickKlass } from "./klasses";
 export { Welcome, Pluses } from "./landing";
 export { TheoryButtons, Balance, Currency, ModuleHeader, ModuleList } from "./manuals";
 export { Note, StudentNoteList, TeacherNoteList, NotePicker } from "./notes";
-export { Panel, ClientPanel } from "./panel";
 export { SchoolPositions, SchoolPositionsEditor, TeacherPositions, TeacherPositionsEditor } from "./positions";
 export { ProfileContainer, Profile, SmallProfile, UserVerifier } from "./profile";
 export {
@@ -17,7 +16,7 @@ export {
   PickSchool, PickSchools,
   SchoolLink, SchoolTable
 } from "./schools";
-export { Students, StudentsEditor } from "./students";
+export { Students, StudentsEditor, StudentsPicker } from "./students";
 export { Subjects, SubjectsEditor } from "./subjects";
 export { Experience, ExperienceEditor } from "./teachers";
 export {
@@ -34,4 +33,5 @@ export { Footer } from "./footer";
 export { ImageUploader } from "./imageUploader";
 export { Loader } from "./loader";
 export { NavigationContainer } from "./navigationContainer";
+export { ThemeImage } from "./themeImage";
 //export { PdfViewer } from "./pdfViewer";

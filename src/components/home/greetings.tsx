@@ -14,7 +14,7 @@ interface GreetingsProps {
 const sections = [Assignment, Home, TrendingUp].map(Icon => ({ icon: Icon }))
 
 export function Greetings({profileType, user}: GreetingsProps) {
-  const t = useTranslations('pages.home')
+  const t = useTranslations('components.home')
 
   const scrollToSection = useCallback((index: number) => {
     const sectionElement = document.getElementById(`section${index}`)

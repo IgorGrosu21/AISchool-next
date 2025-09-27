@@ -1,7 +1,8 @@
 'use client'
 
 import { IKlass, ISchoolName } from "@/interfaces";
-import { PickSchool, ProfileContainer as StudentContainer, PickKlass, ClientPanel } from "@/components";
+import { PickSchool, ProfileContainer as StudentContainer, PickKlass } from "@/components";
+import { Panel } from "@/ui";
 import { useStudentEditorContext } from "@/providers";
 import { useMemo } from "react";
 
@@ -28,13 +29,13 @@ export function Editor({schoolNames}: ContainerProps) {
   }), [student.klass])
 
   return <StudentContainer user={student.user} setUser={user => setStudent(s => ({...s, user}))}>
-    <ClientPanel>
+    <Panel>
       <PickSchool value={student.klass?.school ?? null} setValue={v => setStudent(
         s => ({...s, klass: s.klass ? {...s.klass, school: v} : {...dummyKlass, school: v}})
       )} options={schoolNames} />
-    </ClientPanel>
-    <ClientPanel>
+    </Panel>
+    <Panel>
       <PickKlass klass={dummyKlass} setKlass={klass => setStudent(s => ({...s, klass: {...dummyKlass, grade: klass.grade, letter: klass.letter}}))} />
-    </ClientPanel>
+    </Panel>
   </StudentContainer>
 }

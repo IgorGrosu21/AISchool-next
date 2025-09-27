@@ -24,3 +24,15 @@ a {
   color: inherit;
   text-decoration: none;
 }
+
+@media (prefers-color-scheme: dark) {
+  .theme-image-light {
+    display: none;
+  }
+}
+
+@media (prefers-color-scheme: light) {
+  .theme-image-dark {
+    display: none;
+  }
+}

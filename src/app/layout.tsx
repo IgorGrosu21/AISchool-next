@@ -1,6 +1,10 @@
 import type { Metadata } from "next";
 import { Roboto } from 'next/font/google';
+import InitColorSchemeScript from '@mui/material/InitColorSchemeScript';
 import "./globals.css";
+import { AppRouterCacheProvider } from "@mui/material-nextjs/v15-appRouter";
+import { ThemeProvider, CssBaseline } from "@mui/material";
+import theme from "../theme";
 
 const roboto = Roboto({
   weight: ['300', '400', '500', '700'],
@@ -15,9 +19,15 @@ export const metadata: Metadata = {
 };
 
 export default async function RootLayout({ children }: { children: React.ReactNode }) {
-  return <html>
+  return <html suppressHydrationWarning>
     <body className={roboto.variable}>
-      {children}
+      <InitColorSchemeScript attribute="[data-theme='%s']" />
+      <AppRouterCacheProvider>
+        <ThemeProvider theme={theme}>
+          <CssBaseline />
+          {children}
+        </ThemeProvider>
+      </AppRouterCacheProvider>
     </body>
   </html>
 }

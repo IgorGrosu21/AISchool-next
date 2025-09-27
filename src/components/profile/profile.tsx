@@ -6,13 +6,13 @@ import { getTranslations } from 'next-intl/server';
 import { Socials } from './socials';
 import { IDetailedUser } from '@/interfaces';
 import { NavigationContainer } from '../navigationContainer';
-import { Panel } from '../panel';
+import { Panel } from '@/ui';
 import { Title } from '../editable';
+import { ThemeImage } from '../themeImage';
 
-interface ProfileProps {
+interface ProfileProps extends React.PropsWithChildren {
   user: IDetailedUser
   headerChildren: React.ReactNode | React.ReactNode[],
-  children: React.ReactNode | React.ReactNode[]
 }
 
 export async function Profile({user, headerChildren, children}: ProfileProps) {
@@ -24,7 +24,7 @@ export async function Profile({user, headerChildren, children}: ProfileProps) {
       link={`/core/${user.profileLink}`}
       editable={user}
     />
-    <Stack gap={4} direction={{ xs: 'column', md: 'row' }}>
+    <Stack gap={4} direction={{ xs: 'column', md: 'row' }} sx={{alignItems: 'center'}}>
       <Panel sx={{flexGrow: 0, height: '100%', alignItems: 'center', justifyContent: 'center'}}>
         <Stack sx={{
           border: 1,
@@ -36,18 +36,18 @@ export async function Profile({user, headerChildren, children}: ProfileProps) {
           alignItems: 'center',
           alignSelf: 'center'
         }}>
-          <Image 
-            src={user.avatar ?? '/images/default-avatar.png'} 
-            width={200} 
-            height={200} 
+          <ThemeImage
+            srcDark={user.avatar ? user.avatar : '/images/default-avatar-dark.png'}
+            srcLight={user.avatar ? user.avatar : '/images/default-avatar-light.png'}
+            alt='avatar'
+            width={200}
+            height={200}
             style={{ 
               borderRadius: '50%',
               width: '100%',
               height: '100%',
               objectFit: 'cover'
             }} 
-            alt='avatar' 
-            priority 
           />
         </Stack>
       </Panel>

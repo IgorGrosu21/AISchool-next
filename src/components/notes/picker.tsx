@@ -5,7 +5,7 @@ import { useTranslations } from "next-intl"
 import { INoteName } from "@/interfaces"
 import { useNotePicker } from "@/hooks"
 import { Note } from "./item"
-import { ClientPanel } from "@/components"
+import { Panel } from "@/ui"
 
 interface NotePickerProps<T> {
   notesOpened: boolean
@@ -28,7 +28,7 @@ export function NotePicker<T extends Note>({notesOpened, closeNotes, activeNote,
 
   return <Backdrop sx={{ zIndex: 1300 }} open={notesOpened}>
     <Stack gap={2}>
-      <ClientPanel direction='row' sx={{flexWrap: 'wrap', justifyContent: 'space-between'}} gap={2}>
+      <Panel direction='row' sx={{flexWrap: 'wrap', justifyContent: 'space-between'}} gap={2}>
         {hasNotes ? notes.map(note => <Note
           key={note}
           value={note}
@@ -42,8 +42,8 @@ export function NotePicker<T extends Note>({notesOpened, closeNotes, activeNote,
           sx={{p: 2, flex: 1, aspectRatio: 'unset'}}
           typographyVariant='body1'
         />)}
-      </ClientPanel>
-      <ClientPanel direction={{xs: 'column', md: 'row'}} gap={2}>
+      </Panel>
+      <Panel direction={{xs: 'column', md: 'row'}} gap={2}>
         {abscences.map(abscence => <Note
           key={abscence}
           value={t(abscence)}
@@ -52,15 +52,15 @@ export function NotePicker<T extends Note>({notesOpened, closeNotes, activeNote,
           sx={{p: 2, flex: 1, aspectRatio: 'unset'}}
           typographyVariant='body1'
         />)}
-      </ClientPanel>
-      <ClientPanel>
+      </Panel>
+      <Panel>
         <TextField
           label={t('comment')}
           value={newNote?.comment ?? ''}
           onChange={e => updateNoteComment(e.target.value)}
         />
-      </ClientPanel>
-      <ClientPanel direction={{xs: 'column', md: 'row'}} gap={2}>
+      </Panel>
+      <Panel direction={{xs: 'column', md: 'row'}} gap={2}>
         <Button variant='outlined' onClick={closeNotes}>{t('close')}</Button>
         {link && <Link href={link}>
           <Button variant='outlined'>{t('open_lesson')}</Button>
@@ -68,7 +68,7 @@ export function NotePicker<T extends Note>({notesOpened, closeNotes, activeNote,
         <Box sx={{flex: 1}} />
         <Button variant='outlined' onClick={discard}>{t('discard')}</Button>
         <Button variant='contained' onClick={save}>{t('save')}</Button>
-      </ClientPanel>
+      </Panel>
     </Stack>
   </Backdrop>
 }

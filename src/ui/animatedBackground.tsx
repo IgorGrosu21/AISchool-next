@@ -1,6 +1,7 @@
 'use client'
 
-import { Box, keyframes } from '@mui/material'
+import { Box, keyframes, useColorScheme } from '@mui/material'
+import { useMemo } from 'react'
 
 const float = keyframes`
   0%, 100% {
@@ -38,6 +39,9 @@ const pulse = keyframes`
 `
 
 export function AnimatedBackground() {
+  const { mode } = useColorScheme()
+  const isDark = useMemo(() => mode === 'dark', [mode])
+
   return <Box
     sx={{
       position: 'fixed',
@@ -47,15 +51,27 @@ export function AnimatedBackground() {
       height: '100%',
       zIndex: -1,
       overflow: 'hidden',
-      background: `
-        linear-gradient(135deg, 
-          rgba(20, 111, 194, 0.1) 0%, 
-          rgba(0, 135, 126, 0.08) 25%, 
-          rgba(104, 20, 194, 0.06) 50%, 
-          rgba(233, 242, 247, 0.9) 75%, 
-          rgba(255, 255, 255, 0.95) 100%
-        )
-      `,
+      background: isDark 
+        ? `
+          linear-gradient(135deg, 
+            rgba(30, 58, 138, 0.25) 0%, 
+            rgba(16, 185, 129, 0.2) 15%, 
+            rgba(139, 92, 246, 0.18) 30%, 
+            rgba(236, 72, 153, 0.15) 45%, 
+            rgba(22, 13, 8, 0.95) 70%, 
+            rgba(0, 0, 0, 0.98) 100%
+          )
+        `
+        : `
+          linear-gradient(135deg, 
+            rgba(59, 130, 246, 0.12) 0%, 
+            rgba(16, 185, 129, 0.1) 15%, 
+            rgba(139, 92, 246, 0.08) 30%, 
+            rgba(236, 72, 153, 0.06) 45%, 
+            rgba(248, 250, 252, 0.95) 70%, 
+            rgba(255, 255, 255, 0.98) 100%
+          )
+        `,
       '&::before': {
         content: '""',
         position: 'absolute',
@@ -63,11 +79,19 @@ export function AnimatedBackground() {
         left: 0,
         width: '100%',
         height: '100%',
-        background: `
-          radial-gradient(circle at 20% 80%, rgba(20, 111, 194, 0.15) 0%, transparent 50%),
-          radial-gradient(circle at 80% 20%, rgba(0, 135, 126, 0.12) 0%, transparent 50%),
-          radial-gradient(circle at 40% 40%, rgba(104, 20, 194, 0.1) 0%, transparent 50%)
-        `,
+        background: isDark
+          ? `
+            radial-gradient(circle at 20% 80%, rgba(30, 58, 138, 0.25) 0%, transparent 60%),
+            radial-gradient(circle at 80% 20%, rgba(16, 185, 129, 0.22) 0%, transparent 60%),
+            radial-gradient(circle at 40% 40%, rgba(139, 92, 246, 0.2) 0%, transparent 60%),
+            radial-gradient(circle at 60% 70%, rgba(236, 72, 153, 0.18) 0%, transparent 60%)
+          `
+          : `
+            radial-gradient(circle at 20% 80%, rgba(59, 130, 246, 0.18) 0%, transparent 60%),
+            radial-gradient(circle at 80% 20%, rgba(16, 185, 129, 0.15) 0%, transparent 60%),
+            radial-gradient(circle at 40% 40%, rgba(139, 92, 246, 0.12) 0%, transparent 60%),
+            radial-gradient(circle at 60% 70%, rgba(236, 72, 153, 0.1) 0%, transparent 60%)
+          `,
       }
     }}
   >
@@ -86,13 +110,21 @@ export function AnimatedBackground() {
           width: '200px',
           height: '200px',
           borderRadius: '50%',
-          background: `
-            radial-gradient(circle at 30% 30%, 
-              rgba(20, 111, 194, 0.2) 0%, 
-              rgba(20, 111, 194, 0.1) 50%, 
-              transparent 100%
-            )
-          `,
+          background: isDark
+            ? `
+              radial-gradient(circle at 30% 30%, 
+                rgba(59, 130, 246, 0.4) 0%, 
+                rgba(30, 58, 138, 0.25) 50%, 
+                transparent 100%
+              )
+            `
+            : `
+              radial-gradient(circle at 30% 30%, 
+                rgba(59, 130, 246, 0.25) 0%, 
+                rgba(147, 197, 253, 0.15) 50%, 
+                transparent 100%
+              )
+            `,
           filter: 'blur(1px)',
           animation: `${float} 8s ease-in-out infinite`,
           animationDelay: '0s',
@@ -108,13 +140,21 @@ export function AnimatedBackground() {
           width: '160px',
           height: '160px',
           borderRadius: '50%',
-          background: `
-            radial-gradient(circle at 70% 20%, 
-              rgba(0, 135, 126, 0.18) 0%, 
-              rgba(0, 135, 126, 0.08) 50%, 
-              transparent 100%
-            )
-          `,
+          background: isDark
+            ? `
+              radial-gradient(circle at 70% 20%, 
+                rgba(16, 185, 129, 0.35) 0%, 
+                rgba(5, 150, 105, 0.2) 50%, 
+                transparent 100%
+              )
+            `
+            : `
+              radial-gradient(circle at 70% 20%, 
+                rgba(16, 185, 129, 0.22) 0%, 
+                rgba(110, 231, 183, 0.12) 50%, 
+                transparent 100%
+              )
+            `,
           filter: 'blur(1px)',
           animation: `${floatReverse} 10s ease-in-out infinite`,
           animationDelay: '2s',
@@ -130,13 +170,21 @@ export function AnimatedBackground() {
           width: '140px',
           height: '140px',
           borderRadius: '50%',
-          background: `
-            radial-gradient(circle at 50% 50%, 
-              rgba(104, 20, 194, 0.15) 0%, 
-              rgba(104, 20, 194, 0.05) 50%, 
-              transparent 100%
-            )
-          `,
+          background: isDark
+            ? `
+              radial-gradient(circle at 50% 50%, 
+                rgba(139, 92, 246, 0.3) 0%, 
+                rgba(124, 58, 237, 0.15) 50%, 
+                transparent 100%
+              )
+            `
+            : `
+              radial-gradient(circle at 50% 50%, 
+                rgba(139, 92, 246, 0.2) 0%, 
+                rgba(196, 181, 253, 0.1) 50%, 
+                transparent 100%
+              )
+            `,
           filter: 'blur(1px)',
           animation: `${float} 12s ease-in-out infinite`,
           animationDelay: '4s',
@@ -152,13 +200,21 @@ export function AnimatedBackground() {
           width: '150px',
           height: '150px',
           borderRadius: '50%',
-          background: `
-            radial-gradient(circle at 20% 80%, 
-              rgba(20, 111, 194, 0.12) 0%, 
-              rgba(0, 135, 126, 0.08) 50%, 
-              transparent 100%
-            )
-          `,
+          background: isDark
+            ? `
+              radial-gradient(circle at 20% 80%, 
+                rgba(236, 72, 153, 0.28) 0%, 
+                rgba(219, 39, 119, 0.15) 50%, 
+                transparent 100%
+              )
+            `
+            : `
+              radial-gradient(circle at 20% 80%, 
+                rgba(236, 72, 153, 0.18) 0%, 
+                rgba(251, 207, 232, 0.1) 50%, 
+                transparent 100%
+              )
+            `,
           filter: 'blur(1px)',
           animation: `${floatReverse} 9s ease-in-out infinite`,
           animationDelay: '1s',
@@ -174,13 +230,21 @@ export function AnimatedBackground() {
           width: '180px',
           height: '180px',
           borderRadius: '50%',
-          background: `
-            radial-gradient(circle at 60% 40%, 
-              rgba(0, 135, 126, 0.14) 0%, 
-              rgba(104, 20, 194, 0.06) 50%, 
-              transparent 100%
-            )
-          `,
+          background: isDark
+            ? `
+              radial-gradient(circle at 60% 40%, 
+                rgba(16, 185, 129, 0.25) 0%, 
+                rgba(139, 92, 246, 0.15) 50%, 
+                transparent 100%
+              )
+            `
+            : `
+              radial-gradient(circle at 60% 40%, 
+                rgba(16, 185, 129, 0.16) 0%, 
+                rgba(196, 181, 253, 0.08) 50%, 
+                transparent 100%
+              )
+            `,
           filter: 'blur(1px)',
           animation: `${float} 11s ease-in-out infinite`,
           animationDelay: '3s',
@@ -196,13 +260,21 @@ export function AnimatedBackground() {
           width: '120px',
           height: '120px',
           borderRadius: '50%',
-          background: `
-            radial-gradient(circle at 40% 60%, 
-              rgba(104, 20, 194, 0.16) 0%, 
-              rgba(20, 111, 194, 0.08) 50%, 
-              transparent 100%
-            )
-          `,
+          background: isDark
+            ? `
+              radial-gradient(circle at 40% 60%, 
+                rgba(139, 92, 246, 0.32) 0%, 
+                rgba(59, 130, 246, 0.18) 50%, 
+                transparent 100%
+              )
+            `
+            : `
+              radial-gradient(circle at 40% 60%, 
+                rgba(139, 92, 246, 0.2) 0%, 
+                rgba(147, 197, 253, 0.1) 50%, 
+                transparent 100%
+              )
+            `,
           filter: 'blur(1px)',
           animation: `${floatReverse} 7s ease-in-out infinite`,
           animationDelay: '5s',
@@ -217,12 +289,21 @@ export function AnimatedBackground() {
           left: 0,
           width: '100%',
           height: '100%',
-          background: `
-            radial-gradient(circle at 50% 50%, 
-              rgba(255, 255, 255, 0.1) 0%, 
-              transparent 70%
-            )
-          `,
+          background: isDark
+            ? `
+              radial-gradient(circle at 50% 50%, 
+                rgba(255, 255, 255, 0.08) 0%, 
+                rgba(139, 92, 246, 0.03) 30%,
+                transparent 70%
+              )
+            `
+            : `
+              radial-gradient(circle at 50% 50%, 
+                rgba(255, 255, 255, 0.15) 0%, 
+                rgba(59, 130, 246, 0.05) 30%,
+                transparent 70%
+              )
+            `,
           animation: `${pulse} 6s ease-in-out infinite`,
         }}
       />

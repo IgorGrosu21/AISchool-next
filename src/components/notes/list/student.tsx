@@ -7,7 +7,7 @@ import { Link } from '@/i18n';
 import { NotesContainer } from "../container";
 import { useJournalContext } from "@/providers";
 import { useStudentNotes } from "@/hooks"
-import { ClientPanel } from "@/components";
+import { Panel } from "@/ui";
 
 interface StudentNoteListProps {
   subjects: ISubjectName[]
@@ -20,7 +20,7 @@ export function StudentNoteList({subjects}: StudentNoteListProps) {
 
   return <NotesContainer loading={isPending}>
     <Stack gap={4}>
-      {groups.map((group, i) => <ClientPanel key={i} direction='row' gap={2}>
+      {groups.map((group, i) => <Panel key={i} direction='row' gap={2}>
         <Grid2 container spacing={2} sx={{flex: 1}}>
           <Grid2 size={{xs: 12, md: 2}}>
             <Typography variant='h5' color='primary'>{group.name}</Typography>
@@ -47,7 +47,7 @@ export function StudentNoteList({subjects}: StudentNoteListProps) {
             {group.performance ? group.performance : '-'}
           </Typography>
         </Stack>
-      </ClientPanel>)}
+      </Panel>)}
     </Stack>
   </NotesContainer>
 }

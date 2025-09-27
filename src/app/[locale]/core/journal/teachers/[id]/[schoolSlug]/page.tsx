@@ -1,6 +1,7 @@
 import { Stack, Typography } from '@mui/material'
 import { errorHandler, fetchTeacherKlasses } from '@/requests'
-import { KlassLink, NavigationContainer, Panel } from '@/components'
+import { KlassLink, NavigationContainer } from '@/components'
+import { Panel } from '@/ui'
 import { getTranslations } from 'next-intl/server'
 import { IKlass } from '@/interfaces'
 

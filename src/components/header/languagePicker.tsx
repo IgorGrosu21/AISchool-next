@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import { Button, Menu, MenuItem, ListItemText, Box } from '@mui/material';
+import { Button, Menu, MenuItem, ListItemText, Box, Typography } from '@mui/material';
 import { KeyboardArrowDown, Check } from '@mui/icons-material';
 import { useRouter, usePathname } from '@/i18n';
 import { useLocale } from 'next-intl';
@@ -45,20 +45,15 @@ export function LanguagePicker() {
       }}
       aria-label="language picker"
     >
-      {currentLanguage?.name}
+      <Typography sx={{display: {xs: 'none', lg: 'block'}}}>{currentLanguage?.name}</Typography>
+      <Typography sx={{display: {xs: 'block', lg: 'none'}}}>{currentLanguage?.code}</Typography>
     </Button>
     <Menu
       anchorEl={anchorEl}
       open={open}
       onClose={handleClose}
-      anchorOrigin={{
-        vertical: 'bottom',
-        horizontal: 'right',
-      }}
-      transformOrigin={{
-        vertical: 'top',
-        horizontal: 'right',
-      }}
+      anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}
+      transformOrigin={{ vertical: 'top', horizontal: 'right' }}
     >
       {languages.map((language) => (
         <MenuItem
@@ -78,7 +73,8 @@ export function LanguagePicker() {
             transition: '0.5s'
           }}
         >
-          <ListItemText primary={language.name} />
+          <ListItemText primary={language.name} sx={{display: {xs: 'none', lg: 'block'}}} />
+          <ListItemText primary={language.code} sx={{display: {xs: 'block', lg: 'none'}}} />
           {language.code === locale && (
             <Check sx={{ ml: 2, color: 'primary.main' }} />
           )}

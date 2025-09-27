@@ -3,7 +3,8 @@
 import { IMedia } from '@/interfaces'
 import { Stack, TextField } from '@mui/material'
 import { useTranslations } from 'next-intl'
-import { ImageUploader, SchoolPositionsEditor, PhotosEditor, ContactsEditor, ClientPanel } from '@/components'
+import { ImageUploader, SchoolPositionsEditor, PhotosEditor, ContactsEditor } from '@/components'
+import { Panel } from '@/ui'
 import Image from 'next/image'
 import { editSchoolPreview, removeSchoolPreview } from '@/app/actions'
 import { useSchoolEditorContext } from '@/providers'
@@ -51,10 +52,10 @@ export function Editor() {
           />}
         />
       </Stack>
-      <ClientPanel gap={2} sx={{flex: 1, justifyContent: 'space-between'}}>
+      <Panel gap={2} sx={{flex: 1, justifyContent: 'space-between'}}>
         <TextField label={t('name')} value={school.name} onChange={(e) => setSchool({...school, name: e.target.value})} />
         <TextField label={t('desc')} value={school.desc} multiline rows={10} onChange={(e) => setSchool({...school, desc: e.target.value})} />
-      </ClientPanel>
+      </Panel>
     </Stack>
     <ContactsEditor school={school} setSchool={setSchool} />
     <SchoolPositionsEditor school={school} setSchool={setSchool} />

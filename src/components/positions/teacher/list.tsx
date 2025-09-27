@@ -1,7 +1,8 @@
 'use server'
 
 import { Stack, Typography } from '@mui/material'
-import { Panel, SchoolLink, Subjects } from '@/components';
+import { SchoolLink, Subjects } from '@/components';
+import { Panel } from '@/ui';
 import { Link } from '@/i18n'
 import Image from 'next/image';
 import { getTranslations } from 'next-intl/server';
@@ -28,9 +29,7 @@ export async function TeacherPositions({positions, link}: TeacherPositionsProps)
           <Panel>
             <Typography variant='h6'>{t('singular')}: {t(position.type)}</Typography>
           </Panel>
-          <Panel>
-            <Subjects subjects={position.subjects} small sx={{flex: 1, alignItems: 'center'}} />
-          </Panel>
+          <Subjects subjects={position.subjects} small sx={{flex: 1, alignItems: 'center'}} />
         </Stack>
         <Panel sx={{justifyContent: 'center'}}>
           <Link href={link ? link(position.school.slug) : `/core/schools/${position.school.slug}/`}>

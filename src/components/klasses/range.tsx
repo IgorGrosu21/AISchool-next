@@ -1,7 +1,7 @@
 'use client'
 
 import { Typography, Slider } from "@mui/material";
-import { ClientPanel } from "../panel";
+import { Panel } from "@/ui";
 import { useTranslations } from "next-intl";
 import { useCallback } from "react";
 
@@ -19,7 +19,7 @@ export function KlassesRange({startGrade, finalGrade, setGrades}: KlassesRangePr
     setGrades(vs[0], vs[1])
   }, [setGrades])
 
-  return <ClientPanel gap={2} sx={{height: '100%', justifyContent: 'space-between'}}>
+  return <Panel gap={2} sx={{height: '100%', justifyContent: 'space-between'}}>
     <Typography variant='h6'>{t('plural')}:</Typography>
     <Slider
       aria-label='klasses'
@@ -30,5 +30,5 @@ export function KlassesRange({startGrade, finalGrade, setGrades}: KlassesRangePr
       onChange={handleGradeChange}
       valueLabelDisplay="auto"
     />
-  </ClientPanel>
+  </Panel>
 }

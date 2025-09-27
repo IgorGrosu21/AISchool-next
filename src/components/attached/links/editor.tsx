@@ -4,7 +4,7 @@ import { Stack, TextField, Typography } from "@mui/material";
 import { useTranslations } from "next-intl";
 import { Add, Close } from "@mui/icons-material";
 import { useAttachedLinksContext } from "@/providers";
-import { ClientPanel } from "@/components";
+import { Panel } from "@/ui";
 
 interface AttachedLinksEditorProps {
   links?: string
@@ -15,7 +15,7 @@ export function AttachedLinksEditor({links, small = true}: AttachedLinksEditorPr
   const { openLinks, editLink, deleteLink } = useAttachedLinksContext()
   const t = useTranslations('timetable.specific_lessons')
   
-  return <ClientPanel gap={2}>
+  return <Panel gap={2} sx={{height: '100%'}}>
     <Stack direction='row' sx={{justifyContent: 'space-between', alignItems: 'center'}}>
       <Typography variant={small ? 'h6' : 'h5'}>{t('links.plural')}:</Typography>
       <Add onClick={openLinks} color='primary' />
@@ -24,5 +24,5 @@ export function AttachedLinksEditor({links, small = true}: AttachedLinksEditorPr
       <TextField sx={{flex: 1}} label={t('links.singular')} value={link} onChange={e => editLink(e.target.value, i)} />
       <Close onClick={() => deleteLink(i)} color='primary' />
     </Stack>)}
-  </ClientPanel>
+  </Panel>
 }
